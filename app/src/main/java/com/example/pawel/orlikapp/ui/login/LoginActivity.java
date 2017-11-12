@@ -18,6 +18,7 @@ import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.find_orlik.FindOrlikActicity;
 import com.example.pawel.orlikapp.ui.find_orlik.FindOrlikActivityInterface;
 import com.example.pawel.orlikapp.ui.main.MainActivity;
+import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
 
 import java.util.Optional;
 
@@ -41,6 +42,8 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
         initialize();
         onButtonClick();
         //onButtonClick();
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 
     @Override

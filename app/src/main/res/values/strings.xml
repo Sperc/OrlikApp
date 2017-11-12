@@ -13,4 +13,12 @@
     <!--LoginActivity-UI-->
     <string name="invalidCredentialis">Błędna nazwa użytkownika lub haslo</string>
 
+    <!--RegistrationActivity-->
+    <string name="email">Adres Email</string>
+    <string name="frist_name">Imię</string>
+    <string name="last_name">Nazwisko</string>
+    <string name="password">Hasło</string>
+    <string name="repeat_password">Powtórz Hasło</string>
+    <string name="username">Nazwa użytkownika</string>
+
 </resources>
