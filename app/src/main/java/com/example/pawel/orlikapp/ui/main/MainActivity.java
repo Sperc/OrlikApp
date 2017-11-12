@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui;
+package com.example.pawel.orlikapp.ui.main;
 
 import android.os.Bundle;
 

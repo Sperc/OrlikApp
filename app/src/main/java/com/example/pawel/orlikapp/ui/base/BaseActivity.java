@@ -1,6 +1,7 @@
 package com.example.pawel.orlikapp.ui.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
@@ -94,6 +95,9 @@ public class BaseActivity extends AppCompatActivity {
     public String readDataFromPrefs(String key){
         SharedPreferences sharedPreferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key,"");
+    }
+    public void startNewActivity(Context context,Class activity){
+        Intent intent = new Intent(this,activity);
     }
 
 

@@ -7,8 +7,7 @@ import com.example.pawel.orlikapp.model.AppUser;
  */
 
 public interface LoginActiivityInterface {
-    public void onLoginSucces(AppUser appUser);
-
-    public void login(String username, String password);
-
+    public void initialize();
+    public void setPresenter();
+    public void onButtonClick();
 }

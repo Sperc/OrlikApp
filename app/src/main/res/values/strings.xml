@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">OrlikApp</string>
     <string name="findOrlik">Znajdz Orlika</string>
+    <string name="serverProblem">Problem z serwerem</string>
+
+    <!--LoginActivity -->
+    <string name="hintUser">Użytkownik</string>
+    <string name="rememberCheckbox">Zapamietaj mnie</string>
+    <string name="logIn">Zaloguj</string>
+    <string name="signUp">Zarejestruj</string>
+    <string name="forgotPassword">Zapomniałeś Hasła?</string>
+
+    <!--LoginActivity-UI-->
+    <string name="invalidCredentialis">Błędna nazwa użytkownika lub haslo</string>
+
 </resources>
