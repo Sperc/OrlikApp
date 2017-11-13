@@ -37,4 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             });
         }
     }
+    public abstract void initialize();
+    public abstract void onButtonClick();
+    public abstract void setPresenter();
 }

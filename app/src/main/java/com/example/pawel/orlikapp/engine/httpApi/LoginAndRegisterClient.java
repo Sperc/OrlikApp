@@ -13,4 +13,6 @@ import retrofit2.http.POST;
 public interface LoginAndRegisterClient {
     @POST("/login")
     Call<AppUser> login(@Body AppUser appUser);
+    @POST("/register")
+    Call<AppUser> register(@Body AppUser appUser);
 }

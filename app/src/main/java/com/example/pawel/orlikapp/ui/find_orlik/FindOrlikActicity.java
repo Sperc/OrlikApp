@@ -26,6 +26,16 @@ public class FindOrlikActicity extends BaseActivity implements FindOrlikActivity
     }
 
     @Override
+    public void onButtonClick() {
+
+    }
+
+    @Override
+    public void setPresenter() {
+
+    }
+
+    @Override
     public void addAdapter() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

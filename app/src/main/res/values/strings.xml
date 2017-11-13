@@ -21,4 +21,13 @@
     <string name="repeat_password">Powtórz Hasło</string>
     <string name="username">Nazwa użytkownika</string>
 
+    <!--Errors-->
+    <string name="emailError">Niepoprawny adres email</string>
+    <string name="firstNameError">Błędne dane</string>
+    <string name="lastNameError">Błędne dane</string>
+    <string name="usernameError">Niepoprawna nazwa użytkownika</string>
+    <string name="repeatPasswordError">Błedne dane</string>
+    <string name="passwordError">Błedne Hasło</string>
+    <string name="usernameExistsError">Użytkownik juz istnieje</string>
+
 </resources>

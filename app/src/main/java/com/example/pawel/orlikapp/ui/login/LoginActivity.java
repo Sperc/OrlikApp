@@ -1,9 +1,7 @@
 package com.example.pawel.orlikapp.ui.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,14 +13,10 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
-import com.example.pawel.orlikapp.ui.find_orlik.FindOrlikActicity;
-import com.example.pawel.orlikapp.ui.find_orlik.FindOrlikActivityInterface;
 import com.example.pawel.orlikapp.ui.main.MainActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
 
-import java.util.Optional;
-
-public class LoginActivity extends BaseActivity implements LoginActiivityInterface, LoginPresenter.LoginPresenterListener {
+public class LoginActivity extends BaseActivity implements LoginView, LoginPresenter.LoginPresenterListener {
 
 
     private SharedPrefs sharedPrefs;
@@ -41,9 +35,6 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
         setPresenter();
         initialize();
         onButtonClick();
-        //onButtonClick();
-        Intent intent = new Intent(this, RegistrationActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -60,7 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
         sharedPrefs = new SharedPrefs(this);
         checkBox = (CheckBox) findViewById(R.id.saveUsername);
         logIn = (Button) findViewById(R.id.logIn);
-        register = (Button) findViewById(R.id.register);
+        register = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
@@ -69,7 +60,7 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
 
     @Override
     public void setPresenter() {
-        loginPresenter = new LoginPresenter(this, this);
+        loginPresenter = new LoginPresenter(this, this,this);
     }
 
 
@@ -86,6 +77,13 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
                 loginPresenter.login(username.getText().toString(), password.getText().toString());
             }
         });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -99,5 +97,15 @@ public class LoginActivity extends BaseActivity implements LoginActiivityInterfa
     @Override
     public void loginFailure() {
         Toast.makeText(this, R.string.invalidCredentialis, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setPasswordError() {
+        password.setError(getString(R.string.passwordError));
+    }
+
+    @Override
+    public void setUsernameError() {
+        username.setError(getString(R.string.usernameError));
     }
 }

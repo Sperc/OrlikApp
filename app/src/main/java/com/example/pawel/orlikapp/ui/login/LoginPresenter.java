@@ -1,16 +1,12 @@
 package com.example.pawel.orlikapp.ui.login;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.engine.ServiceGenerator;
 import com.example.pawel.orlikapp.engine.httpApi.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
-import com.example.pawel.orlikapp.ui.base.BasePresenter;
-
-import java.util.List;
 
 import okhttp3.Headers;
 import retrofit2.Call;
@@ -21,24 +17,51 @@ import retrofit2.Response;
  * Created by Pawel on 05.11.2017.
  */
 
-public class LoginPresenter{
+public class LoginPresenter implements LoginIntercator,LoginIntercator.LoginCredentialisListener {
     Context context;
     LoginPresenterListener loginPresenterListener;
+    LoginView loginView;
+    @Override
+    public boolean onCredentialisValidate(String username, String password, LoginCredentialisListener loginCredentialisListener) {
+        boolean flag = true;
+        if(username.equals("")){
+            loginCredentialisListener.onUsernameError();
+            flag = false;
+        }
+        if(password.equals("")){
+            loginCredentialisListener.onPasswordError();
+            flag = false;
+        }
+        return flag;
+    }
 
     public interface LoginPresenterListener{
         void loginSucces(AppUser appUser);
         void loginFailure();
     }
 
-    public LoginPresenter(LoginPresenterListener loginPresenterListener,Context context) {
+    public LoginPresenter(LoginPresenterListener loginPresenterListener,Context context,LoginView loginView) {
         this.loginPresenterListener = loginPresenterListener;
         this.context = context;
+        this.loginView = loginView;
     }
 
+    @Override
+    public void onUsernameError() {
+        loginView.setUsernameError();
+    }
+
+    @Override
+    public void onPasswordError() {
+        loginView.setPasswordError();
+    }
+
+
+
+
     public void login(final String username, String password){
-        if(username==null || password==null){
-            loginPresenterListener.loginFailure();
-            throw new IllegalArgumentException("username or password is null");
+        if(!onCredentialisValidate(username,password,this)){
+            return;
         }
         final AppUser user = new AppUser();
         user.setUsername(username);
