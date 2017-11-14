@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
 
     @Override
     public void setPresenter() {
-        loginPresenter = new LoginPresenter(this, this,this);
+        loginPresenter = new LoginPresenter(this, this, this);
     }
 
 
@@ -74,13 +74,13 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
                 } else {
                     sharedPrefs.deleteString("login");
                 }
-                loginPresenter.login(username.getText().toString(), password.getText().toString());
+                loginPresenter.onLogin(username.getText().toString(), password.getText().toString());
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -101,11 +101,11 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
 
     @Override
     public void setPasswordError() {
-        password.setError(getString(R.string.passwordError));
+        password.setError(getString(R.string.emptyBox));
     }
 
     @Override
     public void setUsernameError() {
-        username.setError(getString(R.string.usernameError));
+        username.setError(getString(R.string.emptyBox));
     }
 }

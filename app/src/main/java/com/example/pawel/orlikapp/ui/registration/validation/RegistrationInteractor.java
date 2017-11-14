@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.registration;
+package com.example.pawel.orlikapp.ui.registration.validation;
 
 /**
  * Created by Pawel on 12.11.2017.

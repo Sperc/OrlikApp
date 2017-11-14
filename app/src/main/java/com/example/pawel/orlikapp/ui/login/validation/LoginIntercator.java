@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.login;
+package com.example.pawel.orlikapp.ui.login.validation;
 
 /**
  * Created by Pawel on 13.11.2017.
@@ -6,9 +6,9 @@ package com.example.pawel.orlikapp.ui.login;
 
 public interface LoginIntercator {
     public interface LoginCredentialisListener {
-        public void onUsernameError();
+        public void onEmptyUsernameError();
 
-        public void onPasswordError();
+        public void onEmptyPasswordError();
     }
 
     public boolean onCredentialisValidate(String username, String password, LoginCredentialisListener loginCredentialisListener);

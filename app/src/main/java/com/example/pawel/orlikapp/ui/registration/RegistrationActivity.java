@@ -45,7 +45,7 @@ public class RegistrationActivity extends BaseActivity implements RegistrationVi
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrationPresenter.registration(email.getText().toString(),password.getText().toString(),
+                registrationPresenter.onRegister(email.getText().toString(),password.getText().toString(),
                         repeatPassword.getText().toString(),username.getText().toString(),
                         firstName.getText().toString(),lastName.getText().toString());
             }
@@ -66,7 +66,7 @@ public class RegistrationActivity extends BaseActivity implements RegistrationVi
 
     @Override
     public void setPasswordError() {
-        password.setError(getString(R.string.passwordError));
+        password.setError(getString(R.string.emptyBox));
     }
 
     @Override
@@ -76,17 +76,17 @@ public class RegistrationActivity extends BaseActivity implements RegistrationVi
 
     @Override
     public void setUsernameError() {
-        username.setError(getString(R.string.usernameError));
+        username.setError(getString(R.string.emptyBox));
     }
 
     @Override
     public void setFirstNameError() {
-        firstName.setError(getString(R.string.firstNameError));
+        firstName.setError(getString(R.string.emptyBox));
     }
 
     @Override
     public void setLastNameError() {
-        lastName.setError(getString(R.string.lastNameError));
+        lastName.setError(getString(R.string.emptyBox));
     }
 
     @Override

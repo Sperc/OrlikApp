@@ -7,9 +7,6 @@ import com.example.pawel.orlikapp.model.AppUser;
  */
 
 public interface LoginView {
-//    public void initialize();
-//    public void setPresenter();
-//    public void onButtonClick();
     void setPasswordError();
     void setUsernameError();
 }

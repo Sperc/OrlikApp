@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.engine.httpApi;
+package com.example.pawel.orlikapp.engine.http;
 
 import com.example.pawel.orlikapp.model.MyObject;
 import com.example.pawel.orlikapp.model.Playground;

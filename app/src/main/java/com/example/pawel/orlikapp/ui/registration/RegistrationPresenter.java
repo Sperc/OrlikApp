@@ -1,14 +1,14 @@
 package com.example.pawel.orlikapp.ui.registration;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.engine.ServiceGenerator;
-import com.example.pawel.orlikapp.engine.httpApi.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.engine.http.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
-import com.example.pawel.orlikapp.utils.Validation;
+import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractor;
+import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractorImpl;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,11 +18,11 @@ import retrofit2.Response;
  * Created by Pawel on 12.11.2017.
  */
 
-public class RegistrationPresenter implements RegistrationInteractor.CredentialisListener,RegistrationInteractor {
+public class RegistrationPresenter implements RegistrationInteractor.CredentialisListener {
     private Context context;
     private RegistrationView registrationView;
     private PresenterListener listener;
-
+    private RegistrationInteractor registrationInteractor;
     public interface PresenterListener {
         public void onSuccesRegistration();
         public void onFailure();
@@ -32,6 +32,7 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
         this.context = context;
         this.listener = listener;
         this.registrationView = registrationView;
+        registrationInteractor = new RegistrationInteractorImpl();
     }
 
     @Override
@@ -64,41 +65,11 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
         registrationView.setLastNameError();
     }
 
-    @Override
-    public boolean onCredentialisValidate(String email, String password, String repeatPassword, String username, String firstName, String lastName, CredentialisListener credentialisListener) {
-//        boolean flag = true;
-//        if (!password.equals(repeatPassword) || password.equals("")) {
-//            credentialisListener.onPasswordRepeatError();
-//            flag = false;
-//        }
-//        if (!Validation.onEmailAddresValidation(email) || email.equals("")) {
-//            credentialisListener.onEmailError();
-//            flag = false;
-//        }
-//        if (password.equals("")) {
-//            credentialisListener.onPasswordError();
-//            flag = false;
-//        }
-//        if (username.equals("")) {
-//            credentialisListener.onUsernameError();
-//            flag = false;
-//        }
-//        if (firstName.equals("")) {
-//            credentialisListener.onFirstNameError();
-//            flag = false;
-//        }
-//        if (lastName.equals("")) {
-//            credentialisListener.onLastNameError();
-//            flag = false;
-//        }
-//        return flag;
-        return true;
-    }
 
 
-    public void registration(String email, String password, String repeatPassword, String username,
+    public void onRegister(String email, String password, String repeatPassword, String username,
                              String firstName, String lastName) {
-        if (!onCredentialisValidate(email, password, repeatPassword, username, firstName, lastName, this)) {
+        if (!registrationInteractor.onCredentialisValidate(email, password, repeatPassword, username, firstName, lastName, this)) {
             return;
         }
         AppUser appUser = new AppUser(firstName, lastName, username, password, email);

@@ -23,11 +23,8 @@
 
     <!--Errors-->
     <string name="emailError">Niepoprawny adres email</string>
-    <string name="firstNameError">Błędne dane</string>
-    <string name="lastNameError">Błędne dane</string>
-    <string name="usernameError">Niepoprawna nazwa użytkownika</string>
-    <string name="repeatPasswordError">Błedne dane</string>
-    <string name="passwordError">Błedne Hasło</string>
-    <string name="usernameExistsError">Użytkownik juz istnieje</string>
+    <string name="repeatPasswordError">Podane hasła nie są identyczne</string>
+    <string name="usernameExistsError">Użytkownik o danej nazwie już istnieje</string>
+    <string name="emptyBox">Pole nie moze byc puste</string>
 
 </resources>
