@@ -7,6 +7,8 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.engine.ServiceGenerator;
 import com.example.pawel.orlikapp.engine.http.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
+import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.model.wraper.RegisterAccount;
 import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractor;
 import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractorImpl;
 
@@ -72,12 +74,18 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
         if (!registrationInteractor.onCredentialisValidate(email, password, repeatPassword, username, firstName, lastName, this)) {
             return;
         }
-        AppUser appUser = new AppUser(firstName, lastName, username, password, email);
+        AppUser appUser = new AppUser();
+        appUser.setPassword(password);
+        appUser.setUsername(username);
+        Player player = new Player(firstName,lastName,username,email);
+        RegisterAccount registerAccount = new RegisterAccount();
+        registerAccount.setAppUser(appUser);
+        registerAccount.setPlayer(player);
         LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
-        Call<AppUser> call = loginAndRegisterClient.register(appUser);
-        call.enqueue(new Callback<AppUser>() {
+        Call<Player> call = loginAndRegisterClient.register(registerAccount);
+        call.enqueue(new Callback<Player>() {
             @Override
-            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
+            public void onResponse(Call<Player> call, Response<Player> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccesRegistration();
                 } else {
@@ -86,7 +94,7 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
             }
 
             @Override
-            public void onFailure(Call<AppUser> call, Throwable t) {
+            public void onFailure(Call<Player> call, Throwable t) {
                 Toast.makeText(context, R.string.serverProblem, Toast.LENGTH_SHORT).show();
             }
         });

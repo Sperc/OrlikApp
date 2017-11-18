@@ -9,38 +9,46 @@ import android.preference.PreferenceManager;
  */
 
 public class SharedPrefs {
-//    private Context context;
+    //    private Context context;
     private SharedPreferences sharedPreferences;
 
     public SharedPrefs(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public void storeUser(String username) {
+    public void onStoreData(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("username", username);
+        editor.putString(key, value);
         editor.apply();
     }
 
-    public void storeToken(String token) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("token", token);
-        editor.apply();    }
-    public void storeLogin(String login){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("login",login);
-        editor.apply();
-    }
-    public void storeLoginCheckbox(String flag){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("loginCheckbox",flag);
-        editor.apply();
-    }
-    public String readString(String key) {
+    public String onReadString(String key) {
         return sharedPreferences.getString(key, "");
     }
-    public void deleteString(String key){
+
+    public void onDeleteString(String key) {
         sharedPreferences.edit().remove(key).apply();
     }
+
+//    public void storeUser(String username) {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("username", username);
+//        editor.apply();
+//    }
+//
+//    public void storeToken(String token) {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("token", token);
+//        editor.apply();    }
+//    public void storeLogin(String login){
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("login",login);
+//        editor.apply();
+//    }
+//    public void storeLoginCheckbox(String flag){
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("loginCheckbox",flag);
+//        editor.apply();
+//    }
 
 }

@@ -16,7 +16,7 @@ public class Booking {
     private boolean isAvailable = true;
     private Long leaderId;
 
-    private Set<AppUser> appUserSet;
+    private Set<Player> appUserSet;
     private Playground playground;
 
     public Long getId() {
@@ -75,11 +75,11 @@ public class Booking {
         this.leaderId = leaderId;
     }
 
-    public Set<AppUser> getAppUserSet() {
+    public Set<Player> getAppUserSet() {
         return appUserSet;
     }
 
-    public void setAppUserSet(Set<AppUser> appUserSet) {
+    public void setAppUserSet(Set<Player> appUserSet) {
         this.appUserSet = appUserSet;
     }
 

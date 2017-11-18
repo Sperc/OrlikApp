@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.AppUser;
+import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.main.MainActivity;
@@ -19,7 +20,6 @@ import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
 public class LoginActivity extends BaseActivity implements LoginView, LoginPresenter.LoginPresenterListener {
 
 
-    private SharedPrefs sharedPrefs;
     private EditText username;
     private EditText password;
     private Button logIn;
@@ -27,6 +27,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     private TextView forgotPassword;
     private CheckBox checkBox;
     private LoginPresenter loginPresenter;
+    private SharedPrefs sharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,8 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     protected void onResume() {
         super.onResume();
-        if (!sharedPrefs.readString("login").equals("")) {
-            username.setText(sharedPrefs.readString("login"));
+        if (!sharedPrefs.onReadString("login").equals("")) {
+            username.setText(sharedPrefs.onReadString("login"));
             checkBox.setChecked(true);
         }
     }
@@ -70,9 +71,11 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
             @Override
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
-                    sharedPrefs.storeLogin(username.getText().toString());
+//                    SharedPrefs.storeLogin(username.getText().toString());
+                    sharedPrefs.onStoreData("login",username.getText().toString());
                 } else {
-                    sharedPrefs.deleteString("login");
+//                    sharedPrefs.deleteString("login");
+                    sharedPrefs.onDeleteString("login");
                 }
                 loginPresenter.onLogin(username.getText().toString(), password.getText().toString());
             }
@@ -88,7 +91,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     }
 
     @Override
-    public void loginSucces(AppUser appUser) {
+    public void loginSucces(Player player) {
         //startNewActivity(this, MainActivity.class);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

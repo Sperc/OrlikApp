@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.find_orlik.FindOrlikActicity" />
-        <activity android:name=".ui.registration.RegistrationActivity"></activity>
+        <activity android:name=".ui.registration.RegistrationActivity" />
+        <activity android:name=".ui.base.StartActivity"></activity>
     </application>
 
 </manifest>

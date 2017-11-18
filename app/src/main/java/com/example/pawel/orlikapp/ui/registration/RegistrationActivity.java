@@ -93,6 +93,7 @@ public class RegistrationActivity extends BaseActivity implements RegistrationVi
     public void onSuccesRegistration() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+        Toast.makeText(this, "succesfull", Toast.LENGTH_SHORT).show();
         finish();
     }
 

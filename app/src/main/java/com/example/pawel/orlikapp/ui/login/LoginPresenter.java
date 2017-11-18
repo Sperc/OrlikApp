@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.example.pawel.orlikapp.engine.ServiceGenerator;
 import com.example.pawel.orlikapp.engine.http.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
+import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
 import com.example.pawel.orlikapp.ui.login.validation.LoginInteractorImpl;
 import com.example.pawel.orlikapp.ui.login.validation.LoginIntercator;
@@ -24,10 +25,11 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
     private LoginPresenterListener loginPresenterListener;
     private LoginView loginView;
     private LoginIntercator loginIntercator;
+    private SharedPrefs sharedPrefs;
 
 
     public interface LoginPresenterListener {
-        void loginSucces(AppUser appUser);
+        void loginSucces(Player player);
 
         void loginFailure();
     }
@@ -37,6 +39,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         this.context = context;
         this.loginView = loginView;
         loginIntercator = new LoginInteractorImpl();
+        sharedPrefs = new SharedPrefs(context);
     }
 
     @Override
@@ -58,15 +61,15 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         user.setUsername(username);
         user.setPassword(password);
         LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
-        Call<AppUser> call = loginAndRegisterClient.login(user);
-        call.enqueue(new Callback<AppUser>() {
+        Call<Player> call = loginAndRegisterClient.login(user);
+        call.enqueue(new Callback<Player>() {
             @Override
-            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
+            public void onResponse(Call<Player> call, Response<Player> response) {
                 if (response.isSuccessful()) {
                     SharedPrefs sharedPrefs = new SharedPrefs(context);
                     Headers headers = response.headers();
-                    sharedPrefs.storeUser(username);
-                    sharedPrefs.storeToken(headers.get("token"));
+                    sharedPrefs.onStoreData("username",username);
+                    sharedPrefs.onStoreData("token",headers.get("token"));
                     loginPresenterListener.loginSucces(response.body());
                 } else {
                     loginPresenterListener.loginFailure();
@@ -74,7 +77,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
             }
 
             @Override
-            public void onFailure(Call<AppUser> call, Throwable t) {
+            public void onFailure(Call<Player> call, Throwable t) {
                 Toast.makeText(context.getApplicationContext(), "Problem z serwerem", Toast.LENGTH_SHORT).show();
             }
         });

@@ -12,7 +12,7 @@ public class Team {
     private Long leaderId;
     private boolean isAvaiable;
 
-    private Set<AppUser> setOfUsers;
+    private Set<Player> setOfUsers;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class Team {
         isAvaiable = avaiable;
     }
 
-    public Set<AppUser> getSetOfUsers() {
+    public Set<Player> getSetOfUsers() {
         return setOfUsers;
     }
 
-    public void setSetOfUsers(Set<AppUser> setOfUsers) {
+    public void setSetOfUsers(Set<Player> setOfUsers) {
         this.setOfUsers = setOfUsers;
     }
 }
