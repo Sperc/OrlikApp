@@ -22,7 +22,10 @@
         </activity>
         <activity android:name=".ui.find_orlik.FindOrlikActicity" />
         <activity android:name=".ui.registration.RegistrationActivity" />
-        <activity android:name=".ui.base.StartActivity"></activity>
+        <activity android:name=".ui.base.StartActivity" />
+        <activity android:name=".ui.team.TeamActivity" />
+        <activity android:name=".ui.playgrounds.FindPlaygroundActivity" />
+        <activity android:name=".ui.my_team.MyTeamsActivity"></activity>
     </application>
 
 </manifest>

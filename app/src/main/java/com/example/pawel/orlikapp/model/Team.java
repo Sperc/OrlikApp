@@ -9,7 +9,7 @@ import java.util.Set;
 public class Team {
     private Long id;
     private String name;
-    private Long leaderId;
+    private String leaderName;
     private boolean isAvaiable;
 
     private Set<Player> setOfUsers;
@@ -30,12 +30,12 @@ public class Team {
         this.name = name;
     }
 
-    public Long getLeaderId() {
-        return leaderId;
+    public String getLeaderName() {
+        return leaderName;
     }
 
-    public void setLeaderId(Long leaderId) {
-        this.leaderId = leaderId;
+    public void setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
     }
 
     public boolean isAvaiable() {
@@ -52,5 +52,10 @@ public class Team {
 
     public void setSetOfUsers(Set<Player> setOfUsers) {
         this.setOfUsers = setOfUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "Nazwa: "+name+"\nLider: "+leaderName;
     }
 }

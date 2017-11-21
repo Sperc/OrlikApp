@@ -30,25 +30,5 @@ public class SharedPrefs {
         sharedPreferences.edit().remove(key).apply();
     }
 
-//    public void storeUser(String username) {
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("username", username);
-//        editor.apply();
-//    }
-//
-//    public void storeToken(String token) {
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("token", token);
-//        editor.apply();    }
-//    public void storeLogin(String login){
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("login",login);
-//        editor.apply();
-//    }
-//    public void storeLoginCheckbox(String flag){
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("loginCheckbox",flag);
-//        editor.apply();
-//    }
 
 }

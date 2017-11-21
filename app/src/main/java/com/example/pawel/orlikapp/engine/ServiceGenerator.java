@@ -12,19 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ServiceGenerator {
-    public static final String BASE_URL = "http://192.168.0.185:8080/";
-//    public static final String BASE_URL = "http://192.168.1.26:8080/";
+//    public static final String BASE_URL = "http://192.168.0.185:8080/";
+    public static final String BASE_URL = "http://192.168.1.26:8080/";
     //public static final String BASE_URL = "http://192.168.0.185:8080/";
-
-//    public static Retrofit client() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.1.17:8080")
-//                //.client(client)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        return retrofit;
-//    }
 
     public static Retrofit createService() {
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();

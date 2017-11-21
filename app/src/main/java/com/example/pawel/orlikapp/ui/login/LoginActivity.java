@@ -15,7 +15,9 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.main.MainActivity;
+import com.example.pawel.orlikapp.ui.my_team.MyTeamsActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
+import com.example.pawel.orlikapp.ui.team.TeamActivity;
 
 public class LoginActivity extends BaseActivity implements LoginView, LoginPresenter.LoginPresenterListener {
 
@@ -93,8 +95,9 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     public void loginSucces(Player player) {
         //startNewActivity(this, MainActivity.class);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MyTeamsActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     @Override

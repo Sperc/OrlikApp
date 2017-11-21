@@ -69,7 +69,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
                     SharedPrefs sharedPrefs = new SharedPrefs(context);
                     Headers headers = response.headers();
                     sharedPrefs.onStoreData("username",username);
-                    sharedPrefs.onStoreData("token",headers.get("token"));
+                    sharedPrefs.onStoreData("token",headers.get("authorization"));
                     loginPresenterListener.loginSucces(response.body());
                 } else {
                     loginPresenterListener.loginFailure();
