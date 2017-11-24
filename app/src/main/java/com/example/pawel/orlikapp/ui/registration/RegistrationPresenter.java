@@ -4,8 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
-import com.example.pawel.orlikapp.engine.ServiceGenerator;
-import com.example.pawel.orlikapp.engine.http.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.retrofit.ApiClient.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.model.wraper.RegisterAccount;

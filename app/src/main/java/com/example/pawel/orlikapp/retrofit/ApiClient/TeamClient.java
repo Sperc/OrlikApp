@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.engine.http;
+package com.example.pawel.orlikapp.retrofit.ApiClient;
 
 import com.example.pawel.orlikapp.model.Team;
 

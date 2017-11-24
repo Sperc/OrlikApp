@@ -10,14 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
-import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.model.Player;
-import com.example.pawel.orlikapp.prefs.SharedPrefs;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
-import com.example.pawel.orlikapp.ui.main.MainActivity;
 import com.example.pawel.orlikapp.ui.my_team.MyTeamsActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
-import com.example.pawel.orlikapp.ui.team.TeamActivity;
 
 public class LoginActivity extends BaseActivity implements LoginView, LoginPresenter.LoginPresenterListener {
 
@@ -29,7 +27,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     private TextView forgotPassword;
     private CheckBox checkBox;
     private LoginPresenter loginPresenter;
-    private SharedPrefs sharedPrefs;
+//    private SharedPrefs sharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +41,17 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     protected void onResume() {
         super.onResume();
-        if (!sharedPrefs.onReadString("login").equals("")) {
-            username.setText(sharedPrefs.onReadString("login"));
+        //tutaj zmieniane prefsy
+        if (!PreferencesShared.onReadString(PreferencesSharedKyes.login).equals("")) {
+//            username.setText(sharedPrefs.onReadString("login"));
+            username.setText(PreferencesShared.onReadString(PreferencesSharedKyes.login));
             checkBox.setChecked(true);
         }
     }
 
     @Override
     public void initialize() {
-        sharedPrefs = new SharedPrefs(this);
+        //sharedPrefs = new SharedPrefs(this);
         checkBox = (CheckBox) findViewById(R.id.saveUsername);
         logIn = (Button) findViewById(R.id.logIn);
         register = (Button) findViewById(R.id.registerButton);
@@ -74,10 +74,12 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
 //                    SharedPrefs.storeLogin(username.getText().toString());
-                    sharedPrefs.onStoreData("login",username.getText().toString());
+//                    sharedPrefs.onStoreData("login",username.getText().toString());
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.login,username.getText().toString());
                 } else {
 //                    sharedPrefs.deleteString("login");
-                    sharedPrefs.onDeleteString("login");
+                    //sharedPrefs.onDeleteString("login");
+                    PreferencesShared.onDeleteString(PreferencesSharedKyes.login);
                 }
                 loginPresenter.onLogin(username.getText().toString(), password.getText().toString());
             }

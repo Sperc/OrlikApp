@@ -3,11 +3,12 @@ package com.example.pawel.orlikapp.ui.login;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.pawel.orlikapp.engine.ServiceGenerator;
-import com.example.pawel.orlikapp.engine.http.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.retrofit.ApiClient.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.model.Player;
-import com.example.pawel.orlikapp.prefs.SharedPrefs;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.login.validation.LoginInteractorImpl;
 import com.example.pawel.orlikapp.ui.login.validation.LoginIntercator;
 
@@ -25,7 +26,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
     private LoginPresenterListener loginPresenterListener;
     private LoginView loginView;
     private LoginIntercator loginIntercator;
-    private SharedPrefs sharedPrefs;
+//    private SharedPrefs sharedPrefs;
 
 
     public interface LoginPresenterListener {
@@ -39,7 +40,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         this.context = context;
         this.loginView = loginView;
         loginIntercator = new LoginInteractorImpl();
-        sharedPrefs = new SharedPrefs(context);
+//        sharedPrefs = new SharedPrefs(context);
     }
 
     @Override
@@ -66,10 +67,10 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
                 if (response.isSuccessful()) {
-                    SharedPrefs sharedPrefs = new SharedPrefs(context);
+//                    SharedPrefs sharedPrefs = new SharedPrefs(context);
                     Headers headers = response.headers();
-                    sharedPrefs.onStoreData("username",username);
-                    sharedPrefs.onStoreData("token",headers.get("authorization"));
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.username,username);
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.token,headers.get("authorization"));
                     loginPresenterListener.loginSucces(response.body());
                 } else {
                     loginPresenterListener.loginFailure();

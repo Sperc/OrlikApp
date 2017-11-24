@@ -1,14 +1,12 @@
 package com.example.pawel.orlikapp.ui.my_team;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.pawel.orlikapp.engine.ServiceGenerator;
-import com.example.pawel.orlikapp.engine.http.TeamClient;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.retrofit.ApiClient.TeamClient;
 import com.example.pawel.orlikapp.model.Team;
 import com.example.pawel.orlikapp.prefs.SharedPrefs;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.Set;
 
@@ -55,7 +53,7 @@ public class MyTeamPresenter {
 
             @Override
             public void onFailure(Call<Set<Team>> call, Throwable t) {
-
+                Toast.makeText(context, "Brak połaczenia z serwerem", Toast.LENGTH_SHORT).show();
             }
         });
     }
