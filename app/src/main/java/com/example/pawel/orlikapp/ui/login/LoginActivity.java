@@ -14,6 +14,7 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
+import com.example.pawel.orlikapp.ui.main.MainActivity;
 import com.example.pawel.orlikapp.ui.my_team.MyTeamsActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
 
@@ -36,6 +37,8 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
         setPresenter();
         initialize();
         onButtonClick();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent) ;
     }
 
     @Override

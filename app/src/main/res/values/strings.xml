@@ -27,4 +27,8 @@
     <string name="usernameExistsError">Użytkownik o danej nazwie już istnieje</string>
     <string name="emptyBox">Pole nie moze byc puste</string>
 
+    <!--Drawer-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
 </resources>
