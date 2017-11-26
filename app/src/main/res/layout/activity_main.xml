@@ -7,13 +7,15 @@
     android:id="@+id/drawer"
     tools:context="com.example.pawel.orlikapp.ui.main.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@drawable/boisko_v2"
+        android:id="@+id/flcontent">
+    </FrameLayout>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/navigationDrawer"
         app:headerLayout="@layout/header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

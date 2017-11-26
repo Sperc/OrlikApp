@@ -37,8 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
         setPresenter();
         initialize();
         onButtonClick();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent) ;
+
     }
 
     @Override
@@ -100,9 +99,9 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     public void loginSucces(Player player) {
         //startNewActivity(this, MainActivity.class);
-        Intent intent = new Intent(this, MyTeamsActivity.class);
-        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent) ;
+        finish();
     }
 
     @Override

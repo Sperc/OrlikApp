@@ -31,4 +31,13 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <!--Menu MainActivityDrawer-->
+    <string name="settings">Ustawienia</string>
+    <string name="search">Szukaj</string>
+    <string name="teams">Grupy</string>
+    <string name="logout">Wyloguj</string>
+    <string name="reservation">Rezerwacje</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

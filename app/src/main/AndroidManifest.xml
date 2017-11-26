@@ -14,19 +14,16 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.base.BaseActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity"/>
+        <activity android:name=".ui.registration.RegistrationActivity" />
+        <activity android:name=".ui.my_team.MyTeamsActivity" />
+        <activity android:name=".core.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.find_orlik.FindOrlikActicity" />
-        <activity android:name=".ui.registration.RegistrationActivity" />
-        <activity android:name=".ui.base.StartActivity" />
-        <activity android:name=".ui.team.TeamActivity" />
-        <activity android:name=".ui.playgrounds.FindPlaygroundActivity" />
-        <activity android:name=".ui.my_team.MyTeamsActivity"></activity>
     </application>
 
 </manifest>
