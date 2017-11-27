@@ -1,7 +1,7 @@
-package com.example.pawel.orlikapp.ui.main.teams;
+package com.example.pawel.orlikapp.ui.main.myteams;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.model.Team;
@@ -20,12 +20,12 @@ import retrofit2.Response;
  * Created by Pawel on 26.11.2017.
  */
 
-public class TeamsPresenter {
+public class MyTeamsPresenter {
 
     private Context context;
     private TeamsPresenterListener teamsPresenterListener;
 
-    public TeamsPresenter(Context context,TeamsPresenterListener teamsPresenterListener) {
+    public MyTeamsPresenter(Context context, TeamsPresenterListener teamsPresenterListener) {
         this.teamsPresenterListener = teamsPresenterListener;
         this.context = context;
     }
@@ -50,6 +50,7 @@ public class TeamsPresenter {
             }
         });
     }
+
 
     public interface TeamsPresenterListener{
         void onSucces(Set<Team> teams);

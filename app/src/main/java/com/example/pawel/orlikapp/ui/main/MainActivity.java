@@ -16,7 +16,8 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
-import com.example.pawel.orlikapp.ui.main.teams.TeamsFragment;
+import com.example.pawel.orlikapp.ui.main.myteams.MyTeamsFragment;
+import com.example.pawel.orlikapp.ui.main.team.TeamFragment;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity {
         Class fragmentClass = null;
         switch (menuItem.getItemId()) {
             case R.id.teams:
-                fragmentClass = TeamsFragment.class;
+                fragmentClass = TeamFragment.class;
                 break;
             case R.id.logout:
                 logout();
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
                 fragmentClass = SettingsFragment.class;
                 break;
             default:
-                fragmentClass = TeamsFragment.class;
+                fragmentClass = MyTeamsFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
