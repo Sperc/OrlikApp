@@ -1,9 +1,6 @@
-package com.example.pawel.orlikapp.ui.main;
+package com.example.pawel.orlikapp.ui.menu.main;
 
 import android.content.Context;
-
-import com.example.pawel.orlikapp.prefs.PreferencesShared;
-import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 
 /**
  * Created by Pawel on 26.11.2017.

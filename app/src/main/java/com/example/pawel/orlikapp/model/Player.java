@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.model;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,7 +14,7 @@ public class Player {
     private String username;
     private String email;
 
-    private Set<Booking> usersBookingSet;
+    private List<Booking> bookingList;
     private Set<Team> userTeams;
 
     public Player(String firstName, String lastName, String username, String email) {
@@ -63,12 +64,12 @@ public class Player {
         this.email = email;
     }
 
-    public Set<Booking> getUsersBookingSet() {
-        return usersBookingSet;
+    public List<Booking> getBookingList() {
+        return bookingList;
     }
 
-    public void setUsersBookingSet(Set<Booking> usersBookingSet) {
-        this.usersBookingSet = usersBookingSet;
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
 
     public Set<Team> getUserTeams() {

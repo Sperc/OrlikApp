@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.model;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,9 +15,9 @@ public class Booking {
     private double endOrder;
     private int maxNumberOfPlayer = 14;
     private boolean isAvailable = true;
-    private Long leaderId;
+    private String leaderName;
 
-    private Set<Player> appUserSet;
+    private List<Player> players;
     private Playground playground;
 
     public Long getId() {
@@ -67,20 +68,20 @@ public class Booking {
         isAvailable = available;
     }
 
-    public Long getLeaderId() {
-        return leaderId;
+    public String getLeaderName() {
+        return leaderName;
     }
 
-    public void setLeaderId(Long leaderId) {
-        this.leaderId = leaderId;
+    public void setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
     }
 
-    public Set<Player> getAppUserSet() {
-        return appUserSet;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setAppUserSet(Set<Player> appUserSet) {
-        this.appUserSet = appUserSet;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public Playground getPlayground() {

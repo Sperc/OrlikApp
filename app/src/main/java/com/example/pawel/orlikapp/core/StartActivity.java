@@ -1,7 +1,6 @@
 package com.example.pawel.orlikapp.core;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.pawel.orlikapp.R;
@@ -9,7 +8,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
-import com.example.pawel.orlikapp.ui.main.MainActivity;
+import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
 
 public class StartActivity extends BaseActivity {
 

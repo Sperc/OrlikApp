@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.main.team;
+package com.example.pawel.orlikapp.ui.menu.team;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

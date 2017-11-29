@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.base.BaseActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.menu.main.MainActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.registration.RegistrationActivity" />
         <activity android:name=".ui.my_team.MyTeamsActivity" />

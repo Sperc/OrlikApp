@@ -1,25 +1,19 @@
-package com.example.pawel.orlikapp.ui.main.team;
+package com.example.pawel.orlikapp.ui.menu.team;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.pawel.orlikapp.R;
-import com.example.pawel.orlikapp.ui.main.myteams.MyTeamsFragment;
-import com.example.pawel.orlikapp.ui.main.teamsnotification.TeamNotificationFragment;
+import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
+import com.example.pawel.orlikapp.ui.menu.teamsnotification.TeamNotificationFragment;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class TeamFragment extends Fragment {

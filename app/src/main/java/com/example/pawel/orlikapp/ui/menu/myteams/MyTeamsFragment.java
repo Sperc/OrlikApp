@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.main.myteams;
+package com.example.pawel.orlikapp.ui.menu.myteams;
 
 import android.os.Bundle;
 //import android.app.Fragment;

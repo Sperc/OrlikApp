@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.main.teamsnotification;
+package com.example.pawel.orlikapp.ui.menu.teamsnotification;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

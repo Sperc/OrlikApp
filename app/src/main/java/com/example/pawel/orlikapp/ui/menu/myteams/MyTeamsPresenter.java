@@ -1,7 +1,6 @@
-package com.example.pawel.orlikapp.ui.main.myteams;
+package com.example.pawel.orlikapp.ui.menu.myteams;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.model.Team;

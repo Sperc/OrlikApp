@@ -1,6 +1,7 @@
-package com.example.pawel.orlikapp.ui.main;
+package com.example.pawel.orlikapp.ui.menu.main;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,8 +17,11 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
-import com.example.pawel.orlikapp.ui.main.myteams.MyTeamsFragment;
-import com.example.pawel.orlikapp.ui.main.team.TeamFragment;
+import com.example.pawel.orlikapp.ui.menu.FindPlayground;
+import com.example.pawel.orlikapp.ui.menu.SettingsFragment;
+import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
+import com.example.pawel.orlikapp.ui.menu.reservation.ReservationFragment;
+import com.example.pawel.orlikapp.ui.menu.team.TeamFragment;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
@@ -32,6 +36,7 @@ public class MainActivity extends BaseActivity {
         drawerLayout.addDrawerListener(toggle);
         navigationView = (NavigationView) findViewById(R.id.navigationDrawer);
         toggle.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setUpDrawerContent(navigationView);
 
@@ -79,6 +84,10 @@ public class MainActivity extends BaseActivity {
             case R.id.settings:
                 fragmentClass = SettingsFragment.class;
                 break;
+            case R.id.reservation:
+                fragmentClass = ReservationFragment.class;
+                break;
+
             default:
                 fragmentClass = MyTeamsFragment.class;
         }
