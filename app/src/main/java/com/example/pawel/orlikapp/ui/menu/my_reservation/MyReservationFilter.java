@@ -1,7 +1,6 @@
-package com.example.pawel.orlikapp.ui.menu.reservation;
+package com.example.pawel.orlikapp.ui.menu.my_reservation;
 
 import com.example.pawel.orlikapp.model.Booking;
-import com.example.pawel.orlikapp.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
  * Created by Pawel on 28.11.2017.
  */
 
-public class ReservationFilter {
+public class MyReservationFilter {
     public List<Booking> getUserOwnReservation(List<Booking> list,String username){
         List<Booking> booking = new ArrayList<>();
         for(Booking b:list){

@@ -1,9 +1,8 @@
-package com.example.pawel.orlikapp.ui.menu.reservation;
+package com.example.pawel.orlikapp.ui.menu.my_reservation;
 
 import android.content.Context;
 
 import com.example.pawel.orlikapp.model.Booking;
-import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
@@ -20,11 +19,11 @@ import retrofit2.Response;
  * Created by Pawel on 27.11.2017.
  */
 
-public class ReservationPresenter {
+public class MyReservationPresenter {
     private Context context;
     private ReservationListener reservationListener;
 
-    public ReservationPresenter(Context context, ReservationListener reservationListener) {
+    public MyReservationPresenter(Context context, ReservationListener reservationListener) {
         this.reservationListener = reservationListener;
         this.context = context;
     }
@@ -37,7 +36,7 @@ public class ReservationPresenter {
             @Override
             public void onResponse(Call<List<Booking>> call, Response<List<Booking>> response) {
                 if (response.isSuccessful()) {
-                    ReservationFilter reservationFilter = new ReservationFilter();
+                    MyReservationFilter reservationFilter = new MyReservationFilter();
                     List<Booking> ownReservation = reservationFilter.getUserOwnReservation(response.body(), PreferencesShared.onReadString(PreferencesSharedKyes.username));
                     List<Booking> memberReservation = reservationFilter.getMemberReservation(response.body(),PreferencesShared.onReadString(PreferencesSharedKyes.username));
                     reservationListener.onSucces(ownReservation,memberReservation);

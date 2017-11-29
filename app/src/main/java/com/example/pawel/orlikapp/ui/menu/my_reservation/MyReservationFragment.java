@@ -1,10 +1,9 @@
-package com.example.pawel.orlikapp.ui.menu.reservation;
+package com.example.pawel.orlikapp.ui.menu.my_reservation;
 
 
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,16 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
-import com.example.pawel.orlikapp.model.Player;
-import com.example.pawel.orlikapp.utils.Logs;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReservationFragment extends Fragment implements ReservationPresenter.ReservationListener{
+public class MyReservationFragment extends Fragment implements MyReservationPresenter.ReservationListener{
 
 
-    public ReservationFragment() {
+    public MyReservationFragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +29,7 @@ public class ReservationFragment extends Fragment implements ReservationPresente
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservation, container, false);
-        ReservationPresenter reservationPresenter = new ReservationPresenter(getContext(),this);
+        MyReservationPresenter reservationPresenter = new MyReservationPresenter(getContext(),this);
         reservationPresenter.getUserRerservation();
         return view;
     }

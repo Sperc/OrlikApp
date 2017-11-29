@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.ui.menu;
+package com.example.pawel.orlikapp.ui.menu.settings;
 
 import android.content.Context;
 import android.net.Uri;
