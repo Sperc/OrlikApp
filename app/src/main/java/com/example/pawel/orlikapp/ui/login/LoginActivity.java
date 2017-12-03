@@ -16,6 +16,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
+import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
 
 public class LoginActivity extends BaseActivity implements LoginView, LoginPresenter.LoginPresenterListener {
 
@@ -98,7 +99,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     public void loginSucces(Player player) {
         //startNewActivity(this, MainActivity.class);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SelectCityActicity.class);
         startActivity(intent) ;
         finish();
     }

@@ -1,6 +1,7 @@
 package com.example.pawel.orlikapp.ui.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,13 @@ public abstract class BaseActivity extends AppCompatActivity {
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+    public void onStartActivity(Class w,boolean finishThisActivity){
+        Intent intent = new Intent(this,w);
+        startActivity(intent);
+        if(finishThisActivity){
+            finish();
         }
     }
     public abstract void initialize();

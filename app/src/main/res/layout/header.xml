@@ -2,15 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@color/darkgray">
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/darkgray" >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:text="Imie i nazwisko"/>
+        android:orientation="vertical"
+        android:id="@+id/containerCity"
+        android:paddingLeft="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="Aktualne miasto:"/>
+        <TextView
+            android:paddingBottom="10dp"
+            android:id="@+id/actualCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Warszawa"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

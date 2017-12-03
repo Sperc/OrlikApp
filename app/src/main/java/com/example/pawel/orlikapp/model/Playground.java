@@ -9,13 +9,17 @@ import java.util.Set;
 public class Playground {
     private Long id;
     private String name;
-    private String city;
     private String streetName;
     private String streetNumber;
     private double longitude;
     private double latitude;
+    private City city;
 
     private Set<Booking> bookingSet;
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public Long getId() {
         return id;
@@ -33,14 +37,9 @@ public class Playground {
         this.name = name;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getStreetName() {
         return streetName;
     }

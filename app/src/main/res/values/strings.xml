@@ -2,6 +2,7 @@
     <string name="app_name">OrlikApp</string>
     <string name="findOrlik">Znajdz Orlika</string>
     <string name="serverProblem">Problem z serwerem</string>
+    <string name="error">Coś poszło nie tak</string>
 
     <!--LoginActivity -->
     <string name="hintUser">Użytkownik</string>
@@ -32,11 +33,13 @@
     <string name="close">Close</string>
 
     <!--Menu MainActivityDrawer-->
+    <string name="myprofile">Moj profil</string>
     <string name="settings">Ustawienia</string>
     <string name="search">Szukaj</string>
     <string name="teams">Grupy</string>
     <string name="logout">Wyloguj</string>
-    <string name="reservation">Moje rezerwacje</string>
+    <string name="reservation">Rezerwacje</string>
+    <string name="mainPage">MainPage</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

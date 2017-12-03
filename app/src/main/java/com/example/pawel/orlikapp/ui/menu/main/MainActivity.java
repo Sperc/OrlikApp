@@ -11,6 +11,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
@@ -22,38 +26,58 @@ import com.example.pawel.orlikapp.ui.menu.settings.SettingsFragment;
 import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
 import com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment;
 import com.example.pawel.orlikapp.ui.menu.team.TeamFragment;
+import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
-    private DrawerLayout drawerLayout;
+    @BindView(R.id.drawer)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_action)
+    Toolbar toolbar;
+    TextView actualCity;
+
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-    private Toolbar toolbar;
+    private LinearLayout containerHeader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         initialize();
         setSupportActionBar(toolbar);
         drawerLayout.addDrawerListener(toggle);
-        navigationView = (NavigationView) findViewById(R.id.navigationDrawer);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setUpDrawerContent(navigationView);
+        onButtonClick();
+
 
 
     }
 
     @Override
     public void initialize() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        toolbar = (Toolbar)findViewById(R.id.nav_action);
+        navigationView = (NavigationView) findViewById(R.id.navigationDrawer);
+        View headerLayout = navigationView.getHeaderView(0); //0-index header
+        containerHeader = headerLayout.findViewById(R.id.containerCity);
+        actualCity = headerLayout.findViewById(R.id.actualCity);
+        actualCity.setText(PreferencesShared.onReadString(PreferencesSharedKyes.city));
 
     }
 
     @Override
     public void onButtonClick() {
-
+        containerHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onStartActivity(SelectCityActicity.class,true);
+            }
+        });
     }
 
     @Override
@@ -70,7 +94,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void selectItemDrawer(MenuItem menuItem) {
-        Fragment fragment=null;
+        Fragment fragment = null;
         Class fragmentClass = null;
         switch (menuItem.getItemId()) {
             case R.id.teams:
@@ -98,7 +122,7 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flcontent,fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.flcontent, fragment).commit();
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
@@ -114,7 +138,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    private void logout(){
+
+    private void logout() {
         PreferencesShared.onDeleteString(PreferencesSharedKyes.token);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
