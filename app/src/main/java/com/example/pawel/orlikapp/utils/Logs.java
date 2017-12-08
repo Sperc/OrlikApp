@@ -3,6 +3,7 @@ package com.example.pawel.orlikapp.utils;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.pawel.orlikapp.BuildConfig;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 
 /**
@@ -10,10 +11,8 @@ import com.example.pawel.orlikapp.ui.base.BaseActivity;
  */
 
 public class Logs {
-    public static boolean enableLogs = true;
-
     public static void d(String TAG, String msg) {
-        if (enableLogs) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, msg);
         }
     }

@@ -10,11 +10,16 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
        <EditText
            android:id="@+id/serachEditText"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:maxLines="1"
+           android:padding="10dp"
+           android:drawableRight="@drawable/ic_youtube_searched_for_black_24dp"
            android:textSize="18sp"/>
 
         <ScrollView

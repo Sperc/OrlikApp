@@ -93,6 +93,8 @@ public class SelectCityActicity extends BaseActivity implements SelectCityPresen
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 City city = (City) adapterView.getItemAtPosition(i);
                 PreferencesShared.onStoreData(PreferencesSharedKyes.city,city.getName());
+                PreferencesShared.onStoreData(PreferencesSharedKyes.latitude,city.getLatitude());
+                PreferencesShared.onStoreData(PreferencesSharedKyes.longitude,city.getLongitude());
                 onStartActivity(MainActivity.class,true);
             }
         });

@@ -14,14 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
-import com.example.pawel.orlikapp.ui.menu.search.FindPlayground;
+import com.example.pawel.orlikapp.ui.menu.find_playground.FindPlaygroundFragment;
 import com.example.pawel.orlikapp.ui.menu.settings.SettingsFragment;
 import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
 import com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment;
@@ -104,7 +103,7 @@ public class MainActivity extends BaseActivity {
                 logout();
                 return;
             case R.id.search:
-                fragmentClass = FindPlayground.class;
+                fragmentClass = FindPlaygroundFragment.class;
                 break;
             case R.id.settings:
                 fragmentClass = SettingsFragment.class;

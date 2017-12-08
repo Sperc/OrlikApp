@@ -4,5 +4,12 @@
     android:layout_height="wrap_content"
     android:id="@+id/nav_action"
     android:background="@color/colorPrimary">
+    <EditText
+        android:id="@+id/navbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="asdasd"
+        android:visibility="gone"/>
 
 </android.support.v7.widget.Toolbar>
