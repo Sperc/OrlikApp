@@ -3,6 +3,7 @@
     <string name="findOrlik">Znajdz Orlika</string>
     <string name="serverProblem">Problem z serwerem</string>
     <string name="error">Coś poszło nie tak</string>
+    <string name="connectionError">Brak połączenia</string>
     <string name="authorizationProblem">Problem z autoryzacja</string>
     <!--LoginActivity -->
     <string name="hintUser">Użytkownik</string>

@@ -40,5 +40,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //floating search view
-   // compile 'com.github.arimorty:floatingsearchview:2.1.1'
+    compile 'com.github.arimorty:floatingsearchview:2.1.1'
 }

@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity {
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_action)
     Toolbar toolbar;
+
     TextView actualCity;
 
     private ActionBarDrawerToggle toggle;
@@ -55,7 +56,6 @@ public class MainActivity extends BaseActivity {
         onButtonClick();
 
 
-
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
         containerHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onStartActivity(SelectCityActicity.class,true);
+                onStartActivity(SelectCityActicity.class, true);
             }
         });
     }
