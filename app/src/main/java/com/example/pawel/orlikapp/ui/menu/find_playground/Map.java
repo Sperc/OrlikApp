@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.pawel.orlikapp.model.Playground;
@@ -18,10 +19,10 @@ import java.util.List;
  * Created by Pawel on 09.12.2017.
  */
 
-public class Map{
-    public static void addMarkerFromList(GoogleMap googleMap, List<Playground> playgrounds){
-        for(Playground item: playgrounds){
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getLatitude(),item.getLongitude())));
+public class Map {
+    public static void addMarkerFromList(GoogleMap googleMap, List<Playground> playgrounds) {
+        for (Playground item : playgrounds) {
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getLatitude(), item.getLongitude())));
         }
     }
 }

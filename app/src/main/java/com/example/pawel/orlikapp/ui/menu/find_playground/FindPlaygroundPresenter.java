@@ -1,16 +1,11 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
-import android.app.Activity;
-
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.retrofit.ApiClient.PlaygroundClient;
 import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
@@ -41,16 +36,39 @@ public class FindPlaygroundPresenter {
                     findPlaygroundListener.onSucces(response.body());
                 }
                 else if(response.raw().code()==401){
-                    findPlaygroundView.onResponse(String.valueOf(R.string.authorizationProblem));
+                    findPlaygroundView.onResponsePresenter(R.string.authorizationProblem);
                 }
                 else {
-                    findPlaygroundView.onResponse(String.valueOf(R.string.error));
+                    findPlaygroundView.onResponsePresenter(R.string.error);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Playground>> call, Throwable t) {
-                findPlaygroundView.onResponse(String.valueOf(R.string.connectionError));
+                findPlaygroundView.onResponsePresenter(R.string.connectionError);
+            }
+        });
+    }
+    public void getPlaygroundByCityAndCategory(String city, String category, final FindPlaygroundListener findPlaygroundListener){
+        PlaygroundClient playgroundClient = ServiceGenerator.createService().create(PlaygroundClient.class);
+        Call<List<Playground>> call  = playgroundClient.getAllPlaygroudByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.token),city,category);
+        call.enqueue(new Callback<List<Playground>>() {
+            @Override
+            public void onResponse(Call<List<Playground>> call, Response<List<Playground>> response) {
+                if(response.isSuccessful()){
+                    findPlaygroundListener.onSucces(response.body());
+                }
+                else if(response.raw().code()==401){
+                    findPlaygroundView.onResponsePresenter(R.string.authorizationProblem);
+                }
+                else {
+                    findPlaygroundView.onResponsePresenter(R.string.error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Playground>> call, Throwable t) {
+                findPlaygroundView.onResponsePresenter(R.string.connectionError);
             }
         });
     }

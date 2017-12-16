@@ -9,6 +9,8 @@ import java.util.Set;
 public class Playground {
     private Long id;
     private String name;
+    private String category;
+    private String desctiption;
     private String streetName;
     private String streetNumber;
     private double longitude;
@@ -29,6 +31,22 @@ public class Playground {
         this.id = id;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDesctiption() {
+        return desctiption;
+    }
+
+    public void setDesctiption(String desctiption) {
+        this.desctiption = desctiption;
+    }
+
     public String getName() {
         return name;
     }
@@ -40,6 +58,7 @@ public class Playground {
     public City getCity() {
         return city;
     }
+
     public String getStreetName() {
         return streetName;
     }

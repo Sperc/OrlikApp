@@ -8,4 +8,5 @@
     <color name="white">#fff</color>
     <color name="colorAccent">#FF4081</color>
     <color name="darkgray">#6c6c6c</color>
+    <color name="shadow">#70000000</color>
 </resources>
