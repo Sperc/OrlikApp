@@ -44,6 +44,14 @@
 
     <!--Menu-->
     <string name="searchEditText">Szukaj...</string>
+    <string name="wrongAddresName">Nie znaleziono żadnych obiektow sportowych o podanym adresie</string>
+    <string name="goTo">Przejdz</string>
+
+
+    <!--Categroy-->
+    <string name="football">Piłka nożna</string>
+    <string name="volleyball">Siatkówka</string>
+    <string name="basketball">Koszykówka</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,48 +1,48 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.utils.ConstansValues;
+import com.example.pawel.orlikapp.utils.MyTokenizer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
+import java.util.Map;
 
 public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallback, FindPlaygroundView, GoogleMap.OnMarkerClickListener {
     FindPlaygroundPresenter findPlaygroundPresenter;
-    FloatingSearchView floatingSearchView;
     Spinner spinner;
-
-    RelativeLayout relativeLayout;
+    //    LinearLayout detailLayout;
     MapView mapView;
     private GoogleMap mGoogleMap;
     MultiAutoCompleteTextView multiAutoCompleteTextView;
@@ -55,7 +55,6 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         View view = inflater.inflate(R.layout.fragment_find_playground, container, false);
         init(view);
         autoCompleteFunctons();
-//        autocompleteTest();
         return view;
     }
 
@@ -78,20 +77,25 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         double lati = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.latitude));
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 12));
-
+//        updateCamera(new LatLng(lati,longi),ConstansValues.MAP_ZOOM_DEFAULT);
         findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
         spinerFunctions(googleMap);
+        googleMap.setOnMarkerClickListener(this);
+        mGoogleMap.setInfoWindowAdapter(new CustomWindowAdapter(getContext()));
 
     }
 
 
     @Override
     public void onResponsePresenter(int message) {
-        Toast.makeText(getActivity(), getString(message), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(message), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
+    public boolean onMarkerClick(final Marker marker) {
+        Playground p = (Playground) marker.getTag();
+        updateCamera(new LatLng(p.getLatitude(), p.getLongitude()), ConstansValues.MAP_ZOOM_DETAIL);
+
         return false;
     }
 
@@ -103,37 +107,18 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         spinner = (Spinner) view.findViewById(R.id.categorySpinner);
         ArrayAdapter<CharSequence> spinadapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinadapter);
-
     }
-
-    private void spinerFunctions(final GoogleMap googleMap) {
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    public FindPlaygroundPresenter.FindPlaygroundListener getListener(final GoogleMap googleMap) {
+        return new FindPlaygroundPresenter.FindPlaygroundListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = (TextView) view;
-
-                String category = textView.getText().toString();
-                findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), category, getListener(googleMap));
+            public void onSucces(List<Playground> playgrounds) {
+                googleMap.clear();
+                MapHelper.addMarkerFromList(googleMap, playgrounds);
+                multiAutoCompleteConfig(playgrounds);
+                onDrawableMultitexClick(DataHelper.getPlaygroundsLatLng(playgrounds), googleMap);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        };
     }
-
-//    private void autocompleteTest() {
-//        multiAutoCompleteTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-//                if (i == EditorInfo.IME_ACTION_SEARCH || i == EditorInfo.IME_ACTION_DONE || keyEvent.getAction() == KeyEvent.ACTION_DOWN || keyEvent.getAction() == KeyEvent.ENTER) {
-//                    Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
-//                }
-//                return false;
-//            }
-//        });
-//    }
 
     public void autoCompleteFunctons() {
         multiAutoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -146,66 +131,105 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
                     shadowLayout.setVisibility(View.VISIBLE);
                     multiAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, drawableRight, null);
                 } else {
-                    shadowLayout.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getActivity(), "zmiana", Toast.LENGTH_SHORT).show();
+                    shadowLayout.setVisibility(View.GONE);
                     multiAutoCompleteTextView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
                 }
             }
         });
-        multiAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //turn off shadow background
+        shadowLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView t = (TextView) view;
-                Toast.makeText(getContext(), t.getText(), Toast.LENGTH_SHORT).show();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                multiAutoCompleteTextView.clearFocus();
+                return false;
             }
         });
+    }
+
+    private void onDrawableMultitexClick(final Map<String, LatLng> mapPlaygrounds, final GoogleMap googleMap) {
         multiAutoCompleteTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
                 final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     if (motionEvent.getX() <= (multiAutoCompleteTextView.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())) {
                         // your action here
                         String text = multiAutoCompleteTextView.getText().toString();
-                        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
-
+                        LatLng latLng = mapPlaygrounds.get(text);
+                        if (latLng != null) {
+                            updateCamera(latLng, ConstansValues.MAP_ZOOM_DETAIL);
+                        }
+                        else {
+                            Toast.makeText(getContext(), R.string.wrongAddresName, Toast.LENGTH_SHORT).show();
+                        }
+                        clearInputFocus();
                         return true;
                     } else if (multiAutoCompleteTextView.getCompoundDrawables()[DRAWABLE_RIGHT] != null) {
                         if (motionEvent.getRawX() + multiAutoCompleteTextView.getPaddingRight() >= (multiAutoCompleteTextView.getRight() - multiAutoCompleteTextView.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                             // your action here
-                            Toast.makeText(getActivity(), "workRight", Toast.LENGTH_SHORT).show();
-                            shadowLayout.setVisibility(View.GONE);
+                            multiAutoCompleteTextView.setText("");
+                            clearInputFocus();
                             return true;
                         }
                     }
                 }
                 return false;
+
             }
 
         });
-
     }
 
-    void initSearchAdpater(List<Playground> playgrounds) {
+
+
+    private void spinerFunctions(final GoogleMap googleMap) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView textView = (TextView) view;
+                String category = textView.getText().toString();
+                findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), category, getListener(googleMap));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+
+
+    void multiAutoCompleteConfig(List<Playground> playgrounds) {
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, DataHelper.getListString(playgrounds));
         multiAutoCompleteTextView.setAdapter(adapter);
-        multiAutoCompleteTextView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        multiAutoCompleteTextView.setTokenizer(new MyTokenizer());
         multiAutoCompleteTextView.setThreshold(2);
     }
 
-    public FindPlaygroundPresenter.FindPlaygroundListener getListener(final GoogleMap googleMap) {
-        return new FindPlaygroundPresenter.FindPlaygroundListener() {
-            @Override
-            public void onSucces(List<Playground> playgrounds) {
-                googleMap.clear();
-                Map.addMarkerFromList(googleMap, playgrounds);
-                initSearchAdpater(playgrounds);
-            }
-        };
+    public void updateCamera(LatLng latLng, float zoom) {
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(zoom)
+//                .bearing(90)
+//                .tilt(30)
+                .build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
     }
+
+    private void clearInputFocus() {
+        multiAutoCompleteTextView.clearFocus();
+        setOffSoftKeyboard();
+    }
+
+    private void setOffSoftKeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 
 }

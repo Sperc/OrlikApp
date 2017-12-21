@@ -1,39 +1,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/testowe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.menu.find_playground.FindPlaygroundFragment"
     android:focusableInTouchMode="true"
-    android:id="@+id/testowe">
+    tools:context=".ui.menu.find_playground.FindPlaygroundFragment">
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true" />
 
     <LinearLayout
-        android:focusable="true"
         android:id="@+id/shadowLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/shadow"
-        android:visibility="invisible"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:focusableInTouchMode="true"
+        android:focusable="true" />
+
 
     <!--<com.arlib.floatingsearchview.FloatingSearchView-->
-        <!--android:id="@+id/floating_search_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"-->
-        <!--app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"-->
-        <!--app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"-->
-        <!--app:floatingSearch_searchHint="Search..."-->
-        <!--app:floatingSearch_suggestionsListAnimDuration="250"-->
-        <!--app:floatingSearch_showSearchKey="false"-->
-        <!--app:floatingSearch_leftActionMode="noLeftAction"-->
-        <!--app:showAsAction="always"-->
-        <!--app:floatingSearch_menu="@menu/seach_menu"-->
-        <!--app:floatingSearch_close_search_on_keyboard_dismiss="true"/>-->
+    <!--android:id="@+id/floating_search_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"-->
+    <!--app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"-->
+    <!--app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"-->
+    <!--app:floatingSearch_searchHint="Search..."-->
+    <!--app:floatingSearch_suggestionsListAnimDuration="250"-->
+    <!--app:floatingSearch_showSearchKey="false"-->
+    <!--app:floatingSearch_leftActionMode="noLeftAction"-->
+    <!--app:showAsAction="always"-->
+    <!--app:floatingSearch_menu="@menu/seach_menu"-->
+    <!--app:floatingSearch_close_search_on_keyboard_dismiss="true"/>-->
+
 
     <MultiAutoCompleteTextView
 
@@ -47,21 +53,36 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_search"
         android:drawableLeft="@drawable/ic_search_black_24dp"
-
         android:drawablePadding="15dp"
-        android:padding="12dp"
+        android:ems="15"
         android:hint="@string/searchEditText"
-        android:maxLines="1"
-        android:textSize="20sp" />
+        android:imeOptions="actionDone"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:inputType="textNoSuggestions"/>
 
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/searchAutoComplete"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:focusableInTouchMode="true"
+        android:focusable="true" />
 
-    </Spinner>
+
+    <!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="#fff"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:layout_marginRight="15dp"-->
+    <!--android:id="@+id/markerDetail"-->
+    <!--android:visibility="gone"-->
+    <!--android:padding="10dp" />-->
+
 
 </RelativeLayout>
