@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
 import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.MyTokenizer;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -82,7 +85,12 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         spinerFunctions(googleMap);
         googleMap.setOnMarkerClickListener(this);
         mGoogleMap.setInfoWindowAdapter(new CustomWindowAdapter(getContext()));
-
+        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                onStartDetailsFragment(marker);
+            }
+        });
     }
 
 
@@ -98,6 +106,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
 
         return false;
     }
+
 
     private void init(View view) {
         mapView = (MapView) view.findViewById(R.id.mapView);
@@ -230,6 +239,30 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+    private void onStartDetailsFragment(Marker marker){
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        DetailsPlaygroundFragment detailsPlaygroundFragment = new DetailsPlaygroundFragment();
+
+        Bundle bundle = new Bundle();
+        Playground playground = (Playground) marker.getTag();
+
+        bundle.putSerializable("playground",playground);;
+        detailsPlaygroundFragment.setArguments(bundle);
+        ft.replace(R.id.flcontent,detailsPlaygroundFragment);
+        ft.addToBackStack(null);
+        ft.commit();
 
 
+//
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.flcontent, detailsPlaygroundFragment).commit();
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+    }
 }

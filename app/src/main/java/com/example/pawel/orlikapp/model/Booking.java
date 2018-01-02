@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ import java.util.Set;
  * Created by Pawel on 31.10.2017.
  */
 
-public class Booking {
+public class Booking implements Serializable{
     private Long id;
     //yyyy-MM-dd
     private String date;

@@ -24,23 +24,6 @@
         android:focusableInTouchMode="true"
         android:focusable="true" />
 
-
-    <!--<com.arlib.floatingsearchview.FloatingSearchView-->
-    <!--android:id="@+id/floating_search_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"-->
-    <!--app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"-->
-    <!--app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"-->
-    <!--app:floatingSearch_searchHint="Search..."-->
-    <!--app:floatingSearch_suggestionsListAnimDuration="250"-->
-    <!--app:floatingSearch_showSearchKey="false"-->
-    <!--app:floatingSearch_leftActionMode="noLeftAction"-->
-    <!--app:showAsAction="always"-->
-    <!--app:floatingSearch_menu="@menu/seach_menu"-->
-    <!--app:floatingSearch_close_search_on_keyboard_dismiss="true"/>-->
-
-
     <MultiAutoCompleteTextView
 
         android:id="@+id/searchAutoComplete"

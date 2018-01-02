@@ -1,12 +1,13 @@
 package com.example.pawel.orlikapp.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by Pawel on 31.10.2017.
  */
 
-public class Team {
+public class Team implements Serializable{
     private Long id;
     private String name;
     private String leaderName;

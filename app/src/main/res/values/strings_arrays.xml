@@ -4,7 +4,10 @@
         <item name="football">Piłka nożna</item>
         <item name="volleyball">Siatkówka</item>
         <item name="basketball">Koszykówka</item>
-        
     </string-array>
-
+    <string-array name="view_options">
+        <item name="action_day_view">dzien</item>
+        <item name="action_three_day_view">3 dni</item>
+        <item name="action_week_view">tydzien</item>
+    </string-array>
 </resources>

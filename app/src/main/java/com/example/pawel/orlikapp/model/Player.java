@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ import java.util.Set;
  * Created by Pawel on 18.11.2017.
  */
 
-public class Player {
+public class Player implements Serializable{
     private Long id;
     private String firstName;
     private String lastName;

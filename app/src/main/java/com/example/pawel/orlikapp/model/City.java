@@ -1,12 +1,13 @@
 package com.example.pawel.orlikapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Pawel on 01.12.2017.
  */
 
-public class City {
+public class City implements Serializable{
     private Long id;
     private String name;
     private String latitude;
