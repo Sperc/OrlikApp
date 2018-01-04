@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/organiser"/>-->
+        <!--<TextView-->
+        <!--android:layout_width=""-->
+        <!--android:layout_height="" />-->
+        <!--</LinearLayout>-->
+        <!--<GridLayout-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:columnCount="2"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:rowCount="2">-->
+
+            <!--<TextView-->
+                <!--android:textSize="16sp"-->
+                <!--android:padding="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/organiser"-->
+                <!--android:layout_gravity="left|top"/>-->
+            <!--<TextView-->
+                <!--android:textSize="16sp"-->
+                <!--android:id="@+id/organiser"-->
+                <!--android:padding="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left|top"/>-->
+            <!--<TextView-->
+                <!--android:textSize="16sp"-->
+                <!--android:padding="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/reservationDate"-->
+                <!--android:layout_gravity="left|top"/>-->
+            <!--<TextView-->
+                <!--android:textSize="16sp"-->
+                <!--android:id="@+id/bookingDate"-->
+                <!--android:padding="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left|top"/>-->
+
+
+
+
+
+        <!--</GridLayout>-->
+        <TextView
+            android:id="@+id/bookingDate"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11-05-1213"
+            android:textSize="23sp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/dayOfWeek"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poniedzialek"
+            android:textSize="16sp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/bookingTime"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="11:05 - 12:30"
+            android:layout_gravity="center"/>
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="@string/participants"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="3"
+            android:fillViewport="true">
+
+            <ListView
+                android:id="@+id/participantsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </ScrollView>
+
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/join"
+                android:text="Rezerwuj"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"/>
+            <Button
+                android:id="@+id/escape"
+                android:text="Wypisz"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"/>
+
+            <TextView
+                android:id="@+id/organiser"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:text="Organizator: "/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

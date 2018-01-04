@@ -80,4 +80,9 @@ public class Player implements Serializable{
     public void setUserTeams(Set<Team> userTeams) {
         this.userTeams = userTeams;
     }
+
+    @Override
+    public String toString() {
+        return "nick: " + username+"\n"+firstName+" "+lastName;
+    }
 }

@@ -22,6 +22,7 @@
         app:dayBackgroundColor="#05000000"
         app:todayBackgroundColor="#1848adff"
         app:headerColumnBackground="#ffffffff"
-        app:todayHeaderTextColor="#2789e4" />
+        app:todayHeaderTextColor="#2789e4"
+       />
 
 </LinearLayout>
