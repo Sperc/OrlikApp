@@ -14,10 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -29,20 +25,29 @@ import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsFragment;
 import com.example.pawel.orlikapp.utils.DateHelper;
+import com.example.pawel.orlikapp.utils.Logs;
 
+import org.reactivestreams.Subscription;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class DetailsPlaygroundFragment extends Fragment implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener{
+public class DetailsPlaygroundFragment extends Fragment implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
 
+    DetailsPlaygroundPresenter detailsPlaygroundPresenter;
+    Subscription subscription;
+
+
+    private List<Booking> bookingList;
     private Playground playground;
 
     public DetailsPlaygroundFragment() {
@@ -55,22 +60,18 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_details_playground, container, false);
-        Bundle bundle = getArguments();
         setHasOptionsMenu(true);
-
-        try {
-            playground = (Playground) bundle.getSerializable("playground");
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        }
+        Bundle bundle = getArguments();
+        playground = (Playground) bundle.getSerializable("playground");
 
         return view;
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        Toast.makeText(getContext(), "VIEW CREATED!!!!", Toast.LENGTH_SHORT).show();
         mWeekView = (WeekView) view.findViewById(R.id.weekView);
 
         // Show a toast message about the touched event.
@@ -90,12 +91,13 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
 
+
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_view, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -146,6 +148,7 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
         return super.onOptionsItemSelected(item);
     }
+
     private void setupDateTimeInterpreter(final boolean shortDate) {
         mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
             @Override
@@ -173,11 +176,14 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     protected String getEventTitle(Calendar time) {
         return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
+    private String getClickedTime(Calendar time){
+        return "asd";
+    }
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getContext(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
-        onStartBoogingDetails(event.getId());
+//        Toast.makeText(getContext(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        onStartBookingDetails(event.getId());
     }
 
     @Override
@@ -189,6 +195,7 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     @Override
     public void onEmptyViewLongPress(Calendar time) {
         Toast.makeText(getContext(), "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
+        openDialog(time);
     }
 
     public WeekView getWeekView() {
@@ -197,38 +204,53 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        for(Booking b:playground.getBookingSet()){
+        for (Booking b : playground.getBookingSet()) {
             // if potrzebny do tego by nie bylo 3x tych samych wydarzen
-            if(DateHelper.getMonthFromDate(b.getDate())==newMonth){
+            if (DateHelper.getMonthFromDate(b.getDate()) == newMonth) {
                 int day = DateHelper.getDayFromDate(b.getDate());
                 int month = DateHelper.getMonthFromDate(b.getDate());
                 int year = DateHelper.getYearFromDate(b.getDate());
                 int endDay = DateHelper.getDayFromDate(b.getEndDate());
                 int endMonth = DateHelper.getMonthFromDate(b.getEndDate());
                 int endYear = DateHelper.getYearFromDate(b.getEndDate());
-                EventName eventName = new EventName(b.getLeaderName(),b.getMaxNumberOfPlayer(),b.getPlayers().size()
-                        ,b.getStartOrderHour(),b.getStartOrderMinutes(),b.getEndOrderHour(),b.getEndOrderMinutes());
 
-                WeekViewEvent weekViewEvent = new WeekViewEvent(b.getId(),eventName.getName(),year,month,day,b.getStartOrderHour(),
-                        b.getStartOrderMinutes(),endYear,endMonth,endDay,b.getEndOrderHour(),b.getEndOrderMinutes());
+                EventName eventName = new EventName(b.getLeaderName(), b.getMaxNumberOfPlayer(), b.getPlayers().size()
+                        , b.getStartOrderHour(), b.getStartOrderMinutes(), b.getEndOrderHour(), b.getEndOrderMinutes());
+                Logs.d("ID_EVENT", b.getId().toString());
+
+                WeekViewEvent weekViewEvent = new WeekViewEvent(b.getId(), eventName.getName(), year, month, day, b.getStartOrderHour(),
+                        b.getStartOrderMinutes(), endYear, endMonth, endDay, b.getEndOrderHour(), b.getEndOrderMinutes());
+
 
                 events.add(weekViewEvent);
             }
         }
         return events;
     }
-    public void onStartBoogingDetails(Long id){
+
+    public void onStartBookingDetails(Long id) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         BookingDetailsFragment bookingDetailsFragment = new BookingDetailsFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("booking_id",id);;
+        bundle.putSerializable("booking_id", id);
+        Logs.d("TAG_ID_BOOKING", id.toString());
         bookingDetailsFragment.setArguments(bundle);
-        ft.replace(R.id.flcontent,bookingDetailsFragment);
         ft.addToBackStack(null);
+        ft.replace(R.id.flcontent, bookingDetailsFragment);
         ft.commit();
     }
+    public void openDialog(Calendar time){
+        ChooseTimeDialog chooseTimeDialog = new ChooseTimeDialog();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("booking", (Serializable) playground.getBookingSet());
+        bundle.putSerializable("calendar",time);
+        chooseTimeDialog.setArguments(bundle);
+        chooseTimeDialog.show(getActivity().getSupportFragmentManager(),"choose time");
+    }
+
 }

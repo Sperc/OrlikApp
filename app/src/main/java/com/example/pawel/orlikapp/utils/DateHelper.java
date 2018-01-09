@@ -18,5 +18,13 @@ public class DateHelper {
         String year = date.substring(0,4);
         return Integer.parseInt(year);
     }
+    public static int getHourFromDate(String date){
+        String hour =  date.substring(0,2);
+        return Integer.parseInt(hour);
+    }
+    public static int getMinutesFromDate(String date){
+        String minutes = date.substring(3);
+        return Integer.parseInt(minutes);
+    }
 
 }

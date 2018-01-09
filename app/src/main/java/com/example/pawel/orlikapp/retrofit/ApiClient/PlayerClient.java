@@ -17,4 +17,7 @@ import retrofit2.http.Header;
 public interface PlayerClient {
     @GET("/player/reservation")
     Call<List<Booking>> getUserReservation(@Header("authorization")String token);
+
+    @GET("/player/get")
+    Call<Player> getActualPlayer(@Header("authorization")String token);
 }

@@ -21,6 +21,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
 import com.example.pawel.orlikapp.ui.menu.find_playground.FindPlaygroundFragment;
+import com.example.pawel.orlikapp.ui.menu.my_profile.MyProfileFragment;
 import com.example.pawel.orlikapp.ui.menu.settings.SettingsFragment;
 import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
 import com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment;
@@ -111,7 +112,9 @@ public class MainActivity extends BaseActivity {
             case R.id.reservation:
                 fragmentClass = MyReservationFragment.class;
                 break;
-
+            case R.id.myprofile:
+                fragmentClass = MyProfileFragment.class;
+                break;
             default:
                 fragmentClass = MyTeamsFragment.class;
         }

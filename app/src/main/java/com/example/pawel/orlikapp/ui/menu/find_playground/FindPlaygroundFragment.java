@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -117,6 +116,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         ArrayAdapter<CharSequence> spinadapter = ArrayAdapter.createFromResource(getActivity(), R.array.categories, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinadapter);
     }
+
     public FindPlaygroundPresenter.FindPlaygroundListener getListener(final GoogleMap googleMap) {
         return new FindPlaygroundPresenter.FindPlaygroundListener() {
             @Override
@@ -168,8 +168,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
                         LatLng latLng = mapPlaygrounds.get(text);
                         if (latLng != null) {
                             updateCamera(latLng, ConstansValues.MAP_ZOOM_DETAIL);
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getContext(), R.string.wrongAddresName, Toast.LENGTH_SHORT).show();
                         }
                         clearInputFocus();
@@ -191,7 +190,6 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     }
 
 
-
     private void spinerFunctions(final GoogleMap googleMap) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -200,13 +198,13 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
                 String category = textView.getText().toString();
                 findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), category, getListener(googleMap));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
     }
-
 
 
     void multiAutoCompleteConfig(List<Playground> playgrounds) {
@@ -239,17 +237,18 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-    private void onStartDetailsFragment(Marker marker){
+
+    private void onStartDetailsFragment(Marker marker) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         DetailsPlaygroundFragment detailsPlaygroundFragment = new DetailsPlaygroundFragment();
-
+//        InitializeDetailsPlaygroundFragment initializeDetailsPlaygroundFragment = new InitializeDetailsPlaygroundFragment();
         Bundle bundle = new Bundle();
         Playground playground = (Playground) marker.getTag();
 
-        bundle.putSerializable("playground",playground);;
+        bundle.putSerializable("playground", playground);
         detailsPlaygroundFragment.setArguments(bundle);
-        ft.replace(R.id.flcontent,detailsPlaygroundFragment);
+        ft.replace(R.id.flcontent, detailsPlaygroundFragment);
         ft.addToBackStack(null);
         ft.commit();
 

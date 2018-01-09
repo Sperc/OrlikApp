@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
+import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundPresenter;
+import com.example.pawel.orlikapp.utils.Logs;
 
 import java.util.List;
 
@@ -33,8 +37,8 @@ public class BookingDetailsFragment extends Fragment implements BookingDetailsVi
     TextView bookingTimeTextView;
     Button jointBtn;
     Button escapeBtn;
-
     private BookingDetailsPresenter bookingDetailsPresenter;
+
     public BookingDetailsFragment() {
         // Required empty public constructor
     }
@@ -48,11 +52,22 @@ public class BookingDetailsFragment extends Fragment implements BookingDetailsVi
         return view;
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getActivity(), "destroy", Toast.LENGTH_SHORT).show();
+        DetailsPlaygroundFragment detailsPlaygroundFragment = new DetailsPlaygroundFragment();
+
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        Long bookingId = (Long) bundle.getSerializable("booking_id");
         bookingDetailsPresenter = new BookingDetailsPresenter(this);
-        bookingDetailsPresenter.getBookingList(new Long(1),bookingListener);
+        bookingDetailsPresenter.getBookingList(bookingId,bookingListener);
     }
     private void init(View view){
         listView = (ListView)view.findViewById(R.id.participantsList);
@@ -82,6 +97,22 @@ public class BookingDetailsFragment extends Fragment implements BookingDetailsVi
             escapeBtn.setVisibility(View.GONE);
         }
     }
+    private void onButtonClick(final Long booking_id){
+        jointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bookingDetailsPresenter.addPlayerToBooking(booking_id,onBookingPlayerListener);
+                Toast.makeText(getContext(), "join", Toast.LENGTH_SHORT).show();
+            }
+        });
+        escapeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bookingDetailsPresenter.removePlayerFromBooking(booking_id,onBookingPlayerListener);
+                Toast.makeText(getContext(), "escape", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     public void onSucces() {
@@ -93,13 +124,21 @@ public class BookingDetailsFragment extends Fragment implements BookingDetailsVi
         Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
     }
 
-    BookingDetailsPresenter.BookingListener bookingListener = new BookingDetailsPresenter.BookingListener() {
+    private BookingDetailsPresenter.BookingListener bookingListener = new BookingDetailsPresenter.BookingListener() {
         @Override
         public void getBooking(Booking booking) {
             setPlayerListView(booking.getPlayers());
             setTextViewInformation(booking);
             setButton(booking.getPlayers());
+            onButtonClick(booking.getId());
             Toast.makeText(getContext(), String.valueOf(booking.getPlayers().size()), Toast.LENGTH_SHORT).show();
+        }
+    };
+    private BookingDetailsPresenter.OnBookingPlayerListener onBookingPlayerListener = new BookingDetailsPresenter.OnBookingPlayerListener() {
+        @Override
+        public void onSucces(List<Player> playerList) {
+            setPlayerListView(playerList);
+            setButton(playerList);
         }
     };
 }

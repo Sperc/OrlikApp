@@ -125,16 +125,6 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/join"
-                android:text="Rezerwuj"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentTop="true"
-                android:visibility="gone"/>
             <Button
                 android:id="@+id/escape"
                 android:text="Wypisz"
@@ -142,7 +132,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_alignParentTop="true"/>
+                android:layout_alignParentTop="true"
+                />
+            <Button
+                android:id="@+id/join"
+                android:text="Rezerwuj"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true" />
+
 
             <TextView
                 android:id="@+id/organiser"
