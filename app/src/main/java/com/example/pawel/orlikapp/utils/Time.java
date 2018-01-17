@@ -28,4 +28,8 @@ public class Time {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+    public int getAllTimeInMinutes(){
+        return hour * 60 +minutes;
+    }
 }

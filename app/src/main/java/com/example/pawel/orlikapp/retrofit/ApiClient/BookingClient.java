@@ -20,15 +20,21 @@ public interface BookingClient {
                                  @Path("id") Long id);
 
     @GET("/booking/{id}/add-user/{username}")
-    Call<List<Player>> addPlayerToBooking(@Header("authorization")String token,
-                                          @Path("id")Long id,
-                                          @Path("username")String username);
+    Call<List<Player>> addPlayerToBooking(@Header("authorization") String token,
+                                          @Path("id") Long id,
+                                          @Path("username") String username);
+
     @GET("/booking/{id}/remove-user/{username}")
-    Call<List<Player>> removePlayerFromBooking(@Header("authorization")String token,
+    Call<List<Player>> removePlayerFromBooking(@Header("authorization") String token,
                                                @Path("id") Long id,
-                                               @Path("username")String username);
+                                               @Path("username") String username);
+
     @GET("/booking/playground/{playground_id}/get-all")
     Call<List<Booking>> getBookingByPlaygroundId(@Header("authorization") String token,
-                                                 @Path("playground_id")Long playground_id);
+                                                 @Path("playground_id") Long playground_id);
 
+    @GET("/booking/playground/{playground_id}/{date}")
+    Call<List<Booking>> getBookingByPlaygroundIdAndDate(@Header("authorization") String token,
+                                                        @Path("playground_id") Long id,
+                                                        @Path("date") String date);
 }
