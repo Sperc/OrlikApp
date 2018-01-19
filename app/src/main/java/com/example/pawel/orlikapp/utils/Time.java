@@ -1,10 +1,12 @@
 package com.example.pawel.orlikapp.utils;
 
+import java.io.Serializable;
+
 /**
  * Created by Pawel on 09.01.2018.
  */
 
-public class Time {
+public class Time implements Serializable{
     private int hour;
     private int minutes;
 

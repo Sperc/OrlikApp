@@ -116,7 +116,7 @@ public class CreateBookingHelper {
     private List<Booking> bookinngInClickHour(){
         List<Booking> bookings =  new ArrayList<>();
         for(Booking b:bookingList){
-            if(b.getEndOrderHour()==hourClickTime){
+            if(b.getStartOrderHour()==hourClickTime){
                 bookings.add(b);
             }
         }
@@ -130,7 +130,7 @@ public class CreateBookingHelper {
             return new Time(hourClickTime,0);
         }
         Booking lastBooking = bookings.get(bookings.size()-1);
-        return new Time(lastBooking.getEndOrderHour(),lastBooking.getEndOrderMinutes());
+        return new Time(lastBooking.getStartOrderHour(),lastBooking.getStartOrderMinutes());
     }
     public Time getMaxTimeToEndBooking(){
         for(Booking b: bookingList){
