@@ -43,6 +43,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".ui.Main2Activity" />
+        <activity android:name=".ui.create_player.CreatePlayerActivity"></activity>
     </application>
 
 </manifest>

@@ -25,6 +25,10 @@ import java.util.List;
 
 public class MapHelper {
     public static void addMarkerFromList(GoogleMap googleMap, List<Playground> playgrounds) {
+        if(playgrounds.isEmpty())
+        {
+            return;
+        }
         String category = playgrounds.get(0).getCategory();
         if (category == null) {
             return;

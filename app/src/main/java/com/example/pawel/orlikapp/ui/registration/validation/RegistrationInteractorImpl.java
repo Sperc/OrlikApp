@@ -1,5 +1,6 @@
 package com.example.pawel.orlikapp.ui.registration.validation;
 
+import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.utils.Validation;
 
 /**
@@ -8,30 +9,18 @@ import com.example.pawel.orlikapp.utils.Validation;
 
 public class RegistrationInteractorImpl implements RegistrationInteractor {
     @Override
-    public boolean onCredentialisValidate(String email, String password, String repeatPassword, String username, String firstName, String lastName, CredentialisListener credentialisListener) {
+    public boolean onCredentialisValidate(AppUser appUser, CredentialisListener credentialisListener) {
         boolean flag = true;
-        if (!password.equals(repeatPassword) || password.equals("")) {
+        if (!appUser.getPassword().equals(appUser.getRepeatPassword()) || appUser.getRepeatPassword().equals("")) {
             credentialisListener.onPasswordRepeatError();
             flag = false;
         }
-        if (!Validation.onEmailAddresValidation(email) || email.equals("")) {
+        if (!Validation.onEmailAddresValidation(appUser.getUsername()) || appUser.getUsername().equals("")) {
             credentialisListener.onEmailError();
             flag = false;
         }
-        if (password.equals("")) {
+        if (appUser.getPassword().equals("")) {
             credentialisListener.onPasswordError();
-            flag = false;
-        }
-        if (username.equals("")) {
-            credentialisListener.onUsernameError();
-            flag = false;
-        }
-        if (firstName.equals("")) {
-            credentialisListener.onFirstNameError();
-            flag = false;
-        }
-        if (lastName.equals("")) {
-            credentialisListener.onLastNameError();
             flag = false;
         }
         return flag;

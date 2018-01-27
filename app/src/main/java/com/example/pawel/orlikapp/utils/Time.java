@@ -34,4 +34,10 @@ public class Time implements Serializable{
     public int getAllTimeInMinutes(){
         return hour * 60 +minutes;
     }
+
+    public Time sumToActualTime(Time t){
+        int tMinutes = t.getAllTimeInMinutes();
+        int actualMinutes = getAllTimeInMinutes();
+        return new Time(actualMinutes/60,actualMinutes%60);
+    }
 }

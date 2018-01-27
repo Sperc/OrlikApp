@@ -13,8 +13,23 @@ public class AppUser implements Serializable{
     private Long id;
     private String username;
     private String password;
+    private String repeatPassword;
 
     public AppUser() {
+    }
+
+    public AppUser(String username, String password,String repeatPassword) {
+        this.username = username;
+        this.password = password;
+        this.repeatPassword = repeatPassword;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     public Long getId() {

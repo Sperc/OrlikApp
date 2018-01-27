@@ -11,6 +11,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.login.validation.LoginInteractorImpl;
 import com.example.pawel.orlikapp.ui.login.validation.LoginIntercator;
+import com.example.pawel.orlikapp.utils.CodeStatus;
 
 import okhttp3.Headers;
 import retrofit2.Call;
@@ -32,7 +33,11 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
     public interface LoginPresenterListener {
         void loginSucces(Player player);
 
+        void onFirstLogin();
+
         void loginFailure();
+
+        void onServerError();
     }
 
     public LoginPresenter(LoginPresenterListener loginPresenterListener, Context context, LoginView loginView) {
@@ -69,17 +74,22 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
                 if (response.isSuccessful()) {
 //                    SharedPrefs sharedPrefs = new SharedPrefs(context);
                     Headers headers = response.headers();
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.username,username);
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.token,headers.get("authorization"));
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.username, username);
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
                     loginPresenterListener.loginSucces(response.body());
-                } else {
+                } else if (response.code() == CodeStatus.NOT_FOUND) {
+                    loginPresenterListener.onFirstLogin();
+                } else if (response.code() == CodeStatus.UNAUTHORIZED) {
                     loginPresenterListener.loginFailure();
-                }
+                } else
+                    loginPresenterListener.onServerError();
+
             }
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
-                Toast.makeText(context.getApplicationContext(), "Problem z serwerem", Toast.LENGTH_SHORT).show();
+                loginPresenterListener.onServerError();
+//                Toast.makeText(context.getApplicationContext(), "Problem z serwerem", Toast.LENGTH_SHORT).show();
             }
         });
     }

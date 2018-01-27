@@ -14,6 +14,7 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
+import com.example.pawel.orlikapp.ui.create_player.CreatePlayerActivity;
 import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
 import com.example.pawel.orlikapp.ui.registration.RegistrationActivity;
 import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
@@ -75,12 +76,8 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
             @Override
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
-//                    SharedPrefs.storeLogin(username.getText().toString());
-//                    sharedPrefs.onStoreData("login",username.getText().toString());
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.login,username.getText().toString());
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.login, username.getText().toString());
                 } else {
-//                    sharedPrefs.deleteString("login");
-                    //sharedPrefs.onDeleteString("login");
                     PreferencesShared.onDeleteString(PreferencesSharedKyes.login);
                 }
                 loginPresenter.onLogin(username.getText().toString(), password.getText().toString());
@@ -100,13 +97,25 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     public void loginSucces(Player player) {
         //startNewActivity(this, MainActivity.class);
         Intent intent = new Intent(this, SelectCityActicity.class);
-        startActivity(intent) ;
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onFirstLogin() {
+        Intent intent = new Intent(this, CreatePlayerActivity.class);
+        startActivity(intent);
         finish();
     }
 
     @Override
     public void loginFailure() {
         Toast.makeText(this, R.string.invalidCredentialis, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onServerError() {
+        Toast.makeText(this, getString(R.string.serverProblem), Toast.LENGTH_LONG).show();
     }
 
     @Override

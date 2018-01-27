@@ -26,7 +26,7 @@
     <!--Errors-->
     <string name="emailError">Niepoprawny adres email</string>
     <string name="repeatPasswordError">Podane hasła nie są identyczne</string>
-    <string name="usernameExistsError">Użytkownik o danej nazwie już istnieje</string>
+    <string name="usernameExistsError">E-mail o danej nazwie już istnieje</string>
     <string name="emptyBox">Pole nie moze byc puste</string>
 
     <!--Drawer-->

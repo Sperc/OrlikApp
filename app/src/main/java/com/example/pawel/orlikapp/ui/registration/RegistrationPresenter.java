@@ -25,9 +25,11 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
     private RegistrationView registrationView;
     private PresenterListener listener;
     private RegistrationInteractor registrationInteractor;
+
     public interface PresenterListener {
-        public void onSuccesRegistration();
-        public void onFailure();
+        void onSuccesRegistration();
+
+        void onFailure();
     }
 
     public RegistrationPresenter(Context context, PresenterListener listener, RegistrationView registrationView) {
@@ -47,45 +49,22 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
         registrationView.setEmailError();
     }
 
-    @Override
-    public void onUsernameError() {
-        registrationView.setUsernameError();
-    }
 
     @Override
     public void onPasswordError() {
         registrationView.setPasswordError();
     }
 
-    @Override
-    public void onFirstNameError() {
-        registrationView.setFirstNameError();
-    }
 
-    @Override
-    public void onLastNameError() {
-        registrationView.setLastNameError();
-    }
-
-
-
-    public void onRegister(String email, String password, String repeatPassword, String username,
-                             String firstName, String lastName) {
-        if (!registrationInteractor.onCredentialisValidate(email, password, repeatPassword, username, firstName, lastName, this)) {
+    public void onRegister(AppUser appUser) {
+        if (!registrationInteractor.onCredentialisValidate(appUser, this)) {
             return;
         }
-        AppUser appUser = new AppUser();
-        appUser.setPassword(password);
-        appUser.setUsername(username);
-        Player player = new Player(firstName,lastName,username,email);
-        RegisterAccount registerAccount = new RegisterAccount();
-        registerAccount.setAppUser(appUser);
-        registerAccount.setPlayer(player);
         LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
-        Call<Player> call = loginAndRegisterClient.register(registerAccount);
-        call.enqueue(new Callback<Player>() {
+        Call<AppUser> call = loginAndRegisterClient.register(appUser);
+        call.enqueue(new Callback<AppUser>() {
             @Override
-            public void onResponse(Call<Player> call, Response<Player> response) {
+            public void onResponse(Call<AppUser> call, Response<AppUser> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccesRegistration();
                 } else {
@@ -94,7 +73,7 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
             }
 
             @Override
-            public void onFailure(Call<Player> call, Throwable t) {
+            public void onFailure(Call<AppUser> call, Throwable t) {
                 Toast.makeText(context, R.string.serverProblem, Toast.LENGTH_SHORT).show();
             }
         });

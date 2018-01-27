@@ -16,5 +16,5 @@ public interface LoginAndRegisterClient {
     @POST("/login")
     Call<Player> login(@Body AppUser appUser);
     @POST("/register")
-    Call<Player> register(@Body RegisterAccount registerAccount);
+    Call<AppUser> register(@Body AppUser appUser);
 }

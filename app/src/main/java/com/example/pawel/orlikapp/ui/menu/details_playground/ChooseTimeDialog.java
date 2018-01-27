@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
+import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsFragment;
 import com.example.pawel.orlikapp.ui.menu.create_booking.CreateBookingFragment;
 import com.example.pawel.orlikapp.utils.ConstansValues;
@@ -41,6 +42,7 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
     SeekBar startTimeSeekBar;
     DetailsPlaygroundPresenter detailsPlaygroundPresenter;
     Calendar calendar;
+    Playground playground;
 
     TimePicker timePicker;
     SeekBar durationTimeSeekBar;
@@ -54,10 +56,10 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         setTimePicker(view);
 
         Bundle bundle = getArguments();
-        Long playgroundId = (Long) bundle.getSerializable("playground_id");
+        playground = (Playground) bundle.getSerializable("playground");
         calendar = (Calendar) bundle.getSerializable("calendar");
 
-        detailsPlaygroundPresenter.getSortedBookingByPlaygroundIdAndDate(playgroundId, DateHelper.convertCalendarToDateString(calendar), detailsPlaygroundListener);
+        detailsPlaygroundPresenter.getSortedBookingByPlaygroundIdAndDate(playground.getId(), DateHelper.convertCalendarToDateString(calendar), detailsPlaygroundListener);
 
 
         builder.setView(view)
@@ -72,6 +74,9 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Time startTime = new Time(timePicker.getHour(),timePicker.getMinute()*ConstansValues.TIME_PICKER_INTERVAL);
                         int progress= durationTimeSeekBar.getProgress()/ConstansValues.TIME_PICKER_INTERVAL*ConstansValues.TIME_PICKER_INTERVAL;
+                        Time endTime = new Time(progress/60,progress%60);
+                        openCreateBookingFragment(startTime,endTime);
+
                     }
                 });
 //        initialize(view);
@@ -203,17 +208,27 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
             Logs.d(TAG, "Exception: " + e);
         }
     }
-    private void openCreateBookingFragment(Time startTime,Time durationTime){
+
+    private void openCreateBookingFragment(Time startTime,Time endTime){
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         CreateBookingFragment createBookingFragment = new CreateBookingFragment();
+        Booking booking = new Booking();
+        booking.setPlayground(playground);
+        booking.setDate(DateHelper.convertCalendarToDateString(calendar));
+        booking.setEndDate(DateHelper.convertCalendarToDateString(calendar));
+        booking.setStartOrderHour(startTime.getHour());
+        booking.setStartOrderMinutes(startTime.getMinutes());
+        booking.setEndOrderHour(endTime.getHour());
+        booking.setEndOrderMinutes(endTime.getMinutes());
+
         Bundle bundle = new Bundle();
-        bundle.putSerializable("start_Time", startTime);
-        bundle.putSerializable("duration_Time", durationTime);
+        bundle.putSerializable("booking", booking);
         createBookingFragment.setArguments(bundle);
         ft.replace(R.id.flcontent, createBookingFragment);
         ft.commit();
     }
+
 
 
 }

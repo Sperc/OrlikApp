@@ -13,16 +13,14 @@ public class Player implements Serializable{
     private String firstName;
     private String lastName;
     private String username;
-    private String email;
 
     private List<Booking> bookingList;
     private Set<Team> userTeams;
 
-    public Player(String firstName, String lastName, String username, String email) {
+    public Player(String firstName, String lastName, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        this.email = email;
     }
 
     public Long getId() {
@@ -55,14 +53,6 @@ public class Player implements Serializable{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<Booking> getBookingList() {

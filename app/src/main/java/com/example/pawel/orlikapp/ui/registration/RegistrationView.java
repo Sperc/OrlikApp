@@ -8,7 +8,4 @@ public interface RegistrationView {
     public void setEmailError();
     public void setPasswordError();
     public void setRepeatPasswordError();
-    public void setUsernameError();
-    public void setFirstNameError();
-    public void setLastNameError();
 }

@@ -247,7 +247,7 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     public void openDialog(Calendar time){
         ChooseTimeDialog chooseTimeDialog = new ChooseTimeDialog();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("playground_id", playground.getId());
+        bundle.putSerializable("playground", playground);
         bundle.putSerializable("calendar",time);
         chooseTimeDialog.setArguments(bundle);
         chooseTimeDialog.show(getActivity().getSupportFragmentManager(),"choose time");
