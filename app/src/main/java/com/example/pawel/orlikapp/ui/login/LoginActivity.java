@@ -115,7 +115,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
 
     @Override
     public void onServerError() {
-        Toast.makeText(this, getString(R.string.serverProblem), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.connectionError), Toast.LENGTH_LONG).show();
     }
 
     @Override

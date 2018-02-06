@@ -71,13 +71,15 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         call.enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
+                Headers headers = response.headers();
                 if (response.isSuccessful()) {
 //                    SharedPrefs sharedPrefs = new SharedPrefs(context);
-                    Headers headers = response.headers();
                     PreferencesShared.onStoreData(PreferencesSharedKyes.username, username);
                     PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
                     loginPresenterListener.loginSucces(response.body());
                 } else if (response.code() == CodeStatus.NOT_FOUND) {
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.username, username);
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
                     loginPresenterListener.onFirstLogin();
                 } else if (response.code() == CodeStatus.UNAUTHORIZED) {
                     loginPresenterListener.loginFailure();

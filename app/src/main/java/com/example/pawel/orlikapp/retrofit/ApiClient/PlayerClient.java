@@ -7,8 +7,10 @@ import com.example.pawel.orlikapp.model.Playground;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 
 /**
  * Created by Pawel on 28.11.2017.
@@ -16,8 +18,12 @@ import retrofit2.http.Header;
 
 public interface PlayerClient {
     @GET("/player/reservation")
-    Call<List<Booking>> getUserReservation(@Header("authorization")String token);
+    Call<List<Booking>> getUserReservation(@Header("authorization") String token);
 
     @GET("/player/get")
-    Call<Player> getActualPlayer(@Header("authorization")String token);
+    Call<Player> getActualPlayer(@Header("authorization") String token);
+
+    @POST("/player/add")
+    Call<Void> addPlayer(@Header("authorization") String token,
+                           @Body Player player);
 }
