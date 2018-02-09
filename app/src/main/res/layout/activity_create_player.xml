@@ -57,9 +57,16 @@
         android:layout_height="1dp"
         android:background="#f9d7db" />
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/imageCamera"/>
+
+
+
 
     <Button
-        android:id="@+id/registationButton"
+        android:id="@+id/galeryBtn"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
