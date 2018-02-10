@@ -1,6 +1,7 @@
 package com.example.pawel.orlikapp.ui.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,18 +95,27 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     }
 
     @Override
-    public void loginSucces(Player player) {
-        //startNewActivity(this, MainActivity.class);
-        Intent intent = new Intent(this, SelectCityActicity.class);
-        startActivity(intent);
-        finish();
-    }
+    public void loginSucces() {
+//        Intent intent = new Intent(this, SelectCityActicity.class);
+//        startActivity(intent);
+//        finish();
+        loginPresenter.getActualPlayer(new LoginPresenter.ActualPlayerListener() {
+            @Override
+            public void succes(Player player) {
+                Intent intent = new Intent(getApplicationContext(), SelectCityActicity.class);
+                startActivity(intent);
+                finish();
+            }
 
-    @Override
-    public void onFirstLogin() {
-        Intent intent = new Intent(this, CreatePlayerActivity.class);
-        startActivity(intent);
-        finish();
+            @Override
+            public void notFound() {
+                Intent intent = new Intent(getApplicationContext(),CreatePlayerActivity.class);
+                intent.putExtra("token", PreferencesShared.onReadString(PreferencesSharedKyes.token));
+                PreferencesShared.onDeleteString(PreferencesSharedKyes.token);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

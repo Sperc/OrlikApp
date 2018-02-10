@@ -27,7 +27,7 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     private CreatePlayerPresenter createPlayerPresenter;
     ImageView imageView;
     Button button;
-
+    String token;
     private static final int CAMERA_REQUEST = 1888;
     private static final int SELECT_FILE = 0;
 
@@ -36,10 +36,12 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_player);
+        Intent intent = getIntent();
+        token = intent.getExtras().getString("token");
         setPresenter();
         initialize();
         onButtonClick();
-//        createPlayerPresenter.createPlayer(new Player("Pawel", "Sosnowka", PreferencesShared.onReadString(PreferencesSharedKyes.username)));
+//        createPlayerPresenter.createPlayer(new Player("Pawel", "Sosnowka","test@gmail.com"),token);
     }
 
 

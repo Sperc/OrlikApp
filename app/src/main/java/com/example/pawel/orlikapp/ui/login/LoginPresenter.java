@@ -1,8 +1,10 @@
 package com.example.pawel.orlikapp.ui.login;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
 import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
 import com.example.pawel.orlikapp.retrofit.ApiClient.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
@@ -31,13 +33,16 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
 
 
     public interface LoginPresenterListener {
-        void loginSucces(Player player);
-
-        void onFirstLogin();
+        void loginSucces();
 
         void loginFailure();
 
         void onServerError();
+    }
+
+    public interface ActualPlayerListener {
+        void succes(Player player);
+        void notFound();
     }
 
     public LoginPresenter(LoginPresenterListener loginPresenterListener, Context context, LoginView loginView) {
@@ -67,34 +72,48 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         user.setUsername(username);
         user.setPassword(password);
         LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
-        Call<Player> call = loginAndRegisterClient.login(user);
+        Call<Void> call = loginAndRegisterClient.login(user);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Headers headers = response.headers();
+                if (response.isSuccessful()) {
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
+                    loginPresenterListener.loginSucces();
+                } else if (response.code() == CodeStatus.UNAUTHORIZED) {
+                    loginPresenterListener.loginFailure();
+                } else {
+                    loginPresenterListener.onServerError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                loginPresenterListener.onServerError();
+            }
+        });
+    }
+
+    public void getActualPlayer(final ActualPlayerListener actualPlayerListener) {
+        PlayerClient playerClient = ServiceGenerator.createService().create(PlayerClient.class);
+        Call<Player> call = playerClient.getActualPlayer(PreferencesShared.onReadString(PreferencesSharedKyes.token));
         call.enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
-                Headers headers = response.headers();
                 if (response.isSuccessful()) {
-//                    SharedPrefs sharedPrefs = new SharedPrefs(context);
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.username, username);
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
-                    loginPresenterListener.loginSucces(response.body());
-                } else if (response.code() == CodeStatus.NOT_FOUND) {
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.username, username);
-                    PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
-                    loginPresenterListener.onFirstLogin();
-                } else if (response.code() == CodeStatus.UNAUTHORIZED) {
-                    loginPresenterListener.loginFailure();
-                } else
+                    actualPlayerListener.succes(response.body());
+                } else if(response.code()==CodeStatus.NOT_FOUND){
+                    actualPlayerListener.notFound();
+                }
+                else {
                     loginPresenterListener.onServerError();
-
+                }
             }
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
                 loginPresenterListener.onServerError();
-//                Toast.makeText(context.getApplicationContext(), "Problem z serwerem", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 }

@@ -7,9 +7,5 @@ import android.content.Context;
  */
 
 public class MainActivityPresenter {
-    private Context context;
 
-    public MainActivityPresenter(Context context) {
-        this.context = context;
-    }
 }

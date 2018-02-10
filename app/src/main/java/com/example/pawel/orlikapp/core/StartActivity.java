@@ -10,6 +10,7 @@ import com.example.pawel.orlikapp.ui.Main2Activity;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
 import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
+import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
 
 public class StartActivity extends BaseActivity {
 
@@ -21,13 +22,18 @@ public class StartActivity extends BaseActivity {
     }
     public void executeUserSession(){
         String token = PreferencesShared.onReadString(PreferencesSharedKyes.token);
+        String city = PreferencesShared.onReadString(PreferencesSharedKyes.city);
+        Intent intent;
         if(token.equals("")){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, LoginActivity.class);
         }else {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            if(!city.equals("")){
+                intent = new Intent(this, MainActivity.class);
+            }else {
+                intent = new Intent(this, SelectCityActicity.class);
+            }
         }
+        startActivity(intent);
         finish();
     }
 

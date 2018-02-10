@@ -24,9 +24,9 @@ public class CreatePlayerPresenter {
         this.createPlayerView = createPlayerView;
     }
 
-    public void createPlayer(Player player){
+    public void createPlayer(Player player,String token){
         PlayerClient playerClient = ServiceGenerator.createService().create(PlayerClient.class);
-        Call<Void> call = playerClient.addPlayer(PreferencesShared.onReadString(PreferencesSharedKyes.token),player);
+        Call<Void> call = playerClient.addPlayer(token,player);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
