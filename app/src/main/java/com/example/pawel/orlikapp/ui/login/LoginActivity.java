@@ -26,8 +26,9 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     private EditText username;
     private EditText password;
     private Button logIn;
-    private Button register;
+//    private Button register;
     private TextView forgotPassword;
+    private TextView signIn;
     private CheckBox checkBox;
     private LoginPresenter loginPresenter;
 //    private SharedPrefs sharedPrefs;
@@ -56,9 +57,10 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
     @Override
     public void initialize() {
         //sharedPrefs = new SharedPrefs(this);
+        signIn = (TextView)findViewById(R.id.signInTextView);
         checkBox = (CheckBox) findViewById(R.id.saveUsername);
         logIn = (Button) findViewById(R.id.logIn);
-        register = (Button) findViewById(R.id.registerButton);
+//        register = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
@@ -84,7 +86,7 @@ public class LoginActivity extends BaseActivity implements LoginView, LoginPrese
                 loginPresenter.onLogin(username.getText().toString(), password.getText().toString());
             }
         });
-        register.setOnClickListener(new View.OnClickListener() {
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);

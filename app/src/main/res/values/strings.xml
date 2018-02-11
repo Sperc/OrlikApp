@@ -6,7 +6,7 @@
     <string name="connectionError">Brak połączenia</string>
     <string name="authorizationProblem">Problem z autoryzacja</string>
     <!--LoginActivity -->
-    <string name="hintUser">Użytkownik</string>
+    <string name="hintUser">E-mail</string>
     <string name="rememberCheckbox">Zapamietaj mnie</string>
     <string name="logIn">Zaloguj</string>
     <string name="signUp">Zarejestruj</string>

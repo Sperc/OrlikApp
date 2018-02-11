@@ -1,81 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/boisko_v2"
-    android:orientation="vertical"
+    android:background="@drawable/login_background"
     tools:context="com.example.pawel.orlikapp.ui.create_player.CreatePlayerActivity">
-
-
-    <EditText
-        android:id="@+id/firstName"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_person_white_24dp"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="@string/frist_name"
-        android:inputType="textPersonName"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff" />
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+        <ImageView
+            android:id="@+id/back_arrow_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:src="@drawable/ic_arrow_back_white_24dp"/>
 
-    <View
+        <TextView
+            android:id="@+id/registerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Utwórz Profil"
+            android:textSize="24sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#5DBCD2"
+            android:layout_alignBottom="@+id/registerTextView"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f9d7db" />
+        android:layout_height="match_parent"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/usr"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kamera"
+                android:layout_weight="1" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="galeria"/>
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_email_white_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="IMIĘ"
+            android:textColor="@color/white"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColorHint="@color/white" />
 
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_lock_white_24dp"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="@string/last_name"
-        android:inputType="textPersonName"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f9d7db" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_lock_white_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="NAZWISKO"
+            android:inputType="text"
+            android:textColor="#fff"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColorHint="#fff" />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f9d7db" />
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:id="@+id/imageCamera"/>
-
-
-
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_lock_white_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="DATA URODZENIA (DD-MM-YYYY)"
+            android:inputType="date"
+            android:textColor="#fff"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColorHint="#fff" />
+    </LinearLayout>
     <Button
-        android:id="@+id/galeryBtn"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/registationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/background_signup"
-        android:padding="16dp"
         android:text="@string/signUp"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="18sp" />
-</LinearLayout>
+        android:textSize="18sp"
+        android:padding="16dp"/>
+</RelativeLayout>
 

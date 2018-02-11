@@ -76,18 +76,18 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
 
     @Override
     public void initialize() {
-        imageView = findViewById(R.id.imageCamera);
-        button = findViewById(R.id.galeryBtn);
+//        imageView = findViewById(R.id.imageCamera);
+//        button = findViewById(R.id.galeryBtn);
     }
 
     @Override
     public void onButtonClick() {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectImg();
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                selectImg();
+//            }
+//        });
     }
 
     @Override

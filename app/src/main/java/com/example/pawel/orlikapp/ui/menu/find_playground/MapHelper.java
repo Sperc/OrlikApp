@@ -36,10 +36,10 @@ public class MapHelper {
         int drawable;
         switch (category) {
             case "football":
-                drawable = R.drawable.bridge;
+//                drawable = R.drawable.bridge;
                 break;
             default:
-                drawable = R.drawable.bridge;
+//                drawable = R.drawable.bridge;
         }
         for (Playground item : playgrounds) {
             String snippet = "Adres: " + item.getCity().getName() + "," + " " + item.getStreetName() + " " + item.getStreetNumber();
