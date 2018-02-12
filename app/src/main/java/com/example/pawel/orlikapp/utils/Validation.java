@@ -10,7 +10,10 @@ import java.util.regex.Pattern;
  */
 
 public class Validation {
-    private static String VALID_EMAIL_ADDRES_REGEX = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+    public static String VALID_EMAIL_ADDRES_REGEX = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+//    public static String VALID_BIRTH_DATE_REGEX = "^\\s*(3[01]|[12][0-9]|0?[1-9])\\-(1[012]|0?[1-9])\\-((?:19|20)\\d{2})\\s*$";
+//    yyyy-MM-dd
+    public static String VALID_BIRTH_DATE_REGEX = "^\\s*((?:19|20)\\d{2})\\-(1[012]|0?[1-9])\\-(3[01]|[12][0-9]|0?[1-9])\\s*$";
 
     public static boolean onEmailAddresValidation(@NonNull String email) {
         Pattern pattern = Pattern.compile(VALID_EMAIL_ADDRES_REGEX);
@@ -21,4 +24,13 @@ public class Validation {
             return true;
         }
     }
+    public static boolean validate(@NonNull String birthDate,@NonNull String regex){
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(birthDate);
+        if(!matcher.matches()){
+            return false;
+        }else
+            return true;
+    }
+
 }

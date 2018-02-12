@@ -5,121 +5,130 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
     tools:context="com.example.pawel.orlikapp.ui.create_player.CreatePlayerActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="10dp">
+
         <ImageView
             android:id="@+id/back_arrow_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:src="@drawable/ic_arrow_back_white_24dp"/>
+            android:src="@drawable/ic_arrow_back_white_24dp" />
 
         <TextView
             android:id="@+id/registerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Utwórz Profil"
-            android:textSize="24sp"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white"/>
+            android:text="Utwórz Profil"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#5DBCD2"
-            android:layout_alignBottom="@+id/registerTextView"/>
+            android:layout_alignBottom="@+id/registerTextView"
+            android:background="#5DBCD2" />
     </RelativeLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        >
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
+
         <ImageView
-            android:layout_gravity="center"
+            android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/usr"/>
+            android:layout_gravity="center"
+            android:background="@drawable/usr" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="kamera"
-                android:layout_weight="1" />
-            <Button
+                android:id="@+id/cameraBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="galeria"/>
+                android:text="kamera" />
+
+            <Button
+                android:id="@+id/galeryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="galeria" />
         </LinearLayout>
+
         <EditText
+            android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
-            android:drawableLeft="@drawable/ic_email_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="IMIĘ"
-            android:textColor="@color/white"
             android:inputType="text"
             android:maxLines="1"
             android:padding="10dp"
+            android:textColor="@color/white"
             android:textColorHint="@color/white" />
-
-
         <EditText
+            android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
-            android:drawableLeft="@drawable/ic_lock_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="NAZWISKO"
             android:inputType="text"
-            android:textColor="#fff"
             android:maxLines="1"
             android:padding="10dp"
+            android:textColor="#fff"
             android:textColorHint="#fff" />
 
         <EditText
+            android:id="@+id/birthDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
-            android:drawableLeft="@drawable/ic_lock_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="DATA URODZENIA (DD-MM-YYYY)"
+            android:hint="DATA URODZENIA (YYYY-MM-DD)"
             android:inputType="date"
-            android:textColor="#fff"
             android:maxLines="1"
             android:padding="10dp"
+            android:textColor="#fff"
             android:textColorHint="#fff" />
     </LinearLayout>
+
     <Button
-        android:layout_alignParentBottom="true"
-        android:id="@+id/registationButton"
+        android:id="@+id/createBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="24dp"
-        android:text="@string/signUp"
+        android:padding="16dp"
+        android:text="Utwórz"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="18sp"
-        android:padding="16dp"/>
+        android:textSize="18sp" />
 </RelativeLayout>
 

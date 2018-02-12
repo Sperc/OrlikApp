@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,12 +23,22 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
+import com.example.pawel.orlikapp.ui.login.LoginActivity;
+import com.example.pawel.orlikapp.utils.ImageHelper;
 
 public class CreatePlayerActivity extends BaseActivity implements CreatePlayerView {
     private CreatePlayerPresenter createPlayerPresenter;
     ImageView imageView;
-    Button button;
-    String token;
+    ImageView backArrowImgView;
+    Button cameraBtn;
+    Button galeryBtn;
+    Button createPlayer;
+    EditText firstName;
+    EditText lastName;
+    EditText birthDay;
+
+
+    private String token;
     private static final int CAMERA_REQUEST = 1888;
     private static final int SELECT_FILE = 0;
 
@@ -41,7 +52,6 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
         setPresenter();
         initialize();
         onButtonClick();
-//        createPlayerPresenter.createPlayer(new Player("Pawel", "Sosnowka","test@gmail.com"),token);
     }
 
 
@@ -76,18 +86,51 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
 
     @Override
     public void initialize() {
-//        imageView = findViewById(R.id.imageCamera);
-//        button = findViewById(R.id.galeryBtn);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        backArrowImgView = (ImageView) findViewById(R.id.back_arrow_register);
+        cameraBtn = (Button) findViewById(R.id.cameraBtn);
+        galeryBtn = (Button) findViewById(R.id.galeryBtn);
+        createPlayer = (Button) findViewById(R.id.createBtn);
+        firstName = (EditText) findViewById(R.id.firstName);
+        lastName = (EditText) findViewById(R.id.lastName);
+        birthDay = (EditText) findViewById(R.id.birthDay);
+
+
     }
 
     @Override
     public void onButtonClick() {
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                selectImg();
-//            }
-//        });
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCamera();
+            }
+        });
+        galeryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImg();
+            }
+        });
+        createPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Player player = new Player();
+                player.setFirstName(firstName.getText().toString());
+                player.setLastName(lastName.getText().toString());
+                player.setBirthDate(birthDay.getText().toString());
+                player.setImage(ImageHelper.convertImageToString(imageView));
+                createPlayerPresenter.createPlayer(player, token);
+            }
+        });
+        backArrowImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -113,6 +156,25 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void unuthorized() {
         Toast.makeText(this, getString(R.string.authorizationProblem), Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void emptyFirstName() {
+        firstName.setError(getString(R.string.emptyBox));
+    }
+
+    @Override
+    public void emptyLastName() {
+        lastName.setError(getString(R.string.emptyBox));
+    }
+
+    @Override
+    public void emptyDate() {
+        birthDay.setError(getString(R.string.emptyBox));
+    }
+
+    @Override
+    public void incrrectDate() {
+        birthDay.setError(getString(R.string.badDataInput));
     }
 }

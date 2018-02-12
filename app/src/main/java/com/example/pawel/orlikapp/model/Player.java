@@ -1,6 +1,7 @@
 package com.example.pawel.orlikapp.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -13,14 +14,27 @@ public class Player implements Serializable{
     private String firstName;
     private String lastName;
     private String username;
+    private String birthDate;
+    private String image;
 
     private List<Booking> bookingList;
     private Set<Team> userTeams;
 
-    public Player(String firstName, String lastName, String username) {
+    public Player() {
+    }
+
+    public Player(String firstName, String lastName, String birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
+        this.birthDate = birthDate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Long getId() {
@@ -29,6 +43,14 @@ public class Player implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getFirstName() {
