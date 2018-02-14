@@ -6,6 +6,7 @@ import android.util.Base64;
 import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
 
 /**
  * Created by Pawel on 12.02.2018.
@@ -16,8 +17,9 @@ public class ImageHelper {
         imageView.buildDrawingCache();
         Bitmap bitmap = imageView.getDrawingCache();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] b = baos.toByteArray();
+//        return b;
         String temp = Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }

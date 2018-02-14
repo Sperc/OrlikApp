@@ -24,6 +24,8 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
+import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
+import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
 import com.example.pawel.orlikapp.utils.ImageHelper;
 
 public class CreatePlayerActivity extends BaseActivity implements CreatePlayerView {
@@ -121,6 +123,7 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
                 player.setBirthDate(birthDay.getText().toString());
                 player.setImage(ImageHelper.convertImageToString(imageView));
                 createPlayerPresenter.createPlayer(player, token);
+
             }
         });
         backArrowImgView.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +144,9 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void onPlayerCreate() {
         Toast.makeText(this, "Dodano Gracza", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), SelectCityActicity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

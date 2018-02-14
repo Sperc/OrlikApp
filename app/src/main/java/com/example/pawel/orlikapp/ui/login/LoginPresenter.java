@@ -14,6 +14,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.login.validation.LoginInteractorImpl;
 import com.example.pawel.orlikapp.ui.login.validation.LoginIntercator;
 import com.example.pawel.orlikapp.utils.CodeStatus;
+import com.example.pawel.orlikapp.utils.Logs;
 
 import okhttp3.Headers;
 import retrofit2.Call;
@@ -79,8 +80,8 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
                 Headers headers = response.headers();
                 if (response.isSuccessful()) {
                     PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
-
                     loginPresenterListener.loginSucces();
+                    Logs.d("LOGIN_PRESENTER","SUCCESFUL AUTHORIZATION");
                 } else if (response.code() == CodeStatus.UNAUTHORIZED) {
                     loginPresenterListener.loginFailure();
                 } else {
@@ -101,6 +102,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         call.enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
+                Logs.d("LOGIN_PRESENTER_GET_ACTUAL_PLAYER_RESPONSE","code: "+response.code());
                 if (response.isSuccessful()) {
                     actualPlayerListener.succes(response.body());
                 } else if(response.code()==CodeStatus.NOT_FOUND){
@@ -108,12 +110,14 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
                 }
                 else {
                     loginPresenterListener.onServerError();
+                    Logs.d("LOGIN_PRESENTER_GET_ACTUAL_PLAYER_RESPONSE","code: "+response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
                 loginPresenterListener.onServerError();
+                t.printStackTrace();
             }
         });
     }
