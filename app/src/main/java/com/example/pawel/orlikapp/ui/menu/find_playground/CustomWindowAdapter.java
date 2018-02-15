@@ -1,12 +1,14 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.model.Playground;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
@@ -23,16 +25,22 @@ public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
         mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window,null);
     }
     public void rendowWindowText(Marker marker,View view){
+        Playground playground = (Playground) marker.getTag();
+
         String title = marker.getTitle();
         TextView textView = (TextView)view.findViewById(R.id.title);
-        if(!title.equals("")){
-            textView.setText(title);
-        }
-        String snippet = marker.getSnippet();
+//        if(!title.equals("")){
+//            textView.setText(title);
+//        }
+
+        textView.setText(playground.getName());
+//        String snippet = marker.getSnippet();
         TextView snipsetView = (TextView)view.findViewById(R.id.snippet);
-        if(!snippet.equals("")){
-            snipsetView.setText(snippet);
-        }
+        snipsetView.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(25) });
+//        if(!snippet.equals("")){
+//            snipsetView.setText(snippet);
+//        }
+        snipsetView.setText(playground.getAddres());
     }
 
     @Override

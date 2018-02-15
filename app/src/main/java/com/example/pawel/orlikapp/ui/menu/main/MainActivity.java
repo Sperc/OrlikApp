@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -55,8 +56,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setUpDrawerContent(navigationView);
         onButtonClick();
-
-
+        openStartFragment();
     }
 
     @Override
@@ -146,6 +146,12 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+    public void openStartFragment(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        FindPlaygroundFragment fragment = new FindPlaygroundFragment();
+        setTitle("Strona Główna");
+        ft.replace(R.id.flcontent, fragment).commit();
     }
 
 }

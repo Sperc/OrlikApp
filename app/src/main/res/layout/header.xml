@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/darkgray" >
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    android:padding="20dp">
+
     <LinearLayout
+        android:id="@+id/containerCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/containerCity"
-        android:paddingLeft="30dp">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:text="Aktualne miasto:"/>
+            android:text="Aktualne miasto:"
+            android:textSize="15sp" />
+
         <TextView
-            android:paddingBottom="10dp"
             android:id="@+id/actualCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:text="Warszawa"
-            android:textSize="16sp"
             android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-            />
+            android:paddingBottom="10dp"
+            android:text="Warszawa"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/usr" />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@+id/nameOfUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paweł Sosnówka" />
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/userEmailTextView"
+            android:text="pawel@gmail.com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+
 
 </LinearLayout>

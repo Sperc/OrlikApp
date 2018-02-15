@@ -144,6 +144,7 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void onPlayerCreate() {
         Toast.makeText(this, "Dodano Gracza", Toast.LENGTH_SHORT).show();
+        PreferencesShared.onStoreData(PreferencesSharedKyes.token,token);
         Intent intent = new Intent(getApplicationContext(), SelectCityActicity.class);
         startActivity(intent);
         finish();

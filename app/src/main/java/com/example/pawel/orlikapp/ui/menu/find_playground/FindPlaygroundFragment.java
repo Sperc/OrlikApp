@@ -2,6 +2,7 @@ package com.example.pawel.orlikapp.ui.menu.find_playground;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
+import com.example.pawel.orlikapp.ui.playground_info.PlaygroundInfoActivity;
 import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.MyTokenizer;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -87,7 +89,9 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                onStartDetailsFragment(marker);
+//                onStartDetailsFragment(marker);
+                Intent intent = new Intent(getContext(), PlaygroundInfoActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -196,7 +200,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView textView = (TextView) view;
                 String category = textView.getText().toString();
-                findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), category, getListener(googleMap));
+                findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), "", getListener(googleMap));
             }
 
             @Override

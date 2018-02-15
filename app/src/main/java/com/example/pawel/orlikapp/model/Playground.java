@@ -18,6 +18,61 @@ public class Playground implements Serializable{
     private double latitude;
     private City city;
 
+    private int startHour;
+    private int startMinutes;
+    private int endHour;
+    private int endMinutes;
+    private int phoneNumber;
+    private String photo;
+
+    public int getStartHour() {
+        return startHour;
+    }
+
+    public void setStartHour(int startHour) {
+        this.startHour = startHour;
+    }
+
+    public int getStartMinutes() {
+        return startMinutes;
+    }
+
+    public void setStartMinutes(int startMinutes) {
+        this.startMinutes = startMinutes;
+    }
+
+    public int getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(int endHour) {
+        this.endHour = endHour;
+    }
+
+    public int getEndMinutes() {
+        return endMinutes;
+    }
+
+    public void setEndMinutes(int endMinutes) {
+        this.endMinutes = endMinutes;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     private Set<Booking> bookingSet;
 
     public void setCity(City city) {
@@ -98,5 +153,9 @@ public class Playground implements Serializable{
 
     public void setBookingSet(Set<Booking> bookingSet) {
         this.bookingSet = bookingSet;
+    }
+
+    public String getAddres(){
+        return streetName+" "+streetNumber+" "+city.getName();
     }
 }

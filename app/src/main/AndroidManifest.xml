@@ -15,9 +15,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
-
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:name=".core.OrlikApp"
@@ -51,7 +51,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".ui.Main2Activity" />
-        <activity android:name=".ui.create_player.CreatePlayerActivity"></activity>
+        <activity android:name=".ui.create_player.CreatePlayerActivity" />
+        <activity android:name=".ui.playground_info.PlaygroundInfoActivity"></activity>
     </application>
 
 </manifest>
