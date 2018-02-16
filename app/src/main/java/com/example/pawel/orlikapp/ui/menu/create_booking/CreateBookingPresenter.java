@@ -17,25 +17,26 @@ import retrofit2.Response;
 
 public class CreateBookingPresenter {
 
-    public void addBooking(Booking booking, final AddBookingListener addBookingListener){
+    public void addBooking(Booking booking, final AddBookingListener addBookingListener) {
         BookingClient bookingClient = ServiceGenerator.createService().create(BookingClient.class);
-        Call<Void> call = bookingClient.addBooking(PreferencesShared.onReadString(PreferencesSharedKyes.token),booking);
+        Call<Void> call = bookingClient.addBooking(PreferencesShared.onReadString(PreferencesSharedKyes.token), booking);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     addBookingListener.onSucces();
                 }
-                Logs.d("CREATE_BOOKING_PRESENTER","SERVER RESPONSE: "+ response.code());
+                Logs.d("CREATE_BOOKING_PRESENTER", "SERVER RESPONSE: " + response.code());
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Logs.d("CREATE_BOOKING_PRESENTER","CONNECTION FAILED");
+                Logs.d("CREATE_BOOKING_PRESENTER", "CONNECTION FAILED");
             }
         });
     }
-    interface AddBookingListener{
+
+    public interface AddBookingListener {
         void onSucces();
     }
 }

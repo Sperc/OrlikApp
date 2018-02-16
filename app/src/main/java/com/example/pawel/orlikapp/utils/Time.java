@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Pawel on 09.01.2018.
  */
 
-public class Time implements Serializable{
+public class Time implements Serializable {
     private int hour;
     private int minutes;
 
@@ -31,13 +31,28 @@ public class Time implements Serializable{
         this.minutes = minutes;
     }
 
-    public int getAllTimeInMinutes(){
-        return hour * 60 +minutes;
+    public int getAllTimeInMinutes() {
+        return hour * 60 + minutes;
     }
 
-    public Time sumToActualTime(Time t){
+    public Time sumToActualTime(Time t) {
         int tMinutes = t.getAllTimeInMinutes();
         int actualMinutes = getAllTimeInMinutes();
-        return new Time(actualMinutes/60,actualMinutes%60);
+        int sumMinutes = tMinutes + actualMinutes;
+        return new Time(sumMinutes / 60, sumMinutes % 60);
+    }
+
+    private String convertIntToTimeDisplayString(int w) {
+        String time = String.valueOf(w);
+        if (w < 10) {
+            time = "0" + w;
+        }
+        return time;
+    }
+
+    public String displayTime() {
+        String hour = convertIntToTimeDisplayString(getHour());
+        String minutes = convertIntToTimeDisplayString(getMinutes());
+        return hour + ":" + minutes;
     }
 }

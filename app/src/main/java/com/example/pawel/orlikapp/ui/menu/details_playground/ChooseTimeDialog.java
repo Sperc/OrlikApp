@@ -3,6 +3,7 @@ package com.example.pawel.orlikapp.ui.menu.details_playground;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,7 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsFragment;
+import com.example.pawel.orlikapp.ui.menu.create_booking.CreateBookingActivity;
 import com.example.pawel.orlikapp.ui.menu.create_booking.CreateBookingFragment;
 import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.CreateBookingHelper;
@@ -74,8 +76,10 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Time startTime = new Time(timePicker.getHour(),timePicker.getMinute()*ConstansValues.TIME_PICKER_INTERVAL);
                         int progress= durationTimeSeekBar.getProgress()/ConstansValues.TIME_PICKER_INTERVAL*ConstansValues.TIME_PICKER_INTERVAL;
-                        Time endTime = new Time(progress/60,progress%60);
-                        openCreateBookingFragment(startTime,endTime);
+                        Time durationTime = new Time(progress/60,progress%60);
+                        Time endTime = startTime.sumToActualTime(durationTime);
+//                        openCreateBookingFragment(startTime,endTime);
+                        openCreateBookingActivity(startTime,endTime);
 
                     }
                 });
@@ -227,6 +231,20 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         createBookingFragment.setArguments(bundle);
         ft.replace(R.id.flcontent, createBookingFragment);
         ft.commit();
+    }
+    private void openCreateBookingActivity(Time startTime,Time endTime){
+        Booking booking = new Booking();
+        booking.setPlayground(playground);
+        booking.setDate(DateHelper.convertCalendarToDateString(calendar));
+        booking.setEndDate(DateHelper.convertCalendarToDateString(calendar));
+        booking.setStartOrderHour(startTime.getHour());
+        booking.setStartOrderMinutes(startTime.getMinutes());
+        booking.setEndOrderHour(endTime.getHour());
+        booking.setEndOrderMinutes(endTime.getMinutes());
+
+        Intent intent = new Intent(getContext(), CreateBookingActivity.class);
+        intent.putExtra("booking",booking);
+        startActivity(intent);
     }
 
 

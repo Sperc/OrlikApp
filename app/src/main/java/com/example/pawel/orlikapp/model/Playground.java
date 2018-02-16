@@ -156,6 +156,6 @@ public class Playground implements Serializable{
     }
 
     public String getAddres(){
-        return streetName+" "+streetNumber+" "+city.getName();
+        return "ul. "+streetName+" "+streetNumber+" "+city.getName();
     }
 }

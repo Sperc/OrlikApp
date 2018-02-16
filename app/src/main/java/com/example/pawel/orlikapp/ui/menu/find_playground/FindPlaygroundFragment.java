@@ -28,7 +28,6 @@ import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
-import com.example.pawel.orlikapp.ui.playground_info.PlaygroundInfoActivity;
 import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.MyTokenizer;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -89,9 +88,11 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-//                onStartDetailsFragment(marker);
-                Intent intent = new Intent(getContext(), PlaygroundInfoActivity.class);
-                startActivity(intent);
+                onStartDetailsFragment(marker);
+//                Intent intent = new Intent(getContext(), DetailPlaygroundActivity.class);
+//                Playground playground = (Playground) marker.getTag();
+//                intent.putExtra("playground", playground);
+//                startActivity(intent);
             }
         });
     }

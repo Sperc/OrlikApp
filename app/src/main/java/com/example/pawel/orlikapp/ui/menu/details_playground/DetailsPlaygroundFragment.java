@@ -61,6 +61,7 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_details_playground, container, false);
         setHasOptionsMenu(true);
+        
         Bundle bundle = getArguments();
         playground = (Playground) bundle.getSerializable("playground");
 
