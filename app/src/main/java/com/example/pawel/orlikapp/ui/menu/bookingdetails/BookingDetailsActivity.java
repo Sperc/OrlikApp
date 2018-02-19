@@ -1,0 +1,150 @@
+package com.example.pawel.orlikapp.ui.menu.bookingdetails;
+
+import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.model.Booking;
+import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.utils.Time;
+
+import java.io.Serializable;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class BookingDetailsActivity extends AppCompatActivity {
+    private int BUTTON = 0; // 1 - addButton, 0 - removeButton
+    private Button openParticipantsList;
+    private TextView timeBookingTextView;
+    private TextView dateBookingTextView;
+    private TextView freePlaces;
+    private TextView playerName;
+    private TextView playerEmail;
+    private CircleImageView circleImageView;
+    private FrameLayout frameLayout;
+    private Button addToList;
+    private TextView maxPlaces;
+    private BookingDetailsPresenter bookingDetailsPresenter;
+    private long bookingId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_booking_details);
+        Intent intent = getIntent();
+        bookingId = (long) intent.getSerializableExtra("booking_id");
+        bookingDetailsPresenter = new BookingDetailsPresenter();
+        init();
+        onClick();
+        bookingDetailsPresenter.getBookingById(bookingId, bookingListener);
+    }//
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        bookingDetailsPresenter.getBookingById(bookingId, bookingListener);
+    }
+
+    private void init() {
+        addToList = (Button) findViewById(R.id.addToList);
+        frameLayout = (FrameLayout) findViewById(R.id.frame);
+        timeBookingTextView = (TextView) findViewById(R.id.timeBookingTextView);
+        dateBookingTextView = (TextView) findViewById(R.id.dateBookingTextView);
+        openParticipantsList = (Button) findViewById(R.id.openListDialog);
+        freePlaces = (TextView) findViewById(R.id.freePlaces);
+        playerEmail = (TextView) findViewById(R.id.playerEmail);
+        playerName = (TextView) findViewById(R.id.playerName);
+        circleImageView = (CircleImageView) findViewById(R.id.playerPhoto);
+        maxPlaces = (TextView) findViewById(R.id.maxPlaces);
+    }
+
+    private void onClick() {
+        addToList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (BUTTON == 0) {
+                    bookingDetailsPresenter.removePlayerFromBooking(bookingId, PreferencesShared.onReadString(PreferencesSharedKyes.username), onBookingPlayerListener);
+                    BUTTON = 1;
+                } else {
+                    bookingDetailsPresenter.addPlayerToBooking(bookingId, onBookingPlayerListener);
+                    BUTTON = 0;
+                }
+
+            }
+        });
+    }
+    private void showPlayerBooking(final List<Player>playerList){
+        openParticipantsList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                frameLayout.setVisibility(View.VISIBLE);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                PlayerListFragmet playerListFragmet = new PlayerListFragmet();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("player_list", (Serializable) playerList);
+                playerListFragmet.setArguments(bundle);
+                ft.replace(R.id.frame, playerListFragmet);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
+    }
+
+    private void setButton(List<Player> playerList) {
+        for (Player p : playerList) {
+            if (p.getUsername().equals(PreferencesShared.onReadString(PreferencesSharedKyes.username))) {
+                BUTTON = 0;
+                addToList.setText("Usun");
+                freePlaces.setText(String.valueOf(playerList.size()));
+                return;
+            }
+        }
+        BUTTON = 1;
+        addToList.setText("Dodaj");
+        freePlaces.setText(String.valueOf(playerList.size()));
+    }
+
+    BookingDetailsPresenter.BookingListener bookingListener = new BookingDetailsPresenter.BookingListener() {
+        @Override
+        public void getBooking(Booking booking) {
+            setButton(booking.getPlayers());
+            playerEmail.setText(booking.getLeaderName());
+            bookingDetailsPresenter.getPlayerByUsername(booking.getLeaderName(), getPlayerListener);
+            freePlaces.setText(String.valueOf(booking.getPlayers().size()));
+            maxPlaces.setText("/" + String.valueOf(booking.getMaxNumberOfPlayer()));
+            dateBookingTextView.setText(booking.getDate());
+            Time startTime = new Time(booking.getStartOrderHour(), booking.getStartOrderMinutes());
+            Time endTime = new Time(booking.getEndOrderHour(), booking.getEndOrderMinutes());
+            timeBookingTextView.setText(startTime.displayTime() + " - " + endTime.displayTime());
+
+            showPlayerBooking(booking.getPlayers());
+        }
+    };
+
+    BookingDetailsPresenter.GetPlayerListener getPlayerListener = new BookingDetailsPresenter.GetPlayerListener() {
+        @Override
+        public void onSucces(Player player) {
+            playerName.setText(player.toString());
+        }
+    };
+    BookingDetailsPresenter.OnBookingPlayerListener onBookingPlayerListener = new BookingDetailsPresenter.OnBookingPlayerListener() {
+        @Override
+        public void onSucces(List<Player> playerList) {
+            setButton(playerList);
+            Toast.makeText(BookingDetailsActivity.this, "Dodano", Toast.LENGTH_SHORT).show();
+            showPlayerBooking(playerList);
+        }
+    };
+}

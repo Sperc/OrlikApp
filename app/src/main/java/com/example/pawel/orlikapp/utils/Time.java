@@ -55,4 +55,9 @@ public class Time implements Serializable {
         String minutes = convertIntToTimeDisplayString(getMinutes());
         return hour + ":" + minutes;
     }
+    public String displayTime(int hour_,int minutes_){
+        String hour = convertIntToTimeDisplayString(hour_);
+        String minutes = convertIntToTimeDisplayString(minutes_);
+        return hour + ":" + minutes;
+    }
 }

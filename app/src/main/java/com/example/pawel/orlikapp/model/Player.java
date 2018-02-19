@@ -95,6 +95,7 @@ public class Player implements Serializable{
 
     @Override
     public String toString() {
-        return "nick: " + username+"\n"+firstName+" "+lastName;
+        return firstName+" "+lastName;
     }
+
 }

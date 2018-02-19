@@ -19,11 +19,12 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsView;
 import com.example.pawel.orlikapp.utils.ImageHelper;
 import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Time;
 
-public class CreateBookingActivity extends AppCompatActivity{
+public class CreateBookingActivity extends AppCompatActivity implements BookingDetailsView{
 
     private Booking booking;
 
@@ -105,4 +106,14 @@ public class CreateBookingActivity extends AppCompatActivity{
             finish();
         }
     };
+
+    @Override
+    public void onSucces() {
+
+    }
+
+    @Override
+    public void onFailure() {
+
+    }
 }

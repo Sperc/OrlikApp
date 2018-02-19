@@ -1,12 +1,12 @@
 package com.example.pawel.orlikapp.ui.menu.details_playground;
 
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,13 +23,12 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Playground;
-import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsFragment;
+import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsActivity;
 import com.example.pawel.orlikapp.utils.DateHelper;
 import com.example.pawel.orlikapp.utils.Logs;
 
 import org.reactivestreams.Subscription;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -233,17 +232,20 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     }
 
     public void onStartBookingDetails(Long id) {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        BookingDetailsFragment bookingDetailsFragment = new BookingDetailsFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("booking_id", id);
-        Logs.d("TAG_ID_BOOKING", id.toString());
-        bookingDetailsFragment.setArguments(bundle);
-        ft.addToBackStack(null);
-        ft.replace(R.id.flcontent, bookingDetailsFragment);
-        ft.commit();
+//        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//        BookingDetailsFragment bookingDetailsFragment = new BookingDetailsFragment();
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("booking_id", id);
+//        Logs.d("TAG_ID_BOOKING", id.toString());
+//        bookingDetailsFragment.setArguments(bundle);
+//        ft.addToBackStack(null);
+//        ft.replace(R.id.flcontent, bookingDetailsFragment);
+//        ft.commit();
+        Intent intent = new Intent(getContext(), BookingDetailsActivity.class);
+        intent.putExtra("booking_id",id);
+        startActivity(intent);
     }
     public void openDialog(Calendar time){
         ChooseTimeDialog chooseTimeDialog = new ChooseTimeDialog();

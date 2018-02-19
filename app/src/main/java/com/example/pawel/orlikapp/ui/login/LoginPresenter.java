@@ -80,6 +80,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
                 Headers headers = response.headers();
                 if (response.isSuccessful()) {
                     PreferencesShared.onStoreData(PreferencesSharedKyes.token, headers.get("authorization"));
+                    PreferencesShared.onStoreData(PreferencesSharedKyes.username,username);
                     loginPresenterListener.loginSucces();
                     Logs.d("LOGIN_PRESENTER","SUCCESFUL AUTHORIZATION");
                 } else if (response.code() == CodeStatus.UNAUTHORIZED) {

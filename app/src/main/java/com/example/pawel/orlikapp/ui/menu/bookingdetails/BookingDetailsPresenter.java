@@ -5,6 +5,7 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.retrofit.ApiClient.BookingClient;
+import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
 import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
 
 import java.util.List;
@@ -20,11 +21,7 @@ import retrofit2.Response;
 public class BookingDetailsPresenter {
     private BookingDetailsView bookingDetailsView;
 
-    public BookingDetailsPresenter(BookingDetailsView bookingDetailsView) {
-        this.bookingDetailsView = bookingDetailsView;
-    }
-
-    public void getBookingList(Long id, final BookingListener bookingListener) {
+    public void getBookingById(Long id, final BookingListener bookingListener) {
         final BookingClient bookingClient = ServiceGenerator.createService().create(BookingClient.class);
         Call<Booking> call = bookingClient.getBookingById(PreferencesShared.onReadString(PreferencesSharedKyes.token), id);
         call.enqueue(new Callback<Booking>() {
@@ -62,9 +59,9 @@ public class BookingDetailsPresenter {
         });
     }
 
-    public void removePlayerFromBooking(Long bookingId, final OnBookingPlayerListener onBookingPlayerListener) {
+    public void removePlayerFromBooking(Long bookingId,String username, final OnBookingPlayerListener onBookingPlayerListener) {
         BookingClient bookingClient = ServiceGenerator.createService().create(BookingClient.class);
-        Call<List<Player>> call = bookingClient.removePlayerFromBooking(PreferencesShared.onReadString(PreferencesSharedKyes.token), bookingId, PreferencesShared.onReadString(PreferencesSharedKyes.username));
+        Call<List<Player>> call = bookingClient.removePlayerFromBooking(PreferencesShared.onReadString(PreferencesSharedKyes.token), bookingId,username);
         call.enqueue(new Callback<List<Player>>() {
             @Override
             public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
@@ -77,9 +74,31 @@ public class BookingDetailsPresenter {
 
             @Override
             public void onFailure(Call<List<Player>> call, Throwable t) {
-
+                bookingDetailsView.onFailure();
             }
         });
+    }
+    public void getPlayerByUsername(String username, final GetPlayerListener getPlayerListener){
+        final PlayerClient playerClient = ServiceGenerator.createService().create(PlayerClient.class);
+        Call<Player> call = playerClient.getPlayerByUsername(PreferencesShared.onReadString(PreferencesSharedKyes.token),username);
+        call.enqueue(new Callback<Player>() {
+            @Override
+            public void onResponse(Call<Player> call, Response<Player> response) {
+                if(response.isSuccessful()){
+                    getPlayerListener.onSucces(response.body());
+                }else{
+                    bookingDetailsView.onFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Player> call, Throwable t) {
+                bookingDetailsView.onFailure();
+            }
+        });
+    }
+    public interface GetPlayerListener{
+        void onSucces(Player player);
     }
 
     public interface OnBookingPlayerListener {
