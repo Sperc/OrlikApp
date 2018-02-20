@@ -34,8 +34,12 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private Button addToList;
     private TextView maxPlaces;
+    private TextView playgroundName;
+    private TextView address;
+
     private BookingDetailsPresenter bookingDetailsPresenter;
     private long bookingId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         playerName = (TextView) findViewById(R.id.playerName);
         circleImageView = (CircleImageView) findViewById(R.id.playerPhoto);
         maxPlaces = (TextView) findViewById(R.id.maxPlaces);
+        playgroundName = (TextView) findViewById(R.id.playgroundName);
+        address = (TextView) findViewById(R.id.address);
     }
 
     private void onClick() {
@@ -83,7 +89,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
             }
         });
     }
-    private void showPlayerBooking(final List<Player>playerList){
+
+    private void showPlayerBooking(final List<Player> playerList) {
         openParticipantsList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +100,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 PlayerListFragmet playerListFragmet = new PlayerListFragmet();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("player_list", (Serializable) playerList);
+                bundle.putSerializable("isLeader", isLeader());
+                bundle.putSerializable("leaderName", playerEmail.getText().toString());
                 playerListFragmet.setArguments(bundle);
                 ft.replace(R.id.frame, playerListFragmet);
                 ft.addToBackStack(null);
@@ -116,9 +125,20 @@ public class BookingDetailsActivity extends AppCompatActivity {
         freePlaces.setText(String.valueOf(playerList.size()));
     }
 
+    //true - uzytkownik jest liderem, false - nie jest
+    public boolean isLeader() {
+        String username = PreferencesShared.onReadString(PreferencesSharedKyes.username);
+
+        if (username.equals(playerEmail.getText().toString()))
+            return true;
+        return false;
+    }
+
     BookingDetailsPresenter.BookingListener bookingListener = new BookingDetailsPresenter.BookingListener() {
         @Override
         public void getBooking(Booking booking) {
+            address.setText(booking.getPlayground().getAddres());
+            playgroundName.setText(booking.getPlayground().getName());
             setButton(booking.getPlayers());
             playerEmail.setText(booking.getLeaderName());
             bookingDetailsPresenter.getPlayerByUsername(booking.getLeaderName(), getPlayerListener);
@@ -128,7 +148,6 @@ public class BookingDetailsActivity extends AppCompatActivity {
             Time startTime = new Time(booking.getStartOrderHour(), booking.getStartOrderMinutes());
             Time endTime = new Time(booking.getEndOrderHour(), booking.getEndOrderMinutes());
             timeBookingTextView.setText(startTime.displayTime() + " - " + endTime.displayTime());
-
             showPlayerBooking(booking.getPlayers());
         }
     };

@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.utils.ImageHelper;
 
 import java.util.List;
@@ -22,9 +25,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CustomAdapter extends BaseAdapter {
     private List<Player> playerList;
     private Context context;
+    private DataChangedListener dataChangedListener;
+    private String leaderName;
+    private boolean leader;
 
-    public CustomAdapter(List<Player> playerList, Context context) {
+    public CustomAdapter(List<Player> playerList, Context context, boolean leader, String leaderName, DataChangedListener dataChangedListener) {
         super();
+        this.leader = leader;
+        this.leaderName = leaderName;
+        this.dataChangedListener = dataChangedListener;
         this.playerList = playerList;
         this.context = context;
     }
@@ -45,18 +54,51 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view1 = layoutInflater.inflate(R.layout.list_item_player,null);
-        TextView name = (TextView)view1.findViewById(R.id.playerName);
-        TextView email = (TextView)view1.findViewById(R.id.playerEmail);
-        CircleImageView circleImageView = (CircleImageView)view1.findViewById(R.id.playerPhoto);
+        View view1 = layoutInflater.inflate(R.layout.list_item_player, null);
+        TextView name = (TextView) view1.findViewById(R.id.playerName);
+        TextView email = (TextView) view1.findViewById(R.id.playerEmail);
+        ImageButton imageButton = (ImageButton) view1.findViewById(R.id.deleteBtn);
+        CircleImageView circleImageView = (CircleImageView) view1.findViewById(R.id.playerPhoto);
+        TextView leaderNameTextView = (TextView) view1.findViewById(R.id.leaderTextView);
+
         Player p = playerList.get(i);
         name.setText(p.toString());
         email.setText(p.getUsername());
         circleImageView.setImageBitmap(ImageHelper.convertStringToBitmap(p.getImage()));
         //tutaj onClickListener
+        setLeaderTextView(leaderNameTextView, p.getUsername());
+        if (leader) {
+            setDeleteBtn(imageButton, p.getUsername());
+        }
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playerList.remove(i);
+                dataChangedListener.dataChanged();
+
+            }
+        });
         return view1;
 
+    }
+
+    private void setLeaderTextView(View leaderTv, String playerName) {
+        if (leaderName.equals(playerName)) {
+            leaderTv.setVisibility(View.VISIBLE);
+        } else {
+            leaderTv.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void setDeleteBtn(View deleteBtn, String playerName) {
+        if (!playerName.equals(leaderName))
+            deleteBtn.setVisibility(View.VISIBLE);
+    }
+
+    public interface DataChangedListener {
+        void dataChanged();
     }
 }
