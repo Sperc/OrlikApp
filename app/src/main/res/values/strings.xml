@@ -8,7 +8,7 @@
     <!--LoginActivity -->
     <string name="hintUser">E-mail</string>
     <string name="rememberCheckbox">Zapamietaj mnie</string>
-    <string name="logIn">Zaloguj</string>
+    <string name="logIn">ZALOGUJ</string>
     <string name="signUp">Zarejestruj</string>
     <string name="forgotPassword">Zapomniałeś Hasła?</string>
 
@@ -42,7 +42,7 @@
     <string name="teams">Grupy</string>
     <string name="logout">Wyloguj</string>
     <string name="reservation">Rezerwacje</string>
-    <string name="mainPage">MainPage</string>
+    <string name="mainPage">Strona Główna</string>
 
     <!--Menu-->
     <string name="searchEditText">Szukaj...</string>

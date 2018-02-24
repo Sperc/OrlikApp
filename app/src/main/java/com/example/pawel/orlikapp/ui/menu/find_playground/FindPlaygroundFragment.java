@@ -81,7 +81,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 12));
 //        updateCamera(new LatLng(lati,longi),ConstansValues.MAP_ZOOM_DEFAULT);
-        findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
+//        findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
         spinerFunctions(googleMap);
         googleMap.setOnMarkerClickListener(this);
         mGoogleMap.setInfoWindowAdapter(new CustomWindowAdapter(getContext()));

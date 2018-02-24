@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/nav_action"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/app_background_provide_1">
     <EditText
         android:id="@+id/navbox"
         android:layout_width="wrap_content"

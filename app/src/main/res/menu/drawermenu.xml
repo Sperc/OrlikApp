@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/mainpage"
+        android:id="@+id/search"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/mainPage" />
     <item
@@ -12,14 +12,10 @@
         android:id="@+id/reservation"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/reservation" />
-    <item
-        android:id="@+id/teams"
-        android:icon="@drawable/ic_event_black_24dp"
-        android:title="@string/teams" />
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_youtube_searched_for_black_24dp"
-        android:title="@string/search" />
+    <!--<item-->
+        <!--android:id="@+id/teams"-->
+        <!--android:icon="@drawable/ic_event_black_24dp"-->
+        <!--android:title="@string/teams" />-->
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_black_24dp"

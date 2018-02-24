@@ -11,7 +11,7 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_background">
+            android:background="@drawable/app_background_provide_1">
 
         </android.support.v7.widget.Toolbar>
 
@@ -61,12 +61,13 @@
             android:layout_height="0dp"
             android:layout_weight="4"
             android:orientation="vertical"
+            android:background="@color/backgroundprimary"
             android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_info"
+                android:background="@drawable/background_login_two"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -82,18 +83,6 @@
                         android:gravity="center"
                         android:text="TERMIN"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/dateBookingTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_date_range_white_24dp"
-                        android:drawablePadding="10dp"
-                        android:text="17-01-2018"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -106,14 +95,27 @@
                     android:paddingRight="10dp">
 
                     <TextView
+                        android:gravity="center"
+                        android:id="@+id/dateBookingTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_date_range_white_24dp"
+                        android:drawablePadding="10dp"
+                        android:text="17-01-2018"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:gravity="center"
                         android:id="@+id/timeBookingTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_access_time_white_24dp"
                         android:drawablePadding="10dp"
                         android:text="18:00 - 20:00"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
                         android:textStyle="bold" />
 
 
@@ -125,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/background_info"
+                android:background="@drawable/background_login_two"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -135,7 +137,6 @@
                     android:layout_gravity="center"
                     android:text="SZCZEGÓŁY"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -149,7 +150,6 @@
                         android:drawablePadding="10dp"
                         android:text="max. graczy"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -159,8 +159,7 @@
                         android:ems="2"
                         android:inputType="numberSigned"
                         android:paddingLeft="10dp"
-                        android:text="25"
-                        android:textSize="18sp" />
+                        android:text="25" />
                 </LinearLayout>
 
 
@@ -170,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/background_info"
+                android:background="@drawable/background_login_two"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -180,7 +179,6 @@
                     android:layout_gravity="center"
                     android:text="KTO MOŻE DOŁĄCZYĆ?"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <RadioGroup
@@ -195,7 +193,7 @@
                         android:layout_height="wrap_content"
                         android:text="Tylko ja"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+
                         android:textStyle="bold" />
 
                     <RadioButton
@@ -204,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:text="Wszyscy"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+
                         android:textStyle="bold" />
 
                 </RadioGroup>
@@ -219,6 +217,7 @@
         android:id="@+id/bookingBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/button"
         android:layout_alignParentBottom="true"
         android:text="Przejdz do rezerwacji" />
 

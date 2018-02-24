@@ -15,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
+import com.example.pawel.orlikapp.ui.login.LoginPresenter;
 import com.example.pawel.orlikapp.ui.menu.find_playground.FindPlaygroundFragment;
 import com.example.pawel.orlikapp.ui.menu.my_profile.MyProfileFragment;
 import com.example.pawel.orlikapp.ui.menu.settings.SettingsFragment;
@@ -28,9 +31,11 @@ import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
 import com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment;
 import com.example.pawel.orlikapp.ui.menu.team.TeamFragment;
 import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
+import com.example.pawel.orlikapp.utils.ImageHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer)
@@ -43,6 +48,12 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
     private LinearLayout containerHeader;
+
+    private TextView playerName;
+    private TextView playerEmail;
+    private CircleImageView playerPhoto;
+
+    private MainActivityPresenter mainActivityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class MainActivity extends BaseActivity {
         setUpDrawerContent(navigationView);
         onButtonClick();
         openStartFragment();
+        setPlayerDetails();
     }
 
     @Override
@@ -66,6 +78,11 @@ public class MainActivity extends BaseActivity {
         View headerLayout = navigationView.getHeaderView(0); //0-index header
         containerHeader = headerLayout.findViewById(R.id.containerCity);
         actualCity = headerLayout.findViewById(R.id.actualCity);
+
+        playerEmail = headerLayout.findViewById(R.id.userEmailTextView);
+        playerName = headerLayout.findViewById(R.id.nameOfUser);
+        playerPhoto = headerLayout.findViewById(R.id.playerPhoto);
+
         actualCity.setText(PreferencesShared.onReadString(PreferencesSharedKyes.city));
 
     }
@@ -97,9 +114,6 @@ public class MainActivity extends BaseActivity {
         Fragment fragment = null;
         Class fragmentClass = null;
         switch (menuItem.getItemId()) {
-            case R.id.teams:
-                fragmentClass = TeamFragment.class;
-                break;
             case R.id.logout:
                 logout();
                 return;
@@ -116,7 +130,7 @@ public class MainActivity extends BaseActivity {
                 fragmentClass = MyProfileFragment.class;
                 break;
             default:
-                fragmentClass = MyTeamsFragment.class;
+                fragmentClass = FindPlaygroundFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -147,11 +161,31 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
-    public void openStartFragment(){
+
+    public void openStartFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         FindPlaygroundFragment fragment = new FindPlaygroundFragment();
         setTitle("Strona Główna");
         ft.replace(R.id.flcontent, fragment).commit();
+    }
+
+    private void setPlayerDetails() {
+        MainActivityPresenter mainActivityPresenter = new MainActivityPresenter();
+        mainActivityPresenter.getActualPlayer(new LoginPresenter.ActualPlayerListener() {
+            @Override
+            public void succes(Player player) {
+                playerEmail.setText(player.getUsername());
+                playerName.setText(player.toString());
+                if(player.getImage()!=null){
+                    playerPhoto.setImageBitmap(ImageHelper.convertStringToBitmap(player.getImage()));
+                }
+            }
+
+            @Override
+            public void notFound() {
+                Toast.makeText(MainActivity.this, "Problem z internemtem/serwerem", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

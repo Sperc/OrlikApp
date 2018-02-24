@@ -4,36 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#414858"
     android:orientation="vertical"
     tools:context="com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/app_background_provide_1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:text="REZERWACJA"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:orientation="vertical"
+
         android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_shape"
+            android:background="@drawable/background_login_two"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -63,7 +65,6 @@
                     android:gravity="center"
                     android:text="17-01-2018"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -75,7 +76,6 @@
                     android:gravity="center"
                     android:text="15.00 - 18.00"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/background_shape"
+            android:background="@drawable/background_login_two"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -92,8 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="SZCZEGÓŁY"
                 android:paddingBottom="5dp"
+                android:text="SZCZEGÓŁY"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -110,17 +110,15 @@
                     android:drawablePadding="10dp"
                     android:text="Orlik"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/address"
-                    android:paddingLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="ul. Tumidajskiego 3, Lublin"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -136,7 +134,6 @@
                     android:drawablePadding="10dp"
                     android:text="Wolne miejsca: "
                     android:textColor="@color/white"
-                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -159,11 +156,12 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/background_shape"
+            android:background="@drawable/background_login_two"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -175,58 +173,82 @@
 
                 android:textColor="@color/white"
                 android:textStyle="bold" />
+
             <LinearLayout
-                android:layout_gravity=""
-                android:paddingTop="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity=""
+                android:paddingTop="5dp">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/playerPhoto"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/test"/>
+                    android:src="@drawable/test" />
+
                 <LinearLayout
-                    android:paddingLeft="10dp"
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
                     <TextView
                         android:id="@+id/playerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Paweł Sosnówka"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/playerEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="pawel@gmail.com"/>
+                        android:text="pawel@gmail.com"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
         <Button
             android:id="@+id/openListDialog"
-            android:layout_marginTop="20dp"
-            android:padding="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_login"
+            android:padding="15dp"
             android:text="Pokaż Liste Uczestnikow"
-            android:background="@drawable/background_info" />
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#525B6D"
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/addToList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/tick"
+            android:background="#525B6D"
+            android:text="Rezerwuj"
+            android:textColor="@color/white" />
     </LinearLayout>
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
-    </FrameLayout>
+        android:visibility="visible" />
+
+
 </RelativeLayout>
