@@ -2,6 +2,7 @@ package com.example.pawel.orlikapp.ui.menu.main;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -55,6 +56,8 @@ public class MainActivity extends BaseActivity {
 
     private MainActivityPresenter mainActivityPresenter;
 
+    private static int TOOLBAR_MARGIN_TITLE = 220;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,10 @@ public class MainActivity extends BaseActivity {
         playerPhoto = headerLayout.findViewById(R.id.playerPhoto);
 
         actualCity.setText(PreferencesShared.onReadString(PreferencesSharedKyes.city));
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleMarginStart(TOOLBAR_MARGIN_TITLE);
+
+
 
     }
 
@@ -142,6 +149,7 @@ public class MainActivity extends BaseActivity {
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
+
         drawerLayout.closeDrawers();
     }
 
@@ -176,7 +184,7 @@ public class MainActivity extends BaseActivity {
             public void succes(Player player) {
                 playerEmail.setText(player.getUsername());
                 playerName.setText(player.toString());
-                if(player.getImage()!=null){
+                if (player.getImage() != null) {
                     playerPhoto.setImageBitmap(ImageHelper.convertStringToBitmap(player.getImage()));
                 }
             }

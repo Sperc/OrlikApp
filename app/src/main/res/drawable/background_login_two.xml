@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
         android:width="2dp"
-        android:color="#ffff">
+        android:color="@color/light_gray">
     </stroke>
 
     <corners
-        android:radius="10dp" />
+        android:radius="2dp" />
     <!--<padding-->
         <!--android:left="2dp"-->
         <!--android:right="2dp"-->

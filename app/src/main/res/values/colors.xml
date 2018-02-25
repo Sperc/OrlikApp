@@ -26,4 +26,24 @@
     <color name="toolbar_text">#8f000000</color>
     <color name="accent">#2789e4</color>
 
+    <!--moje kolory-->
+    <color name="darkGray">#21202C</color>
+    <color name="lightGray">#525171</color>
+    <color name="fontOnGray">#AEACC4</color>
+    <color name="logoColor">#9697AB</color>
+    <color name="imageOnDarkGray">#696774</color>
+    <color name="fontOnWhite">#514F5C</color>
+    <color name="fontOnWhite1">#514F70</color>
+
+    <color name="background">#FAFAF8</color>
+    <color name="background1">#FDFDFD</color>
+    <color name="greenBtn">#59A73F</color>
+    <color name="blueColor">#2C8CA6</color>
+
+    <color name="drawableOnWhite">#BEBEC0</color>
+
+    <color name="diffrentGrey">#525B6D</color>
+
+
+
 </resources>

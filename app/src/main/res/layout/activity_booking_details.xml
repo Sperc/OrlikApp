@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#414858"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsActivity">
 
@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/app_background_provide_1">
+        android:background="@color/darkGray">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:text="TERMIN"
-                android:textColor="@color/white"
+                android:textColor="@color/fontOnWhite"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -61,10 +61,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_date_range_white_24dp"
+                    android:drawableLeft="@drawable/draw_date"
                     android:gravity="center"
                     android:text="17-01-2018"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textStyle="bold" />
 
                 <TextView
@@ -72,10 +72,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_access_time_white_24dp"
+                    android:drawableLeft="@drawable/draw_time"
                     android:gravity="center"
                     android:text="15.00 - 18.00"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -94,7 +94,7 @@
                 android:layout_gravity="center"
                 android:paddingBottom="5dp"
                 android:text="SZCZEGÓŁY"
-                android:textColor="@color/white"
+                android:textColor="@color/fontOnWhite"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -106,10 +106,10 @@
                     android:id="@+id/playgroundName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_location_on_white_24dp"
+                    android:drawableLeft="@drawable/draw_location"
                     android:drawablePadding="10dp"
                     android:text="Orlik"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textStyle="bold" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:text="ul. Tumidajskiego 3, Lublin"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -130,10 +130,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_person_white_24dp"
+                    android:drawableLeft="@drawable/draw_person"
                     android:drawablePadding="10dp"
                     android:text="Wolne miejsca: "
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textStyle="bold" />
 
                 <TextView
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:text="24"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="/25"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fontOnWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -171,7 +171,7 @@
                 android:layout_gravity="center"
                 android:text="LEADER"
 
-                android:textColor="@color/white"
+                android:textColor="@color/fontOnWhite"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -198,7 +198,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Paweł Sosnówka"
-                        android:textColor="@color/white"
+                        android:textColor="@color/fontOnWhite"
                         android:textStyle="bold" />
 
                     <TextView
@@ -206,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="pawel@gmail.com"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/fontOnWhite" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@drawable/background_login"
+            android:background="@color/blueColor"
             android:padding="15dp"
             android:text="Pokaż Liste Uczestnikow"
             android:textColor="@color/white"
@@ -230,7 +230,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#525B6D"
+        android:background="@color/greenBtn"
         android:orientation="vertical">
 
         <Button
@@ -240,7 +240,7 @@
             android:layout_gravity="center"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/tick"
-            android:background="#525B6D"
+            android:background="@color/greenBtn"
             android:text="Rezerwuj"
             android:textColor="@color/white" />
     </LinearLayout>

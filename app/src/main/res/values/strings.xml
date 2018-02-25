@@ -58,10 +58,10 @@
     <!--WeekView-->
     <string name="view">Widok</string>
 
-    <string name="action_today">dzisiaj</string>
-    <string name="action_day_view">dzien</string>
-    <string name="action_three_day_view">3 dni</string>
-    <string name="action_week_view">tydzien</string>
+    <string name="action_today">Dzisiaj</string>
+    <string name="action_day_view">1-Dzień</string>
+    <string name="action_three_day_view">3-Dni</string>
+    <string name="action_week_view">Tydzień</string>
 
     <!--BookingDetails-->
     <string name="participants">Uczestnicy</string>
