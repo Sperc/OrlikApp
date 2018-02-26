@@ -13,15 +13,15 @@ import java.sql.Blob;
  */
 
 public class ImageHelper {
-    public static String convertImageToString(ImageView imageView){
+    public static byte[] convertImageToString(ImageView imageView){
         imageView.buildDrawingCache();
         Bitmap bitmap = imageView.getDrawingCache();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
-//        return b;
-        String temp = Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
+        return b;
+//        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+//        return temp;
     }
     public static Bitmap convertStringToBitmap(String encodedString){
         try {

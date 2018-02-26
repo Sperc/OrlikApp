@@ -3,6 +3,7 @@ package com.example.pawel.orlikapp.retrofit.ApiClient;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.model.Playground;
+import com.example.pawel.orlikapp.model.wraper.CreatePlayerObject;
 
 import java.util.List;
 
@@ -27,7 +28,8 @@ public interface PlayerClient {
 
     @POST("/player/add")
     Call<Void> addPlayer(@Header("authorization") String token,
-                           @Body Player player);
+                        @Body CreatePlayerObject createPlayerObject);
+
     @GET("/player/get-by-username")
     Call<Player> getPlayerByUsername(@Header("authorization") String token, @Query("username") String username);
 }

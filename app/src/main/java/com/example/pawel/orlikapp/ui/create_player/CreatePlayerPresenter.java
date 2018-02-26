@@ -1,6 +1,9 @@
 package com.example.pawel.orlikapp.ui.create_player;
 
+import android.net.Uri;
+
 import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.model.wraper.CreatePlayerObject;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
@@ -9,6 +12,8 @@ import com.example.pawel.orlikapp.utils.CodeStatus;
 import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Validation;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +50,7 @@ public class CreatePlayerPresenter implements CreatePlayerInteractor.PlayerValid
         createPlayerView.incrrectDate();
     }
 
-    public void createPlayer(Player player, String token) {
+    public void createPlayer(Player player, String token, byte[] imageByte) {
 
         if (!CreatePlayerInteractor.onPlayerValidate(player, this)) {
             Logs.d("CREATE_PLAYER_PRESENTER", "INCORRET VALIDATION");
@@ -53,7 +58,10 @@ public class CreatePlayerPresenter implements CreatePlayerInteractor.PlayerValid
         }
 
         PlayerClient playerClient = ServiceGenerator.createService().create(PlayerClient.class);
-        Call<Void> call = playerClient.addPlayer(token, player);
+        CreatePlayerObject createPlayerObject = new CreatePlayerObject();
+        createPlayerObject.setPhoto(imageByte);
+        createPlayerObject.setPlayer(player);
+        Call<Void> call = playerClient.addPlayer(token, createPlayerObject);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

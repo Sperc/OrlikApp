@@ -66,7 +66,7 @@ public class CustomAdapter extends BaseAdapter {
         Player p = playerList.get(i);
         name.setText(p.toString());
         email.setText(p.getUsername());
-        circleImageView.setImageBitmap(ImageHelper.convertStringToBitmap(p.getImage()));
+//        circleImageView.setImageBitmap(ImageHelper.convertStringToBitmap(p.getImage()));
         //tutaj onClickListener
         setLeaderTextView(leaderNameTextView, p.getUsername());
         if (leader) {

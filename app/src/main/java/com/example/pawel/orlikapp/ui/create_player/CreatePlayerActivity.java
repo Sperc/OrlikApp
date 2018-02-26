@@ -1,16 +1,10 @@
 package com.example.pawel.orlikapp.ui.create_player;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,9 +18,13 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.base.BaseActivity;
 import com.example.pawel.orlikapp.ui.login.LoginActivity;
-import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
 import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
 import com.example.pawel.orlikapp.utils.ImageHelper;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class CreatePlayerActivity extends BaseActivity implements CreatePlayerView {
     private CreatePlayerPresenter createPlayerPresenter;
@@ -121,8 +119,8 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
                 player.setFirstName(firstName.getText().toString());
                 player.setLastName(lastName.getText().toString());
                 player.setBirthDate(birthDay.getText().toString());
-                player.setImage(ImageHelper.convertImageToString(imageView));
-                createPlayerPresenter.createPlayer(player, token);
+                imageView.buildDrawingCache();
+                createPlayerPresenter.createPlayer(player, token,ImageHelper.convertImageToString(imageView));
 
             }
         });

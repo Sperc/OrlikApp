@@ -32,7 +32,9 @@ import com.example.pawel.orlikapp.ui.menu.myteams.MyTeamsFragment;
 import com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment;
 import com.example.pawel.orlikapp.ui.menu.team.TeamFragment;
 import com.example.pawel.orlikapp.ui.select_city.SelectCityActicity;
+import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.ImageHelper;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,7 +91,6 @@ public class MainActivity extends BaseActivity {
         actualCity.setText(PreferencesShared.onReadString(PreferencesSharedKyes.city));
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitleMarginStart(TOOLBAR_MARGIN_TITLE);
-
 
 
     }
@@ -184,9 +185,16 @@ public class MainActivity extends BaseActivity {
             public void succes(Player player) {
                 playerEmail.setText(player.getUsername());
                 playerName.setText(player.toString());
-                if (player.getImage() != null) {
-                    playerPhoto.setImageBitmap(ImageHelper.convertStringToBitmap(player.getImage()));
-                }
+
+//                Picasso.with(getApplicationContext()).load("http://192.168.0.185:8080/picture/get/3")
+                Picasso.with(getApplicationContext()).load(ConstansValues.BASE_IMG_URL + player.getPicture().getId())
+                        .placeholder(R.drawable.draw_person)
+                        .error(R.drawable.common_google_signin_btn_icon_dark_normal)
+                        .into(playerPhoto);
+
+//                if (player.getImage() != null) {
+//                    playerPhoto.setImageBitmap(ImageHelper.convertStringToBitmap(player.getImage()));
+//                }
             }
 
             @Override

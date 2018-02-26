@@ -1,24 +1,29 @@
 package com.example.pawel.orlikapp.model;
 
+import android.net.Uri;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import retrofit2.http.Multipart;
+
 /**
  * Created by Pawel on 18.11.2017.
  */
 
-public class Player implements Serializable{
+public class Player implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
     private String username;
     private String birthDate;
-    private String image;
 
     private List<Booking> bookingList;
     private Set<Team> userTeams;
+    private Picture picture;
 
     public Player() {
     }
@@ -29,12 +34,13 @@ public class Player implements Serializable{
         this.birthDate = birthDate;
     }
 
-    public String getImage() {
-        return image;
+
+    public Picture getPicture() {
+        return picture;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public Long getId() {
@@ -95,7 +101,7 @@ public class Player implements Serializable{
 
     @Override
     public String toString() {
-        return firstName+" "+lastName;
+        return firstName + " " + lastName;
     }
 
 }
