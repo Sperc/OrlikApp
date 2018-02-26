@@ -17,14 +17,20 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
+import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsView;
+import com.example.pawel.orlikapp.utils.ConstansValues;
 import com.example.pawel.orlikapp.utils.ImageHelper;
 import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Time;
+import com.squareup.picasso.Picasso;
 
-public class CreateBookingActivity extends AppCompatActivity implements BookingDetailsView{
+import java.util.Optional;
+
+public class CreateBookingActivity extends AppCompatActivity implements BookingDetailsView {
 
     private Booking booking;
 
@@ -61,13 +67,16 @@ public class CreateBookingActivity extends AppCompatActivity implements BookingD
         timeBookingTextView = (TextView) findViewById(R.id.timeBookingTextView);
         onlyMeRadioButton = (RadioButton) findViewById(R.id.onlyMeRadioButton);
         everyoneRadioButton = (RadioButton) findViewById(R.id.everyoneRadioButton);
-        createBooking = (Button)findViewById(R.id.bookingBtn);
-        playgroundPhoto = (ImageView)findViewById(R.id.playgroundPhoto);
+        createBooking = (Button) findViewById(R.id.bookingBtn);
+        playgroundPhoto = (ImageView) findViewById(R.id.playgroundPhoto);
 
     }
 
     private void initializeBookingScreen() {
-        playgroundPhoto.setBackground(new BitmapDrawable(getApplicationContext().getResources(),ImageHelper.convertStringToBitmap(booking.getPlayground().getPhoto())));
+//        playgroundPhoto.setBackground(new BitmapDrawable(getApplicationContext().getResources(),ImageHelper.convertStringToBitmap(booking.getPlayground().getPhoto())));
+        Optional<Picture> picture = Optional.ofNullable(booking.getPlayground().getPicture());
+        picture.ifPresent(picture1 -> Picasso.with(this).load(ServiceGenerator.BASE_URL_IMAGE + picture1.getId()).fit().into(playgroundPhoto));
+
         everyoneRadioButton.setChecked(true);
         nameTextView.setText(booking.getPlayground().getName());
         addressTextView.setText(booking.getPlayground().getAddres());
@@ -77,16 +86,18 @@ public class CreateBookingActivity extends AppCompatActivity implements BookingD
         timeBookingTextView.setText(startTime.displayTime() + " - " + endTime.displayTime());
 
     }
-    private void onClick(){
+
+    private void onClick() {
         createBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBooking();
-                createBookingPresenter.addBooking(booking,addBookingListener);
+                createBookingPresenter.addBooking(booking, addBookingListener);
             }
         });
     }
-    private void setBooking(){
+
+    private void setBooking() {
         booking.setLeaderName(PreferencesShared.onReadString(PreferencesSharedKyes.username));
         booking.setAvailable(checkedRadioButton());
         booking.setMaxNumberOfPlayer(Integer.valueOf(maxPlayersEditText.getText().toString()));

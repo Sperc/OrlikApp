@@ -9,12 +9,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.ImageHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Optional;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -66,7 +70,8 @@ public class CustomAdapter extends BaseAdapter {
         Player p = playerList.get(i);
         name.setText(p.toString());
         email.setText(p.getUsername());
-//        circleImageView.setImageBitmap(ImageHelper.convertStringToBitmap(p.getImage()));
+        Optional<Picture> picture = Optional.ofNullable(p.getPicture());
+        picture.ifPresent(picture1 -> Picasso.with(context).load(ServiceGenerator.BASE_URL_IMAGE + picture1.getId()).into(circleImageView));
         //tutaj onClickListener
         setLeaderTextView(leaderNameTextView, p.getUsername());
         if (leader) {

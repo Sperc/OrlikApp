@@ -53,7 +53,6 @@
         <activity android:name=".ui.Main2Activity" />
         <activity android:name=".ui.create_player.CreatePlayerActivity" />
         <activity android:name=".ui.playground_info.PlaygroundInfoActivity" />
-        <activity android:name=".ui.detail_playground.DetailPlaygroundActivity" />
         <activity android:name=".ui.menu.create_booking.CreateBookingActivity" />
         <activity android:name=".ui.menu.bookingdetails.BookingDetailsActivity"></activity>
     </application>

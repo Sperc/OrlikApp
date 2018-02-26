@@ -16,6 +16,14 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_gravity="center"
+            android:text="Wybierz miasto"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+
         <EditText
             android:id="@+id/serachEditText"
             android:layout_width="match_parent"

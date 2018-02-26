@@ -41,9 +41,9 @@
     <color name="blueColor">#2C8CA6</color>
 
     <color name="drawableOnWhite">#BEBEC0</color>
-
     <color name="diffrentGrey">#525B6D</color>
 
-
-
+    <!--testowe-->
+    <color name="startblue">#09c6fd</color>
+    <color name="endblue">#0bcce6</color>
 </resources>

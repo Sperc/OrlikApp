@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by Pawel on 31.10.2017.
  */
 
-public class Playground implements Serializable{
+public class Playground implements Serializable {
     private Long id;
     private String name;
     private String category;
@@ -23,7 +23,16 @@ public class Playground implements Serializable{
     private int endHour;
     private int endMinutes;
     private int phoneNumber;
-    private String photo;
+
+    private Picture picture;
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
 
     public int getStartHour() {
         return startHour;
@@ -63,14 +72,6 @@ public class Playground implements Serializable{
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     private Set<Booking> bookingSet;
@@ -155,7 +156,7 @@ public class Playground implements Serializable{
         this.bookingSet = bookingSet;
     }
 
-    public String getAddres(){
-        return "ul. "+streetName+" "+streetNumber+" "+city.getName();
+    public String getAddres() {
+        return "ul. " + streetName + " " + streetNumber + " " + city.getName();
     }
 }

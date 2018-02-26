@@ -12,13 +12,17 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
+import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.Time;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -90,7 +94,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void showPlayerBooking(final List<Player> playerList) {
+    private void openBookingPlayerList(final List<Player> playerList) {
         openParticipantsList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,7 +152,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             Time startTime = new Time(booking.getStartOrderHour(), booking.getStartOrderMinutes());
             Time endTime = new Time(booking.getEndOrderHour(), booking.getEndOrderMinutes());
             timeBookingTextView.setText(startTime.displayTime() + " - " + endTime.displayTime());
-            showPlayerBooking(booking.getPlayers());
+            openBookingPlayerList(booking.getPlayers());
         }
     };
 
@@ -156,6 +160,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         @Override
         public void onSucces(Player player) {
             playerName.setText(player.toString());
+            Optional<Picture> picture = Optional.ofNullable(player.getPicture());
+            picture.ifPresent(picture1 -> Picasso.with(getApplicationContext()).load(ServiceGenerator.BASE_URL_IMAGE + picture1.getId()).into(circleImageView));
         }
     };
     BookingDetailsPresenter.OnBookingPlayerListener onBookingPlayerListener = new BookingDetailsPresenter.OnBookingPlayerListener() {
@@ -163,7 +169,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         public void onSucces(List<Player> playerList) {
             setButton(playerList);
             Toast.makeText(BookingDetailsActivity.this, "Dodano", Toast.LENGTH_SHORT).show();
-            showPlayerBooking(playerList);
+            openBookingPlayerList(playerList);
         }
     };
 }

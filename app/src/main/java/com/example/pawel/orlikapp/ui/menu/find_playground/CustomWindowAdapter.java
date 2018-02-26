@@ -9,8 +9,13 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Playground;
+import com.example.pawel.orlikapp.utils.ConstansValues;
+import com.example.pawel.orlikapp.utils.Logs;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Pawel on 21.12.2017.
@@ -36,11 +41,17 @@ public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
         textView.setText(playground.getName());
 //        String snippet = marker.getSnippet();
         TextView snipsetView = (TextView)view.findViewById(R.id.snippet);
-        snipsetView.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(25) });
+        snipsetView.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(40) });
 //        if(!snippet.equals("")){
 //            snipsetView.setText(snippet);
 //        }
         snipsetView.setText(playground.getAddres());
+        CircleImageView circleImageView = view.findViewById(R.id.photo);
+        if(playground.getPicture()!=null){
+            Picasso.with(context).load(ConstansValues.BASE_IMG_URL+playground.getPicture().getId()).into(circleImageView);
+            Logs.d("CustomWindowAdapter","Picture is not null");
+        }
+
     }
 
     @Override
