@@ -1,15 +1,14 @@
 package com.example.pawel.orlikapp.ui.select_city;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.City;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.CityClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.CityClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.retrofit.ApiClient;
+package com.example.pawel.orlikapp.api.client;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

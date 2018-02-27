@@ -1,17 +1,13 @@
 package com.example.pawel.orlikapp.ui.menu.create_booking;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +16,8 @@ import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsView;
-import com.example.pawel.orlikapp.utils.ConstansValues;
-import com.example.pawel.orlikapp.utils.ImageHelper;
-import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Time;
 import com.squareup.picasso.Picasso;
 

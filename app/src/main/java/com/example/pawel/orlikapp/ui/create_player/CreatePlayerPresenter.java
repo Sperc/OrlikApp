@@ -1,19 +1,12 @@
 package com.example.pawel.orlikapp.ui.create_player;
 
-import android.net.Uri;
-
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.model.wraper.CreatePlayerObject;
-import com.example.pawel.orlikapp.prefs.PreferencesShared;
-import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.PlayerClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.CodeStatus;
 import com.example.pawel.orlikapp.utils.Logs;
-import com.example.pawel.orlikapp.utils.Validation;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -5,8 +5,8 @@ import android.content.Context;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.PlayerClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.Logs;
 
 import java.util.List;

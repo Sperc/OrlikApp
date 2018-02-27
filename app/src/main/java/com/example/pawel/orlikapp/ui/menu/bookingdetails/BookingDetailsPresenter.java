@@ -4,9 +4,9 @@ import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.BookingClient;
-import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.BookingClient;
+import com.example.pawel.orlikapp.api.client.PlayerClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 
 import java.util.List;
 

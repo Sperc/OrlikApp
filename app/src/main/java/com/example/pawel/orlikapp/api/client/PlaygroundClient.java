@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.retrofit.ApiClient;
+package com.example.pawel.orlikapp.api.client;
 
 import com.example.pawel.orlikapp.model.MyObject;
 import com.example.pawel.orlikapp.model.Playground;
@@ -8,7 +8,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Path;
 
 /**

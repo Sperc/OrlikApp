@@ -6,8 +6,8 @@ import android.widget.Toast;
 import com.example.pawel.orlikapp.model.Team;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.TeamClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.TeamClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 
 import java.util.Set;
 

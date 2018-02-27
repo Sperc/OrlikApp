@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/app_background_provide_1"
     tools:context="com.example.pawel.orlikapp.ui.create_player.CreatePlayerActivity">
 
     <RelativeLayout
+        android:background="@color/darkGray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/back_arrow_register"
@@ -25,14 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Utwórz Profil"
+            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="24sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignBottom="@+id/registerTextView"
-            android:background="#5DBCD2" />
+            android:textSize="20sp" />
     </RelativeLayout>
 
 
@@ -46,7 +42,7 @@
         android:paddingLeft="35dp"
         android:paddingRight="35dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -76,6 +72,7 @@
         </LinearLayout>
 
         <EditText
+            android:drawableLeft="@drawable/ic_person_white_24dp"
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,6 +87,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
         <EditText
+            android:drawableLeft="@drawable/draw_person"
             android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,7 +95,7 @@
             android:background="@drawable/background_login_two"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="NAZWISKO"
+            android:hint="Nazwisko"
             android:inputType="text"
             android:maxLines="1"
             android:padding="10dp"
@@ -105,6 +103,7 @@
             android:textColorHint="#fff" />
 
         <EditText
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:id="@+id/birthDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,12 +111,27 @@
             android:background="@drawable/background_login_two"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="DATA URODZENIA (YYYY-MM-DD)"
+            android:hint="Data urodzenia"
             android:inputType="date"
             android:maxLines="1"
             android:padding="10dp"
             android:textColor="#fff"
             android:textColorHint="#fff" />
+        <EditText
+            android:drawableLeft="@drawable/phone_number"
+            android:id="@+id/phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_login_two"
+            android:drawablePadding="12dp"
+            android:ems="9"
+            android:hint="Nr telefonu"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <Button
@@ -125,9 +139,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/greenBtn"
         android:layout_marginTop="24dp"
         android:padding="16dp"
         android:text="Utwórz"
+        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="18sp" />

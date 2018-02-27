@@ -1,6 +1,6 @@
 package com.example.pawel.orlikapp.utils;
 
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 
 /**
  * Created by Pawel on 16.12.2017.

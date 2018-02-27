@@ -1,8 +1,6 @@
-package com.example.pawel.orlikapp.retrofit.ApiClient;
+package com.example.pawel.orlikapp.api.client;
 
 import com.example.pawel.orlikapp.model.AppUser;
-import com.example.pawel.orlikapp.model.Player;
-import com.example.pawel.orlikapp.model.wraper.RegisterAccount;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

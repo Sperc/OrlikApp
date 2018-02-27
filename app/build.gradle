@@ -51,4 +51,7 @@ dependencies {
     //rounded image
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //time api
+    compile 'joda-time:joda-time:2.9.9'
 }

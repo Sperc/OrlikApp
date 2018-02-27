@@ -1,5 +1,11 @@
 package com.example.pawel.orlikapp.utils;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,5 +46,10 @@ public class DateHelper {
         inActiveDate = format1.format(date);
         return inActiveDate;
     }
-
+    public static int getActualAgeFromBirthday(String date){
+        LocalDate birthDay = LocalDate.parse(date);
+        LocalDate nowDay = LocalDate.now();
+        Years age = Years.yearsBetween(birthDay,nowDay);
+        return age.getYears();
+    }
 }

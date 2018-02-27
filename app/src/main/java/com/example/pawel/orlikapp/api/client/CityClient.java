@@ -1,4 +1,4 @@
-package com.example.pawel.orlikapp.retrofit.ApiClient;
+package com.example.pawel.orlikapp.api.client;
 
 import com.example.pawel.orlikapp.model.City;
 

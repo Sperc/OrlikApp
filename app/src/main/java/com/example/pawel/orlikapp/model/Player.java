@@ -20,6 +20,7 @@ public class Player implements Serializable {
     private String lastName;
     private String username;
     private String birthDate;
+    private String phoneNumber;
 
     private List<Booking> bookingList;
     private Set<Team> userTeams;
@@ -34,6 +35,13 @@ public class Player implements Serializable {
         this.birthDate = birthDate;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public Picture getPicture() {
         return picture;

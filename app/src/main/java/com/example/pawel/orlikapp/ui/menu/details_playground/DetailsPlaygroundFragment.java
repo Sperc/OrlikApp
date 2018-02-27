@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,11 +95,7 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_view, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

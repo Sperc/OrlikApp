@@ -11,10 +11,7 @@ import android.widget.TextView;
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.model.Player;
-import com.example.pawel.orlikapp.prefs.PreferencesShared;
-import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
-import com.example.pawel.orlikapp.utils.ImageHelper;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

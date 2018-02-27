@@ -1,12 +1,10 @@
 package com.example.pawel.orlikapp.ui.login;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.widget.Toast;
 
-import com.example.pawel.orlikapp.retrofit.ApiClient.PlayerClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
-import com.example.pawel.orlikapp.retrofit.ApiClient.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.api.client.PlayerClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.LoginAndRegisterClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;

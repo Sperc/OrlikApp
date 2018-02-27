@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.pawel.orlikapp.ui.menu.my_profile.MyProfileFragment">
 
     <!--<RelativeLayout-->
@@ -115,6 +114,7 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="0dp"-->
     <!--android:layout_weight="1"></LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -124,39 +124,91 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/blue_background_gradient"/>
+            android:background="@drawable/blue_background_gradient">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/shadow"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zmien zdjęcie"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
-            android:paddingTop="60dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingTop="60dp">
+
             <LinearLayout
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:orientation="vertical">
-                <TextView
-                    android:padding="10dp"
-                    android:textSize="18sp"
+
+                <EditText
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:drawableRight="@drawable/ic_mode_edit_grey_500_24dp"
+                    android:id="@+id/emailAddres"
+                    android:maxLines="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="78522211sssssssssssss1"/>
-                <TextView
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/e_mail"
+                    android:drawablePadding="20dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:text="pawel@gmail.com"
+
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:drawableRight="@drawable/ic_mode_edit_grey_500_24dp"
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="785222111"/>
-                <TextView
-                    android:padding="10dp"
-                    android:textSize="18sp"
-                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/phone_number"
+                    android:drawablePadding="15dp"
+                    android:maxLines="1"
+                    android:text="Brak"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:textSize="20sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="785222111"/>
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
+                    <EditText
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                        android:drawablePadding="15dp"
+                        android:maxLines="1"
+                        android:text="18"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:drawableRight="@drawable/ic_mode_edit_grey_500_24dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="lat"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </RelativeLayout>
     </LinearLayout>
 
@@ -178,7 +230,7 @@
         android:padding="10dp"
         android:text="Paweł Sosnówka"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.CardView
@@ -189,14 +241,13 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
                 <TextView
@@ -204,15 +255,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Rezerwacje" />
+                    android:text="Aktualne rezerwacje"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/actualBookings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
                     android:text="12"
-                    android:textColor="@color/blueColor" />
+                    android:textColor="@color/endblue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -220,21 +275,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
-                android:paddingRight="20dp">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Znajomi" />
+                    android:text="Wszystkie rezerwacje"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/allBookings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
                     android:text="20"
-                    android:textColor="@color/blueColor" />
+                    android:textColor="@color/endblue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -242,6 +301,5 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
 
 </RelativeLayout>

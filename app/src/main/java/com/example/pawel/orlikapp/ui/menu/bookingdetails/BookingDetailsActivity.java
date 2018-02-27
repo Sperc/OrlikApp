@@ -16,7 +16,7 @@ import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.Time;
 import com.squareup.picasso.Picasso;
 

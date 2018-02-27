@@ -3,8 +3,8 @@ package com.example.pawel.orlikapp.ui.menu.create_booking;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.BookingClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.BookingClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.Logs;
 
 import retrofit2.Call;

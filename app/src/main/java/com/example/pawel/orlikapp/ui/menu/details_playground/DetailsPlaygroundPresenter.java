@@ -3,8 +3,8 @@ package com.example.pawel.orlikapp.ui.menu.details_playground;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
-import com.example.pawel.orlikapp.retrofit.ApiClient.BookingClient;
-import com.example.pawel.orlikapp.retrofit.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.BookingClient;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
 
 import java.util.List;
 
