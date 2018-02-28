@@ -10,7 +10,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +50,7 @@ public class MainActivity extends BaseActivity {
 
     TextView actualCity;
 
-    private ActionBarDrawerToggle toggle;
+    ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
     private LinearLayout containerHeader;
 
@@ -90,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
         actualCity.setText(PreferencesShared.onReadString(PreferencesSharedKyes.city));
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitleMarginStart(TOOLBAR_MARGIN_TITLE);
+//        toolbar.setTitleMarginStart(TOOLBAR_MARGIN_TITLE);
 
 
     }
@@ -150,6 +152,8 @@ public class MainActivity extends BaseActivity {
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(menuItem.getTitle());
 
         drawerLayout.closeDrawers();
     }

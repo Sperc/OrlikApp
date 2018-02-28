@@ -12,9 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ServiceGenerator {
-    //    public static final String BASE_URL = "http://192.168.1.26:8080/";
+        public static final String BASE_URL = "http://192.168.1.26:8080/";
 //    public static final String BASE_URL = "http://192.168.43.100:8080/";
-    public static final String BASE_URL = "http://192.168.0.185:8080/";
+//    public static final String BASE_URL = "http://192.168.0.185:8080/";
     //        public static final String BASE_URL = "http://192.168.1.16:8080/";
 //    public static final String BASE_URL = "http://192.168.1.19:8080/";
 
