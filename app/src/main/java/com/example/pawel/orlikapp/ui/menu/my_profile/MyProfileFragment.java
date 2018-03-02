@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.PlayerListFragmet;
 import com.example.pawel.orlikapp.ui.menu.editplayer.EditPlayerFragment;
 import com.example.pawel.orlikapp.ui.menu.main.MainActivity;
@@ -28,10 +30,9 @@ import java.io.Serializable;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyProfileFragment extends Fragment {
+public class MyProfileFragment extends Fragment{
 
     private MyProfilePresenter myProfilePresenter;
-
 
     public MyProfileFragment() {
         // Required empty public constructor
@@ -47,9 +48,9 @@ public class MyProfileFragment extends Fragment {
         viewHolder = new ViewHolder(view1);
         myProfilePresenter = new MyProfilePresenter(this);
 
-
-        Button button = view1.findViewById(R.id.test);
-        button.setOnClickListener(view -> OpenFragment());
+//
+//        Button button = view1.findViewById(R.id.test);
+//        button.setOnClickListener(view -> OpenFragment());
         return view1;
     }
 
@@ -60,13 +61,20 @@ public class MyProfileFragment extends Fragment {
         myProfilePresenter.getUser();
     }
 
-    public void OpenFragment() {
+    public void openEditPlayerFragment(Player player){
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         EditPlayerFragment editPlayerFragment = new EditPlayerFragment();
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable("player", player);
+        editPlayerFragment.setArguments(bundle);
         ft.replace(R.id.frame, editPlayerFragment);
         ft.addToBackStack(null);
         ft.commit();
+    }
+    public void onCLick(){
+
     }
 
 }

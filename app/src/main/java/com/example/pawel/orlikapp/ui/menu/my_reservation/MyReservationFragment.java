@@ -8,57 +8,67 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Booking;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyReservationFragment extends Fragment implements MyReservationPresenter.ReservationListener {
-
-    ArrayAdapter<Booking> adapterOwnReservation;
-    ArrayAdapter<Booking> adapterReservation;
-
-    ListView ownList;
-    ListView list;
-
+public class MyReservationFragment extends Fragment implements MyReservationView {
     public MyReservationFragment() {
         // Required empty public constructor
     }
 
+    private ExpantableListAdapter expantableListAdapter;
+    private ExpandableListView expandableListView;
+    private MyReservationPresenter myReservationPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservation, container, false);
-        init(view);
-        MyReservationPresenter reservationPresenter = new MyReservationPresenter(getContext(), this);
-        reservationPresenter.getUserRerservation();
+        expandableListView = view.findViewById(R.id.expand_list_view);
+        myReservationPresenter = new MyReservationPresenter(this);
+
         return view;
     }
 
     @Override
-    public void onSucces(List<Booking> ownReservation, List<Booking> memberReservation) {
-        Toast.makeText(getContext(), "own: " + ownReservation.size() + " member: " + memberReservation.size(), Toast.LENGTH_SHORT).show();
-        adapterOwnReservation = new ArrayAdapter<Booking>(getContext(), android.R.layout.simple_list_item_1, ownReservation);
-        adapterReservation = new ArrayAdapter<Booking>(getContext(), android.R.layout.simple_list_item_1, memberReservation);
-        list.setAdapter(adapterReservation);
-        ownList.setAdapter(adapterOwnReservation);
+    public void onStart() {
+        super.onStart();
+        myReservationPresenter.getPlayerBooking();
     }
 
     @Override
-    public void onFailure() {
-        Toast.makeText(getContext(), "nie dziala", Toast.LENGTH_SHORT).show();
+    public void onServerError() {
 
     }
 
-    private void init(View view) {
-        ownList = (ListView) view.findViewById(R.id.ownReservationList);
-        list = (ListView)view.findViewById(R.id.reservationList);
+    @Override
+    public void onServerNotResponse() {
+
+    }
+
+    @Override
+    public void onUnauthorized() {
+
+    }
+
+    @Override
+    public void onSuccesGetBooking(List<Booking> ownBooking, List<Booking> participantBooking) {
+        HashMap<String, List<Booking>> listHashMap = new HashMap<>();
+        listHashMap.put("own_booking", ownBooking);
+        listHashMap.put("participant_booking", participantBooking);
+        String[] categories = {"own_booking", "participant_booking"};
+        expantableListAdapter = new ExpantableListAdapter(getContext(), categories, listHashMap);
+        expandableListView.setAdapter(expantableListAdapter);
     }
 }

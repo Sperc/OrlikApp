@@ -1,8 +1,9 @@
 package com.example.pawel.orlikapp.ui.menu.my_profile;
 
+import android.view.View;
 import android.widget.Toast;
 
-import com.example.pawel.orlikapp.api.client_impl.PlayerServiceImpl;
+import com.example.pawel.orlikapp.api.client.client_impl.PlayerServiceImpl;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.DateHelper;
@@ -30,7 +31,13 @@ public class GetActualPlayer implements PlayerServiceImpl.ActualPlayerListener {
         fragment.viewHolder.nameOfUser.setText(player.toString());
         Optional.ofNullable(player.getPhoneNumber()).ifPresent(s -> fragment.viewHolder.phoneNumber.setText(player.getPhoneNumber()));
         Logs.d("MyProfileFragment","SUCCESFUL");
-
+        fragment.viewHolder.test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment.openEditPlayerFragment(player);
+                fragment.onStop();
+            }
+        });
     }
 
     @Override

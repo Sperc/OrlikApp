@@ -1,7 +1,9 @@
 package com.example.pawel.orlikapp.ui.menu.my_reservation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.pawel.orlikapp.api.client.client_impl.PlayerServiceImpl;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
@@ -9,7 +11,10 @@ import com.example.pawel.orlikapp.api.client.PlayerClient;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.utils.Logs;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,40 +25,47 @@ import retrofit2.Response;
  */
 
 public class MyReservationPresenter {
-    private Context context;
-    private ReservationListener reservationListener;
+    private MyReservationView myReservationView;
+    private PlayerServiceImpl playerService;
 
-    public MyReservationPresenter(Context context, ReservationListener reservationListener) {
-        this.reservationListener = reservationListener;
-        this.context = context;
+    public MyReservationPresenter(MyReservationView myReservationView) {
+        this.myReservationView = myReservationView;
+        playerService = new PlayerServiceImpl();
     }
 
-    public void getUserRerservation() {
-        PlayerClient playerClient = ServiceGenerator.createService().create(PlayerClient.class);
-        Call<List<Booking>> call = playerClient.getUserReservation(PreferencesShared.onReadString(PreferencesSharedKyes.token));
-        Logs.d(this.toString(), "getUserReservation");
-        call.enqueue(new Callback<List<Booking>>() {
-            @Override
-            public void onResponse(Call<List<Booking>> call, Response<List<Booking>> response) {
-                if (response.isSuccessful()) {
-                    MyReservationFilter reservationFilter = new MyReservationFilter();
-                    List<Booking> ownReservation = reservationFilter.getUserOwnReservation(response.body(), PreferencesShared.onReadString(PreferencesSharedKyes.username));
-                    List<Booking> memberReservation = reservationFilter.getMemberReservation(response.body(),PreferencesShared.onReadString(PreferencesSharedKyes.username));
-                    reservationListener.onSucces(ownReservation,memberReservation);
+    public void getPlayerBooking() {
+        playerService.getPlayerBooking(userReservationListener);
+    }
+
+    PlayerServiceImpl.UserReservationListener userReservationListener = new PlayerServiceImpl.UserReservationListener() {
+        @Override
+        public void onSucces(List<Booking> bookingList) {
+            String usernamePlayer = PreferencesShared.onReadString(PreferencesSharedKyes.username);
+            List<Booking> ownBooking = new ArrayList<>();
+            List<Booking> participantBooking = new ArrayList<>();
+            for (Booking b : bookingList) {
+                if (b.getLeaderName().equals(usernamePlayer)) {
+                    ownBooking.add(b);
+                } else {
+                    participantBooking.add(b);
                 }
-
             }
+            myReservationView.onSuccesGetBooking(ownBooking, participantBooking);
+        }
 
-            @Override
-            public void onFailure(Call<List<Booking>> call, Throwable t) {
+        @Override
+        public void onServerNotResponse() {
+            myReservationView.onServerNotResponse();
+        }
 
-            }
-        });
-    }
+        @Override
+        public void onUnauthorized() {
+            myReservationView.onUnauthorized();
+        }
 
-    public interface ReservationListener {
-        void onSucces(List<Booking> ownReservation, List<Booking> memberReservation);
-
-        void onFailure();
-    }
+        @Override
+        public void onServerError() {
+            myReservationView.onServerError();
+        }
+    };
 }

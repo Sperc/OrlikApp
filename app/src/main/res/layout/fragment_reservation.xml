@@ -4,48 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.pawel.orlikapp.ui.menu.my_reservation.MyReservationFragment">
 
-    <ScrollView
-        android:layout_margin="10dp"
+    <ExpandableListView
+        android:id="@+id/expand_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dip" >
+        android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="Utworzone Rezerwacje" />
-
-            <ListView
-                android:id="@+id/ownReservationList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#B29090" >
-            </ListView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:gravity="center_vertical"
-                android:text="Zarezerwowane Miejsca" />
-
-            <ListView
-                android:id="@+id/reservationList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:background="#4A9C67" >
-            </ListView>
-        </LinearLayout>
-
-
-    </ScrollView>
+    </ExpandableListView>
 
 </RelativeLayout>

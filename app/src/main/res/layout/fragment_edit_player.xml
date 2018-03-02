@@ -27,11 +27,12 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/background_info"
-                android:hint="Paweł"
+                android:text="Paweł"
                 android:padding="10dp" />
 
             <TextView
@@ -42,11 +43,12 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/background_info"
-                android:hint="Sosnówka"
+                android:text="Sosnówka"
                 android:padding="10dp" />
 
             <TextView
@@ -57,11 +59,12 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/background_info"
-                android:hint="785-244-937"
+                android:text="785-244-937"
                 android:padding="10dp" />
 
             <TextView
@@ -72,15 +75,17 @@
                 android:textColor="@color/white" />
 
             <EditText
+                android:id="@+id/birthDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/background_info"
-                android:hint="1995-05-11"
+                android:text="1995-05-11"
                 android:padding="10dp" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/accept"
             android:gravity="center"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_done_white_24dp"

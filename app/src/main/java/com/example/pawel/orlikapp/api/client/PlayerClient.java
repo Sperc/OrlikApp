@@ -11,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -26,8 +27,11 @@ public interface PlayerClient {
 
     @POST("/player/add")
     Call<Void> addPlayer(@Header("authorization") String token,
-                        @Body CreatePlayerObject createPlayerObject);
+                         @Body CreatePlayerObject createPlayerObject);
 
     @GET("/player/get-by-username")
     Call<Player> getPlayerByUsername(@Header("authorization") String token, @Query("username") String username);
+
+    @PUT("/player/edit")
+    Call<Void> editPlayer(@Header("authorization") String token, @Body Player player);
 }
