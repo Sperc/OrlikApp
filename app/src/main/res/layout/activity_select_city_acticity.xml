@@ -47,7 +47,7 @@
                 <ListView
                     android:id="@+id/citiesListView"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"></ListView>
+                    android:layout_height="match_parent"></ListView>
             </LinearLayout>
 
         </ScrollView>

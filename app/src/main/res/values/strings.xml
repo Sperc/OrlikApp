@@ -70,6 +70,23 @@
     <string name="selectStartTime">WYBIERZ GODZINĘ ROZPOCZĘCIA</string>
     <string name="selectDurationOfBooking">CZAS TRWANIA</string>
 
+    <!--MyReservation-->
+    <string-array name="category_of_reservation_array">
+        <item>Lider</item>
+        <item>Uczestnik</item>
+    </string-array>
+
+    <!--SettingsFragment-->
+    <string name="changeEmail">Zmień E-mail</string>
+    <string name="changePassword">Zmień hasło</string>
+    <string name="save">Zapisz</string>
+    <string name="currentPassword">Aktualne hasło</string>
+    <string name="newPassword">Nowe hasło</string>
+    <string name="repeatPassword">Powtórz hasło</string>
+    <string name="newEmail">Nowy E-mail</string>
+    <string name="repeatEmail">Potwierdź E-mail</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>

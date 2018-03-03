@@ -65,9 +65,10 @@ public class MyReservationFragment extends Fragment implements MyReservationView
     @Override
     public void onSuccesGetBooking(List<Booking> ownBooking, List<Booking> participantBooking) {
         HashMap<String, List<Booking>> listHashMap = new HashMap<>();
-        listHashMap.put("own_booking", ownBooking);
-        listHashMap.put("participant_booking", participantBooking);
-        String[] categories = {"own_booking", "participant_booking"};
+        String[] categories = getResources().getStringArray(R.array.category_of_reservation_array);
+        listHashMap.put(categories[0], ownBooking);
+        listHashMap.put(categories[1], participantBooking);
+
         expantableListAdapter = new ExpantableListAdapter(getContext(), categories, listHashMap);
         expandableListView.setAdapter(expantableListAdapter);
     }

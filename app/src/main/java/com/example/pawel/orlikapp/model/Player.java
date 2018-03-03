@@ -22,7 +22,7 @@ public class Player implements Serializable {
     private String birthDate;
     private String phoneNumber;
 
-    private List<Booking> bookingList;
+    //    private List<Booking> bookingList;
     private Set<Team> userTeams;
     private Picture picture;
 
@@ -89,14 +89,6 @@ public class Player implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public List<Booking> getBookingList() {
-        return bookingList;
-    }
-
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = bookingList;
     }
 
     public Set<Team> getUserTeams() {

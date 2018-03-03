@@ -3,6 +3,7 @@ package com.example.pawel.orlikapp.ui.menu.my_profile;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pawel.orlikapp.R;
@@ -15,9 +16,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 class ViewHolder {
     CircleImageView playerPhoto;
     TextView nameOfUser, actualBookings, allBookings, phoneNumber, age, email;
+    LinearLayout changePhoto;
     Button test;
 
     ViewHolder(View view) {
+        changePhoto = (LinearLayout)view.findViewById(R.id.changePhoto);
         test = (Button) view.findViewById(R.id.test);
         playerPhoto = (CircleImageView) view.findViewById(R.id.playerPhoto);
         nameOfUser = (TextView) view.findViewById(R.id.nameOfUser);
@@ -27,4 +30,5 @@ class ViewHolder {
         age = (TextView) view.findViewById(R.id.age);
         email = (TextView) view.findViewById(R.id.emailAddres);
     }
+
 }

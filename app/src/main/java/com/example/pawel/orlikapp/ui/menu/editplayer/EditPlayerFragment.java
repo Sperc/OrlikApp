@@ -36,10 +36,17 @@ public class EditPlayerFragment extends Fragment implements EditPlayerView {
         Bundle bundle = getArguments();
         player = (Player) bundle.getSerializable("player");
         editPlayerPresenter = new EditPlayerPresenter(this);
-
+        initializePlayer();
         onClick();
         return view;
     }
+    private void initializePlayer(){
+        viewHolder.firstName.setText(player.getFirstName());
+        viewHolder.lastName.setText(player.getLastName());
+        viewHolder.birthDate.setText(player.getBirthDate());
+        viewHolder.phoneNumber.setText(player.getPhoneNumber());
+    }
+
 
     public void openEditPlayerFragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

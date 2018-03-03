@@ -1,13 +1,111 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context="com.example.pawel.orlikapp.ui.menu.settings.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/changePassword"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/currentPassword"
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/ic_lock_open_black_24dp"
+        android:maxLines="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/currentPassword"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/newPasword"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/newPassword"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/repeatPassword"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+    
+    <Button
+        android:id="@+id/savePassword"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:background="@color/greenBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/newEmail"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/newEmail"
+        android:drawableLeft="@drawable/e_mail"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/newEmail"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/confirmEmail"
+        android:drawableLeft="@drawable/e_mail"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/repeatEmail"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/saveEmail"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:background="@color/greenBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
