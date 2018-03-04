@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
-import com.example.pawel.orlikapp.api.client.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.api.client.AppUserClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractor;
 import com.example.pawel.orlikapp.ui.registration.validation.RegistrationInteractorImpl;
@@ -58,7 +58,7 @@ public class RegistrationPresenter implements RegistrationInteractor.Credentiali
         if (!registrationInteractor.onCredentialisValidate(appUser, this)) {
             return;
         }
-        LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
+        AppUserClient loginAndRegisterClient = ServiceGenerator.createService().create(AppUserClient.class);
         Call<AppUser> call = loginAndRegisterClient.register(appUser);
         call.enqueue(new Callback<AppUser>() {
             @Override

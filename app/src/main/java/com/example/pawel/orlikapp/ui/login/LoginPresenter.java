@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.pawel.orlikapp.api.client.PlayerClient;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
-import com.example.pawel.orlikapp.api.client.LoginAndRegisterClient;
+import com.example.pawel.orlikapp.api.client.AppUserClient;
 import com.example.pawel.orlikapp.model.AppUser;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
@@ -70,7 +70,7 @@ public class LoginPresenter implements LoginIntercator.LoginCredentialisListener
         final AppUser user = new AppUser();
         user.setUsername(username);
         user.setPassword(password);
-        LoginAndRegisterClient loginAndRegisterClient = ServiceGenerator.createService().create(LoginAndRegisterClient.class);
+        AppUserClient loginAndRegisterClient = ServiceGenerator.createService().create(AppUserClient.class);
         Call<Void> call = loginAndRegisterClient.login(user);
         call.enqueue(new Callback<Void>() {
             @Override

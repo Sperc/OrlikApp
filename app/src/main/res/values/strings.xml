@@ -85,6 +85,7 @@
     <string name="repeatPassword">Powtórz hasło</string>
     <string name="newEmail">Nowy E-mail</string>
     <string name="repeatEmail">Potwierdź E-mail</string>
+    <string name="deleteAccount">Usuń konto</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -96,4 +97,10 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="delete">Usuń</string>
+    <string name="confirmDelete">Aby usunąć wpisz: DELETE</string>
+    <string name="currentPasswordError">Hasło jest nieprawidłowe</string>
+    <string name="newPasswordError">Hasło nie spełnia wymagań</string>
+    <string name="confirmDeleteError">niepoprawne hasło</string>
 </resources>

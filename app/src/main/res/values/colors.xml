@@ -42,6 +42,7 @@
 
     <color name="drawableOnWhite">#BEBEC0</color>
     <color name="diffrentGrey">#525B6D</color>
+    <color name="red">#FF3300</color>
 
     <!--testowe-->
     <color name="startblue">#09c6fd</color>
