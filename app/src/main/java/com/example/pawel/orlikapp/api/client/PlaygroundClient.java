@@ -29,4 +29,8 @@ public interface PlaygroundClient {
     Call<List<Playground>> getAllPlaygroudByCityAndCategory(@Header("authorization") String token,
                                                             @Path("cityName") String cityName,
                                                             @Path("category") String category);
+
+    @GET("/test/get-one/{id}")
+    Call<Playground> getPlaygroundById(@Header("authorization") String token, @Path("id") Long id);
+
 }

@@ -10,6 +10,12 @@
         <item name="drawerArrowStyle">@style/DrawerHamburgerStyle</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+    <style name="ProgressTheme">
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
 
     <style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>

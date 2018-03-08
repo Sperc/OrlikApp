@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -22,19 +24,27 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.example.pawel.orlikapp.R;
+import com.example.pawel.orlikapp.api.ServiceGenerator;
+import com.example.pawel.orlikapp.api.client.PlaygroundClient;
 import com.example.pawel.orlikapp.model.Booking;
 import com.example.pawel.orlikapp.model.Playground;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsActivity;
 import com.example.pawel.orlikapp.utils.DateHelper;
 import com.example.pawel.orlikapp.utils.Logs;
 
 import org.reactivestreams.Subscription;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class DetailsPlaygroundFragment extends Fragment implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
@@ -49,6 +59,8 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     private List<Booking> bookingList;
     private Playground playground;
+    Playground playground_test;
+
 
     public DetailsPlaygroundFragment() {
         // Required empty public constructor
@@ -61,12 +73,16 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_details_playground, container, false);
         setHasOptionsMenu(true);
-        
+
         Bundle bundle = getArguments();
         playground = (Playground) bundle.getSerializable("playground");
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
 
         return view;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -95,7 +111,20 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        PlaygroundClient playgroundClient = ServiceGenerator.createService().create(PlaygroundClient.class);
+        Call<Playground> call = playgroundClient.getPlaygroundById(PreferencesShared.onReadString(PreferencesSharedKyes.token), playground.getId());
+        try {
+            Response<Playground> test = call.execute();
+            playground_test = test.body();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mWeekView.notifyDatasetChanged();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -173,7 +202,8 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     protected String getEventTitle(Calendar time) {
         return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
     }
-    private String getClickedTime(Calendar time){
+
+    private String getClickedTime(Calendar time) {
         return "asd";
     }
 
@@ -202,11 +232,13 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
+
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        for (Booking b : playground.getBookingSet()) {
+        for (Booking b : playground_test.getBookingSet()) {
             // if potrzebny do tego by nie bylo 3x tych samych wydarzen
             if (DateHelper.getMonthFromDate(b.getDate()) == newMonth) {
+                Toast.makeText(getContext(), "OnMonth", Toast.LENGTH_SHORT).show();
                 int day = DateHelper.getDayFromDate(b.getDate());
                 int month = DateHelper.getMonthFromDate(b.getDate());
                 int year = DateHelper.getYearFromDate(b.getDate());
@@ -221,11 +253,25 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
                 WeekViewEvent weekViewEvent = new WeekViewEvent(b.getId(), eventName.getName(), year, month, day, b.getStartOrderHour(),
                         b.getStartOrderMinutes(), endYear, endMonth, endDay, b.getEndOrderHour(), b.getEndOrderMinutes());
 
-
+//                weekViewEvent.setColor(gettColor(b.getPlayers().size(), b.getMaxNumberOfPlayer()));
+                weekViewEvent.setColor(getResources().getColor(gettColor(b.getPlayers().size(), b.getMaxNumberOfPlayer())));
+//              int w =   weekViewEvent.getColor();
                 events.add(weekViewEvent);
             }
         }
         return events;
+    }
+
+    public int gettColor(int actualPlayers, int maxPlayers) {
+        if (actualPlayers == maxPlayers) return R.color.event_color_02;
+        int count = maxPlayers / 3;
+        if (actualPlayers < count)
+            return R.color.event_color_03;
+        else if (actualPlayers >= count && actualPlayers <= count * 2)
+            return R.color.event_color_04;
+        else
+            return R.color.event_color_02;
+
     }
 
     public void onStartBookingDetails(Long id) {
@@ -241,16 +287,17 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 //        ft.replace(R.id.flcontent, bookingDetailsFragment);
 //        ft.commit();
         Intent intent = new Intent(getContext(), BookingDetailsActivity.class);
-        intent.putExtra("booking_id",id);
+        intent.putExtra("booking_id", id);
         startActivity(intent);
     }
-    public void openDialog(Calendar time){
+
+    public void openDialog(Calendar time) {
         ChooseTimeDialog chooseTimeDialog = new ChooseTimeDialog();
         Bundle bundle = new Bundle();
         bundle.putSerializable("playground", playground);
-        bundle.putSerializable("calendar",time);
+        bundle.putSerializable("calendar", time);
         chooseTimeDialog.setArguments(bundle);
-        chooseTimeDialog.show(getActivity().getSupportFragmentManager(),"choose time");
+        chooseTimeDialog.show(getActivity().getSupportFragmentManager(), "choose time");
     }
 
 }

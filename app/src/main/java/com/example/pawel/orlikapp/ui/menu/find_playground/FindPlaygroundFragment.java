@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,12 +38,14 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 import java.util.Map;
 
 public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallback, FindPlaygroundView, GoogleMap.OnMarkerClickListener {
+    private static String defaultCategory = "Piłka nożna";
     FindPlaygroundPresenter findPlaygroundPresenter;
     Spinner spinner;
     //    LinearLayout detailLayout;
@@ -51,6 +54,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     MultiAutoCompleteTextView multiAutoCompleteTextView;
     LinearLayout shadowLayout;
     ArrayAdapter<String> adapter;
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -79,9 +83,10 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         MapsInitializer.initialize(getContext());
         double lati = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.latitude));
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lati, longi), 12));
-//        updateCamera(new LatLng(lati,longi),ConstansValues.MAP_ZOOM_DEFAULT);
-        findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
+        updateCamera(new LatLng(lati, longi), ConstansValues.MAP_ZOOM_DEFAULT);
+
+//        findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
+        findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), defaultCategory, getListener(googleMap));
         spinerFunctions(googleMap);
         googleMap.setOnMarkerClickListener(this);
         mGoogleMap.setInfoWindowAdapter(new CustomWindowAdapter(getContext()));

@@ -47,4 +47,6 @@
     <!--testowe-->
     <color name="startblue">#09c6fd</color>
     <color name="endblue">#0bcce6</color>
+
+    <color name="eventTest">#fff</color>
 </resources>

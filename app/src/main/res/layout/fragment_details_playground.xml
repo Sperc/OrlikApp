@@ -6,6 +6,24 @@
     tools:context="com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment"
     android:orientation="vertical">
 
+    <!--<com.alamkanak.weekview.WeekView-->
+        <!--android:id="@+id/weekView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:eventTextColor="@android:color/white"-->
+        <!--app:textSize="12sp"-->
+        <!--app:hourHeight="60dp"-->
+        <!--app:headerColumnPadding="8dp"-->
+        <!--app:headerColumnTextColor="#8f000000"-->
+        <!--app:headerRowPadding="12dp"-->
+        <!--app:columnGap="8dp"-->
+        <!--app:noOfVisibleDays="3"-->
+        <!--app:headerRowBackgroundColor="#8f000000"-->
+        <!--app:dayBackgroundColor="#05000000"-->
+        <!--app:todayBackgroundColor="#1848adff"-->
+        <!--app:headerColumnBackground="#ffffffff"-->
+        <!--app:todayHeaderTextColor="#2789e4"-->
+       <!--/>-->
     <com.alamkanak.weekview.WeekView
         android:id="@+id/weekView"
         android:layout_width="match_parent"
@@ -23,6 +41,6 @@
         app:todayBackgroundColor="#1848adff"
         app:headerColumnBackground="#ffffffff"
         app:todayHeaderTextColor="#2789e4"
-       />
+        />
 
 </LinearLayout>
