@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -40,7 +41,11 @@ public interface BookingClient {
     Call<List<Booking>> getBookingByPlaygroundIdAndDate(@Header("authorization") String token,
                                                         @Path("playground_id") Long id,
                                                         @Path("date") String date);
+
     @POST("/booking/add")
     Call<Void> addBooking(@Header("authorization") String token,
-                    @Body Booking booking);
+                          @Body Booking booking);
+
+    @DELETE("/booking/delete/{id}")
+    Call<Void> onDeleteBooking(@Header("authorization") String token, @Path("id") Long id);
 }

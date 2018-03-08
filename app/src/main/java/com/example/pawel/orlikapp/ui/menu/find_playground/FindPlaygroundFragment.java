@@ -30,6 +30,7 @@ import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
 import com.example.pawel.orlikapp.utils.ConstansValues;
+import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.MyTokenizer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
@@ -81,6 +83,8 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     public void onMapReady(final GoogleMap googleMap) {
         mGoogleMap = googleMap;
         MapsInitializer.initialize(getContext());
+        boolean mapStyle = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),R.raw.style_map));
+        Logs.d("FindPlaygroundFragment","Load map style:"+mapStyle);
         double lati = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.latitude));
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
         updateCamera(new LatLng(lati, longi), ConstansValues.MAP_ZOOM_DEFAULT);

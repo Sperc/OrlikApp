@@ -29,7 +29,6 @@ import okhttp3.RequestBody;
 public class CreatePlayerActivity extends BaseActivity implements CreatePlayerView {
     private CreatePlayerPresenter createPlayerPresenter;
     ImageView imageView;
-    ImageView backArrowImgView;
     Button cameraBtn;
     Button galeryBtn;
     Button createPlayer;
@@ -87,7 +86,6 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void initialize() {
         imageView = (ImageView) findViewById(R.id.imageView);
-        backArrowImgView = (ImageView) findViewById(R.id.back_arrow_register);
         cameraBtn = (Button) findViewById(R.id.cameraBtn);
         galeryBtn = (Button) findViewById(R.id.galeryBtn);
         createPlayer = (Button) findViewById(R.id.createBtn);
@@ -122,14 +120,6 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
                 imageView.buildDrawingCache();
                 createPlayerPresenter.createPlayer(player, token,ImageHelper.convertImageToString(imageView));
 
-            }
-        });
-        backArrowImgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

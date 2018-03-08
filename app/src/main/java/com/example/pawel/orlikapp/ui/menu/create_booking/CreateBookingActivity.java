@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Optional;
 
-public class CreateBookingActivity extends AppCompatActivity implements BookingDetailsView {
+public class CreateBookingActivity extends AppCompatActivity {
 
     private Booking booking;
 
@@ -111,13 +111,4 @@ public class CreateBookingActivity extends AppCompatActivity implements BookingD
         }
     };
 
-    @Override
-    public void onSucces() {
-
-    }
-
-    @Override
-    public void onFailure() {
-
-    }
 }

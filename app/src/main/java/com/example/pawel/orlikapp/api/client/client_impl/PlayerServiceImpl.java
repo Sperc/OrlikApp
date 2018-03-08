@@ -39,6 +39,10 @@ public class PlayerServiceImpl {
         void onSucces(List<Booking> bookingList);
     }
 
+    public interface PlayerListener extends BaseApiListener {
+        void onSucces(Player player);
+    }
+
     public void getActualPlayer(ActualPlayerListener actualPlayerListener) {
         Call<Player> call = playerClient.getActualPlayer(PreferencesShared.onReadString(PreferencesSharedKyes.token));
         call.enqueue(new Callback<Player>() {
@@ -98,6 +102,28 @@ public class PlayerServiceImpl {
             @Override
             public void onFailure(Call<List<Booking>> call, Throwable t) {
                 userReservationListener.onServerNotResponse();
+            }
+        });
+    }
+
+    public void getPlayerByUsername(String username, PlayerListener playerListener) {
+        Call<Player> call = playerClient.getPlayerByUsername(PreferencesShared.onReadString(PreferencesSharedKyes.token), username);
+        call.enqueue(new Callback<Player>() {
+            @Override
+            public void onResponse(Call<Player> call, Response<Player> response) {
+                if (response.isSuccessful()) {
+//                    actualPlayerListener.getPlayer(response.body());
+                    playerListener.onSucces(response.body());
+                } else if (response.code() == CodeStatus.UNAUTHORIZED) {
+                    playerListener.onUnauthorized();
+                } else {
+                    playerListener.onServerError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Player> call, Throwable t) {
+                playerListener.onServerNotResponse();
             }
         });
     }

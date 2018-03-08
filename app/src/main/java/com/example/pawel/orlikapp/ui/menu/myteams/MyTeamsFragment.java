@@ -14,18 +14,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pawel.orlikapp.R;
-import com.example.pawel.orlikapp.model.Playground;
 import com.example.pawel.orlikapp.model.Team;
-import com.example.pawel.orlikapp.ui.menu.details_playground.DetailsPlaygroundFragment;
-import com.example.pawel.orlikapp.ui.menu.details_team.DetailsTeamFragment;
-import com.google.android.gms.maps.model.Marker;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MyTeamsFragment extends Fragment implements MyTeamsPresenter.TeamsPresenterListener {
 
@@ -60,7 +55,8 @@ public class MyTeamsFragment extends Fragment implements MyTeamsPresenter.TeamsP
     private void init(View view) {
         listView = (ListView) view.findViewById(R.id.teams_list);
     }
-    private void onClick(){
+
+    private void onClick() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

@@ -6,31 +6,26 @@
     android:background="@drawable/app_background_provide_1"
     tools:context="com.example.pawel.orlikapp.ui.create_player.CreatePlayerActivity">
 
-    <RelativeLayout
-        android:background="@color/darkGray"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:background="@color/darkGray">
 
-        <ImageView
-            android:id="@+id/back_arrow_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:src="@drawable/ic_arrow_back_white_24dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/registerTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Utwórz Profil"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Utwórz Profil"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,14 +42,14 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/usr" />
+            android:src="@drawable/usr" />
 
         <LinearLayout
-            android:paddingTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:paddingTop="15dp">
 
             <Button
                 android:id="@+id/cameraBtn"
@@ -72,12 +67,12 @@
         </LinearLayout>
 
         <EditText
-            android:drawableLeft="@drawable/ic_person_white_24dp"
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_person_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="IMIĘ"
@@ -86,13 +81,14 @@
             android:padding="10dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
+
         <EditText
-            android:drawableLeft="@drawable/draw_person"
             android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_person_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="Nazwisko"
@@ -103,12 +99,12 @@
             android:textColorHint="#fff" />
 
         <EditText
-            android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:id="@+id/birthDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/ic_date_range_white_24dp"
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="Data urodzenia"
@@ -117,13 +113,14 @@
             android:padding="10dp"
             android:textColor="#fff"
             android:textColorHint="#fff" />
+
         <EditText
-            android:drawableLeft="@drawable/phone_number"
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_login_two"
+            android:drawableLeft="@drawable/phone_number"
             android:drawablePadding="12dp"
             android:ems="9"
             android:hint="Nr telefonu"
@@ -139,13 +136,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/greenBtn"
         android:layout_marginTop="24dp"
+        android:background="@color/greenBtn"
         android:padding="16dp"
         android:text="Utwórz"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </RelativeLayout>
 

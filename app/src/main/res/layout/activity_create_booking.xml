@@ -74,17 +74,18 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
-            android:background="@color/white"
+            android:background="@color/light_gray"
             android:orientation="vertical"
             android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_login_two"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -99,7 +100,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="TERMIN"
-                        android:textColor="@color/darkGray"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -120,7 +121,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center"
                         android:text="17-01-2018"
-                        android:textColor="@color/darkGray"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
@@ -132,7 +133,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center"
                         android:text="18:00 - 20:00"
-                        android:textColor="@color/darkGray"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
 
@@ -144,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/background_login_two"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -153,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="SZCZEGÓŁY"
-                    android:textColor="@color/darkGray"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -166,13 +167,14 @@
                         android:drawableLeft="@drawable/draw_person"
                         android:drawablePadding="10dp"
                         android:text="max. graczy"
-                        android:textColor="@color/darkGray"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/maxPlayersEditText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:ems="2"
                         android:inputType="numberSigned"
                         android:paddingLeft="10dp"
@@ -186,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/background_login_two"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -195,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="KTO MOŻE DOŁĄCZYĆ?"
-                    android:textColor="@color/darkGray"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <RadioGroup
@@ -209,7 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/darkGray"
-                        android:text="Tylko ja"
+                        android:text="Nikt"
                         android:textColor="@color/darkGray"
                         android:textStyle="bold" />
 
@@ -227,16 +229,15 @@
 
 
         </LinearLayout>
-
+        <Button
+            android:id="@+id/bookingBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/greenBtn"
+            android:text="Zarezerwuj"
+            android:textColor="@color/white" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bookingBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/blueColor"
-        android:text="Zarezerwuj"
-        android:textColor="@color/white" />
+
 
 </RelativeLayout>

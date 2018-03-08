@@ -22,6 +22,8 @@ import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.model.Playground;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.ui.menu.bookingdetails.PlayerListFragmet;
 import com.example.pawel.orlikapp.ui.menu.editplayer.EditPlayerFragment;
 import com.example.pawel.orlikapp.ui.menu.main.MainActivity;

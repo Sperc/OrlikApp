@@ -7,4 +7,5 @@ package com.example.pawel.orlikapp.ui.menu.bookingdetails;
 public interface BookingDetailsView {
     public void onSucces();
     public void onFailure();
+    public void onServerNotResponse();
 }

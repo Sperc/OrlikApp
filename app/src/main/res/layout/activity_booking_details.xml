@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/light_gray"
     android:orientation="vertical"
     tools:context="com.example.pawel.orlikapp.ui.menu.bookingdetails.BookingDetailsActivity">
 
@@ -14,28 +14,42 @@
         android:layout_height="wrap_content"
         android:background="@color/darkGray">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REZERWACJA"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="REZERWACJA"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/ic_delete_white_48dp" />
+        </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:orientation="vertical"
-
         android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_login_two"
+            android:background="@color/white"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -46,7 +60,7 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:text="TERMIN"
-                android:textColor="@color/fontOnWhite"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -64,7 +78,7 @@
                     android:drawableLeft="@drawable/draw_date"
                     android:gravity="center"
                     android:text="17-01-2018"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
@@ -75,7 +89,7 @@
                     android:drawableLeft="@drawable/draw_time"
                     android:gravity="center"
                     android:text="15.00 - 18.00"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -84,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/background_login_two"
+            android:background="@color/white"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -94,7 +108,7 @@
                 android:layout_gravity="center"
                 android:paddingBottom="5dp"
                 android:text="SZCZEGÓŁY"
-                android:textColor="@color/fontOnWhite"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -109,7 +123,7 @@
                     android:drawableLeft="@drawable/draw_location"
                     android:drawablePadding="10dp"
                     android:text="Orlik"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
@@ -118,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:text="ul. Tumidajskiego 3, Lublin"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -133,7 +147,7 @@
                     android:drawableLeft="@drawable/draw_person"
                     android:drawablePadding="10dp"
                     android:text="Wolne miejsca: "
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
@@ -142,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:text="24"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -151,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="/25"
-                    android:textColor="@color/fontOnWhite"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -161,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/background_login_two"
+            android:background="@color/white"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -171,7 +185,7 @@
                 android:layout_gravity="center"
                 android:text="LEADER"
 
-                android:textColor="@color/fontOnWhite"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -198,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Paweł Sosnówka"
-                        android:textColor="@color/fontOnWhite"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
@@ -206,44 +220,75 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="pawel@gmail.com"
-                        android:textColor="@color/fontOnWhite" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/openListDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@color/blueColor"
-            android:padding="15dp"
-            android:text="Pokaż Liste Uczestnikow"
-            android:textColor="@color/white"
-            android:textSize="16dp" />
+        <!--<Button-->
+        <!--android:id="@+id/openListDialog"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:background="@color/blueColor"-->
+        <!--android:padding="15dp"-->
+        <!--android:text="Pokaż Liste Uczestnikow"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16dp" />-->
 
     </LinearLayout>
+
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/greenBtn"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout"
+        android:background="@color/light_gray"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <Button
-            android:id="@+id/addToList"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/tick"
-            android:background="@color/greenBtn"
-            android:text="Rezerwuj"
-            android:textColor="@color/white" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/openListDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_background_users_icon" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/addToList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_background_add_icon" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"

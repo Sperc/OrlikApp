@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
+import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Time;
 import com.squareup.picasso.Picasso;
 
@@ -26,9 +28,9 @@ import java.util.Optional;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class BookingDetailsActivity extends AppCompatActivity {
+public class BookingDetailsActivity extends AppCompatActivity implements BookingDetailsView {
     private int BUTTON = 0; // 1 - addButton, 0 - removeButton
-    private Button openParticipantsList;
+    private ImageButton openParticipantsList;
     private TextView timeBookingTextView;
     private TextView dateBookingTextView;
     private TextView freePlaces;
@@ -36,7 +38,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private TextView playerEmail;
     private CircleImageView circleImageView;
     private FrameLayout frameLayout;
-    private Button addToList;
+    private ImageButton addToList, deleteBtn;
     private TextView maxPlaces;
     private TextView playgroundName;
     private TextView address;
@@ -51,7 +53,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking_details);
         Intent intent = getIntent();
         bookingId = (long) intent.getSerializableExtra("booking_id");
-        bookingDetailsPresenter = new BookingDetailsPresenter();
+        bookingDetailsPresenter = new BookingDetailsPresenter(this);
         init();
         onClick();
         bookingDetailsPresenter.getBookingById(bookingId, bookingListener);
@@ -64,11 +66,12 @@ public class BookingDetailsActivity extends AppCompatActivity {
     }
 
     private void init() {
-        addToList = (Button) findViewById(R.id.addToList);
+        deleteBtn = (ImageButton) findViewById(R.id.deleteBtn);
+        addToList = (ImageButton) findViewById(R.id.addToList);
         frameLayout = (FrameLayout) findViewById(R.id.frame);
         timeBookingTextView = (TextView) findViewById(R.id.timeBookingTextView);
         dateBookingTextView = (TextView) findViewById(R.id.dateBookingTextView);
-        openParticipantsList = (Button) findViewById(R.id.openListDialog);
+        openParticipantsList = (ImageButton) findViewById(R.id.openListDialog);
         freePlaces = (TextView) findViewById(R.id.freePlaces);
         playerEmail = (TextView) findViewById(R.id.playerEmail);
         playerName = (TextView) findViewById(R.id.playerName);
@@ -79,18 +82,18 @@ public class BookingDetailsActivity extends AppCompatActivity {
     }
 
     private void onClick() {
-        addToList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (BUTTON == 0) {
-                    bookingDetailsPresenter.removePlayerFromBooking(bookingId, PreferencesShared.onReadString(PreferencesSharedKyes.username), onBookingPlayerListener);
-                    BUTTON = 1;
-                } else {
-                    bookingDetailsPresenter.addPlayerToBooking(bookingId, onBookingPlayerListener);
-                    BUTTON = 0;
-                }
-
+        addToList.setOnClickListener(view -> {
+            if (BUTTON == 0) {
+                bookingDetailsPresenter.removePlayerFromBooking(bookingId, PreferencesShared.onReadString(PreferencesSharedKyes.username), onBookingPlayerListener);
+                BUTTON = 1;
+            } else {
+                bookingDetailsPresenter.addPlayerToBooking(bookingId, onBookingPlayerListener);
+                BUTTON = 0;
             }
+
+        });
+        deleteBtn.setOnClickListener(view -> {
+            bookingDetailsPresenter.onDeleteBooking(bookingId);
         });
     }
 
@@ -118,14 +121,18 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private void setButton(List<Player> playerList) {
         for (Player p : playerList) {
             if (p.getUsername().equals(PreferencesShared.onReadString(PreferencesSharedKyes.username))) {
+                //delete
                 BUTTON = 0;
-                addToList.setText("Usun");
+//                addToList.setText("Usun");
+                addToList.setBackground(getDrawable(R.drawable.circle_background_remove_icon));
                 freePlaces.setText(String.valueOf(playerList.size()));
                 return;
             }
         }
+        //add
         BUTTON = 1;
-        addToList.setText("Dodaj");
+//        addToList.setText("Dodaj");
+        addToList.setBackground(getDrawable(R.drawable.circle_background_add_icon));
         freePlaces.setText(String.valueOf(playerList.size()));
     }
 
@@ -141,6 +148,11 @@ public class BookingDetailsActivity extends AppCompatActivity {
     BookingDetailsPresenter.BookingListener bookingListener = new BookingDetailsPresenter.BookingListener() {
         @Override
         public void getBooking(Booking booking) {
+            // if leader show deleteBooking Btn else hide
+            if (booking.getLeaderName().equals(PreferencesShared.onReadString(PreferencesSharedKyes.token)))
+                deleteBtn.setVisibility(View.VISIBLE);
+            deleteBtn.setVisibility(View.GONE);
+
             address.setText(booking.getPlayground().getAddres());
             playgroundName.setText(booking.getPlayground().getName());
             setButton(booking.getPlayers());
@@ -172,4 +184,20 @@ public class BookingDetailsActivity extends AppCompatActivity {
             openBookingPlayerList(playerList);
         }
     };
+
+    @Override
+    public void onSucces() {
+        Logs.d("BookingDetailsActivity", "DELETE_BOOKING_SUCCESFUL");
+        finish();
+    }
+
+    @Override
+    public void onFailure() {
+        Logs.d("BookingDetailsActivity", "FAILURE");
+    }
+
+    @Override
+    public void onServerNotResponse() {
+        Logs.d("BookingDetailsActivity", "SERVER_NOT_RESPONSE");
+    }
 }
