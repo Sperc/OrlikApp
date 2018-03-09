@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by Pawel on 31.10.2017.
  */
 
-public class Booking implements Serializable{
+public class Booking implements Serializable {
     private Long id;
     //yyyy-MM-dd
     private String date;
@@ -18,10 +18,11 @@ public class Booking implements Serializable{
     private int endOrderHour;
     private int endOrderMinutes;
     private int maxNumberOfPlayer = 14;
-    private boolean isAvailable = true;
+    private boolean available;
     private String leaderName;
 
     private List<Player> players;
+
     private Playground playground;
 
     public Long getId() {
@@ -89,11 +90,11 @@ public class Booking implements Serializable{
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 
     public String getLeaderName() {

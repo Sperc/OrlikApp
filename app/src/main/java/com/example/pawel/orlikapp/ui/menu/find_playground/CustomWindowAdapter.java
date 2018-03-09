@@ -1,6 +1,7 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
 import android.content.Context;
+import android.hardware.Camera;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,42 +28,36 @@ public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     public CustomWindowAdapter(Context context) {
         this.context = context;
-        mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window,null);
+        mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
     }
-    public void rendowWindowText(Marker marker,View view){
+
+    public void rendowWindowText(Marker marker, View view) {
         Playground playground = (Playground) marker.getTag();
 
-        String title = marker.getTitle();
-        TextView textView = (TextView)view.findViewById(R.id.title);
-//        if(!title.equals("")){
-//            textView.setText(title);
-//        }
+        TextView textView = (TextView) view.findViewById(R.id.title);
 
         textView.setText(playground.getName());
-//        String snippet = marker.getSnippet();
-        TextView snipsetView = (TextView)view.findViewById(R.id.snippet);
-        snipsetView.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(40) });
-//        if(!snippet.equals("")){
-//            snipsetView.setText(snippet);
-//        }
-        snipsetView.setText(playground.getAddres());
+        TextView snipsetView = (TextView) view.findViewById(R.id.snippet);
+        snipsetView.setFilters(new InputFilter[]{new InputFilter.LengthFilter(40)});
+        snipsetView.setText("ul. " + playground.getStreetName() + " " + playground.getStreetNumber());
+
         CircleImageView circleImageView = view.findViewById(R.id.photo);
-        if(playground.getPicture()!=null){
-            Picasso.with(context).load(ConstansValues.BASE_IMG_URL+playground.getPicture().getId()).into(circleImageView);
-            Logs.d("CustomWindowAdapter","Picture is not null");
+        if (playground.getPicture() != null)
+            Picasso.with(view.getContext()).load(ConstansValues.BASE_IMG_URL + playground.getPicture().getId()).placeholder(R.drawable.football).error(R.drawable.draw_person).into(circleImageView);
+        else {
+            Picasso.with(view.getContext()).load(R.drawable.football).fit().placeholder(R.drawable.draw_person).error(R.drawable.draw_person).into(circleImageView);
         }
 
     }
 
     @Override
     public View getInfoWindow(Marker marker) {
-        rendowWindowText(marker,mWindow);
-        return mWindow;
+        return null;
     }
 
     @Override
     public View getInfoContents(Marker marker) {
-        rendowWindowText(marker,mWindow);
+        rendowWindowText(marker, mWindow);
         return mWindow;
     }
 }

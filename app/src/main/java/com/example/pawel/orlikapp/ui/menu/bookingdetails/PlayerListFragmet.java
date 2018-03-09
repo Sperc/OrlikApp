@@ -1,21 +1,27 @@
 package com.example.pawel.orlikapp.ui.menu.bookingdetails;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Player;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
+import com.example.pawel.orlikapp.ui.menu.player_details.PlayerDetailsActivity;
 import com.example.pawel.orlikapp.utils.Logs;
 
 import java.util.List;
 
-public class PlayerListFragmet extends Fragment {
+public class PlayerListFragmet extends Fragment implements AdapterView.OnItemClickListener{
     private ListView listView;
     private ImageButton settingsBtn;
     private CustomAdapter customAdapter;
@@ -33,13 +39,9 @@ public class PlayerListFragmet extends Fragment {
         leader = (boolean) bundle.getSerializable("isLeader");
         Logs.d("PlayerListFragment", "IsLeader: " + leader);
         list = (List<Player>) bundle.getSerializable("player_list");
-        customAdapter = new CustomAdapter(list, getContext(), leader, leaderName, new CustomAdapter.DataChangedListener() {
-            @Override
-            public void dataChanged() {
-                customAdapter.notifyDataSetChanged();
-            }
-        });
+        customAdapter = new CustomAdapter(list, getContext(), leader, leaderName, () -> customAdapter.notifyDataSetChanged());
         listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(this);
         onCllick();
         setLeaderOptions();
         return view;
@@ -71,6 +73,17 @@ public class PlayerListFragmet extends Fragment {
 
             }
         });
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Player player = (Player) adapterView.getItemAtPosition(i);
+        if(!player.getUsername().equals(PreferencesShared.onReadString(PreferencesSharedKyes.username))){
+            Intent intent = new Intent(getContext(),PlayerDetailsActivity.class);
+            intent.putExtra("player_name",player.getUsername());
+            startActivity(intent);
+        }
 
     }
 }

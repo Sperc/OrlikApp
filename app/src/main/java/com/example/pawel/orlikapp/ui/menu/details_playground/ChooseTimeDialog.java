@@ -60,8 +60,6 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         calendar = (Calendar) bundle.getSerializable("calendar");
 
         detailsPlaygroundPresenter.getSortedBookingByPlaygroundIdAndDate(playground.getId(), DateHelper.convertCalendarToDateString(calendar), detailsPlaygroundListener);
-
-
         builder.setView(view)
                 .setNegativeButton("ANULUJ", new DialogInterface.OnClickListener() {
                     @Override
@@ -72,12 +70,12 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Time startTime = new Time(timePicker.getHour(),timePicker.getMinute()*ConstansValues.TIME_PICKER_INTERVAL);
-                        int progress= durationTimeSeekBar.getProgress()/ConstansValues.TIME_PICKER_INTERVAL*ConstansValues.TIME_PICKER_INTERVAL;
-                        Time durationTime = new Time(progress/60,progress%60);
+                        Time startTime = new Time(timePicker.getHour(), timePicker.getMinute() * ConstansValues.TIME_PICKER_INTERVAL);
+                        int progress = durationTimeSeekBar.getProgress() / ConstansValues.TIME_PICKER_INTERVAL * ConstansValues.TIME_PICKER_INTERVAL;
+                        Time durationTime = new Time(progress / 60, progress % 60);
                         Time endTime = startTime.sumToActualTime(durationTime);
 //                        openCreateBookingFragment(startTime,endTime);
-                        openCreateBookingActivity(startTime,endTime);
+                        openCreateBookingActivity(startTime, endTime);
 
                     }
                 });
@@ -100,39 +98,40 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
             Time endTime = createBookingHelper.getMaxTimeToEndBooking();
 //            seekBarValue(startTime,endTime);
             setTimePickerOptions(startTime, endTime, new Time(createBookingHelper.getHourClickTime(), createBookingHelper.getMinoutesClickTime()));
-            setTimeSeekBarOptions(startTime,endTime,new Time(createBookingHelper.getHourClickTime(), createBookingHelper.getMinoutesClickTime()));
+            setTimeSeekBarOptions(startTime, endTime, new Time(createBookingHelper.getHourClickTime(), createBookingHelper.getMinoutesClickTime()));
         }
     };
 
-    private void seekBarValue(final Time start, Time end) {
-        int test = start.getAllTimeInMinutes() % 60;
-        test = start.getAllTimeInMinutes() + 60 - test;
-
-        startTimeSeekBar.setMax(test);
-        startTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int minValue = start.getAllTimeInMinutes();
-            int progres;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                int stepSize = 15;
-                progres = minValue + i;
-                progres = progres / stepSize * stepSize;
-                startTimeTextView.setText(String.valueOf(progres / 60) + ":" + String.valueOf(progres % 60));
-//                startTimeTextView.setText(String .valueOf(progres));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
+//    private void seekBarValue(final Time start, Time end) {
+//        int test = start.getAllTimeInMinutes() % 60;
+//        test = start.getAllTimeInMinutes() + 60 - test;
+//
+//        startTimeSeekBar.setMax(test);
+//        startTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            int minValue = start.getAllTimeInMinutes();
+//            int progres;
+//
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//                int stepSize = 15;
+//                progres = minValue + i;
+//                progres = progres / stepSize * stepSize;
+//                Time time = new Time(progres / 60, progres % 60);
+//                startTimeTextView.setText(time.displayTime());
+////                startTimeTextView.setText(String .valueOf(progres));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//    }
 
     private void setTimePicker(View view) {
         timePicker = (TimePicker) view.findViewById(R.id.timePicker);
@@ -164,21 +163,22 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
 //
 //                    timePicker.setMinute(start.getMinutes() / ConstansValues.TIME_PICKER_INTERVAL);
 //                }
-                setTimeSeekBarOptions(start,end,click);
+                setTimeSeekBarOptions(start, end, click);
             }
         });
 
     }
 
-    public void setTimeSeekBarOptions(Time start,Time firstBookingAfterClick,Time click){
-        Time actualTime = new Time(timePicker.getHour(),timePicker.getMinute()*ConstansValues.TIME_PICKER_INTERVAL);
+    public void setTimeSeekBarOptions(Time start, Time firstBookingAfterClick, Time click) {
+        Time actualTime = new Time(timePicker.getHour(), timePicker.getMinute() * ConstansValues.TIME_PICKER_INTERVAL);
         durationTimeSeekBar.setMax(firstBookingAfterClick.getAllTimeInMinutes() - actualTime.getAllTimeInMinutes());
         durationTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                int timeBooking =i;
+                int timeBooking = i;
                 timeBooking = timeBooking / 15 * 15;
-                durationTimeTextView.setText(timeBooking / 60 + ":" + timeBooking % 60);
+                Time time = new Time(timeBooking / 60, timeBooking % 60);
+                durationTimeTextView.setText(time.displayTime());
                 Logs.d("ChooseTimeDialog", "TIME: " + timeBooking);
             }
 
@@ -211,7 +211,7 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         }
     }
 
-    private void openCreateBookingFragment(Time startTime,Time endTime){
+    private void openCreateBookingFragment(Time startTime, Time endTime) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         CreateBookingFragment createBookingFragment = new CreateBookingFragment();
@@ -230,7 +230,8 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         ft.replace(R.id.flcontent, createBookingFragment);
         ft.commit();
     }
-    private void openCreateBookingActivity(Time startTime,Time endTime){
+
+    private void openCreateBookingActivity(Time startTime, Time endTime) {
         Booking booking = new Booking();
         booking.setPlayground(playground);
         booking.setDate(DateHelper.convertCalendarToDateString(calendar));
@@ -241,10 +242,9 @@ public class ChooseTimeDialog extends AppCompatDialogFragment {
         booking.setEndOrderMinutes(endTime.getMinutes());
 
         Intent intent = new Intent(getContext(), CreateBookingActivity.class);
-        intent.putExtra("booking",booking);
+        intent.putExtra("booking", booking);
         startActivity(intent);
     }
-
 
 
 }

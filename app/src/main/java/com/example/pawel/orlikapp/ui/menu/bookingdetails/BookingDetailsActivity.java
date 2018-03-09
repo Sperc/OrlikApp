@@ -2,6 +2,7 @@ package com.example.pawel.orlikapp.ui.menu.bookingdetails;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.prefs.PreferencesShared;
 import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
+import com.example.pawel.orlikapp.ui.menu.create_booking.CreateBookingActivity;
 import com.example.pawel.orlikapp.utils.Logs;
 import com.example.pawel.orlikapp.utils.Time;
 import com.squareup.picasso.Picasso;
@@ -93,7 +95,14 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
 
         });
         deleteBtn.setOnClickListener(view -> {
-            bookingDetailsPresenter.onDeleteBooking(bookingId);
+            AlertDialog.Builder builder = new AlertDialog.Builder(BookingDetailsActivity.this);
+            builder.setTitle(getString(R.string.deleteBookingDialog));
+            builder.setPositiveButton("TAK", (dialogInterface, i) -> {
+                bookingDetailsPresenter.onDeleteBooking(bookingId);
+            });
+            builder.setNegativeButton("Anuluj", (dialogInterface, i) -> dialogInterface.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
     }
 
@@ -139,7 +148,6 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
     //true - uzytkownik jest liderem, false - nie jest
     public boolean isLeader() {
         String username = PreferencesShared.onReadString(PreferencesSharedKyes.username);
-
         if (username.equals(playerEmail.getText().toString()))
             return true;
         return false;
@@ -149,9 +157,11 @@ public class BookingDetailsActivity extends AppCompatActivity implements Booking
         @Override
         public void getBooking(Booking booking) {
             // if leader show deleteBooking Btn else hide
-            if (booking.getLeaderName().equals(PreferencesShared.onReadString(PreferencesSharedKyes.token)))
+            if (booking.getLeaderName().equals(PreferencesShared.onReadString(PreferencesSharedKyes.username))) {
                 deleteBtn.setVisibility(View.VISIBLE);
-            deleteBtn.setVisibility(View.GONE);
+            } else {
+                deleteBtn.setVisibility(View.GONE);
+            }
 
             address.setText(booking.getPlayground().getAddres());
             playgroundName.setText(booking.getPlayground().getName());

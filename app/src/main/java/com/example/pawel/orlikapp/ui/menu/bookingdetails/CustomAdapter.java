@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pawel.orlikapp.R;
 import com.example.pawel.orlikapp.model.Picture;
 import com.example.pawel.orlikapp.model.Player;
 import com.example.pawel.orlikapp.api.ServiceGenerator;
+import com.example.pawel.orlikapp.prefs.PreferencesShared;
+import com.example.pawel.orlikapp.prefs.PreferencesSharedKyes;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,7 +49,7 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return playerList.get(i);
     }
 
     @Override
@@ -62,9 +65,13 @@ public class CustomAdapter extends BaseAdapter {
         TextView email = (TextView) view1.findViewById(R.id.playerEmail);
         ImageButton imageButton = (ImageButton) view1.findViewById(R.id.deleteBtn);
         CircleImageView circleImageView = (CircleImageView) view1.findViewById(R.id.playerPhoto);
-        TextView leaderNameTextView = (TextView) view1.findViewById(R.id.leaderTextView);
+        ImageView leaderNameTextView = (ImageView) view1.findViewById(R.id.leaderTextView);
 
         Player p = playerList.get(i);
+        if (ifLoggedUser(p)) {
+            view1.setBackgroundColor(context.getColor(R.color.event_color_01));
+        }
+
         name.setText(p.toString());
         email.setText(p.getUsername());
         Optional<Picture> picture = Optional.ofNullable(p.getPicture());
@@ -102,5 +109,11 @@ public class CustomAdapter extends BaseAdapter {
 
     public interface DataChangedListener {
         void dataChanged();
+    }
+
+    private boolean ifLoggedUser(Player player) {
+        if (player.getUsername().equals(PreferencesShared.onReadString(PreferencesSharedKyes.username)))
+            return true;
+        return false;
     }
 }

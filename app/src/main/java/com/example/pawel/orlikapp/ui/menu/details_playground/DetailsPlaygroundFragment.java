@@ -83,6 +83,11 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_view, menu);
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -209,13 +214,14 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-//        Toast.makeText(getContext(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
-        onStartBookingDetails(event.getId());
+        if (event.getColor() == getResources().getColor(R.color.shadow))
+            Toast.makeText(getContext(), "Rezerwacja prywatna", Toast.LENGTH_SHORT).show();
+        else
+            onStartBookingDetails(event.getId());
     }
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getContext(), "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -238,7 +244,6 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         for (Booking b : playground_test.getBookingSet()) {
             // if potrzebny do tego by nie bylo 3x tych samych wydarzen
             if (DateHelper.getMonthFromDate(b.getDate()) == newMonth) {
-                Toast.makeText(getContext(), "OnMonth", Toast.LENGTH_SHORT).show();
                 int day = DateHelper.getDayFromDate(b.getDate());
                 int month = DateHelper.getMonthFromDate(b.getDate());
                 int year = DateHelper.getYearFromDate(b.getDate());
@@ -254,8 +259,11 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
                         b.getStartOrderMinutes(), endYear, endMonth, endDay, b.getEndOrderHour(), b.getEndOrderMinutes());
 
 //                weekViewEvent.setColor(gettColor(b.getPlayers().size(), b.getMaxNumberOfPlayer()));
-                weekViewEvent.setColor(getResources().getColor(gettColor(b.getPlayers().size(), b.getMaxNumberOfPlayer())));
-//              int w =   weekViewEvent.getColor();
+                if (!b.isAvailable()) {
+                    weekViewEvent.setColor(getResources().getColor(R.color.shadow));
+                } else {
+                    weekViewEvent.setColor(getResources().getColor(gettColor(b.getPlayers().size(), b.getMaxNumberOfPlayer())));
+                }
                 events.add(weekViewEvent);
             }
         }
@@ -275,17 +283,6 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
     }
 
     public void onStartBookingDetails(Long id) {
-//        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//        BookingDetailsFragment bookingDetailsFragment = new BookingDetailsFragment();
-//
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("booking_id", id);
-//        Logs.d("TAG_ID_BOOKING", id.toString());
-//        bookingDetailsFragment.setArguments(bundle);
-//        ft.addToBackStack(null);
-//        ft.replace(R.id.flcontent, bookingDetailsFragment);
-//        ft.commit();
         Intent intent = new Intent(getContext(), BookingDetailsActivity.class);
         intent.putExtra("booking_id", id);
         startActivity(intent);

@@ -1,5 +1,8 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.view.View;
 
@@ -24,31 +27,29 @@ import java.util.List;
  */
 
 public class MapHelper {
-    public static void addMarkerFromList(GoogleMap googleMap, List<Playground> playgrounds) {
-        if(playgrounds.isEmpty())
-        {
+    public static void addMarkerFromList(GoogleMap googleMap, List<Playground> playgrounds, Context context) {
+        if (playgrounds.isEmpty()) {
             return;
         }
-        String category = playgrounds.get(0).getCategory();
-        if (category == null) {
-            return;
-        }
-        int drawable;
-        switch (category) {
-            case "football":
-//                drawable = R.drawable.bridge;
-                break;
-            default:
-//                drawable = R.drawable.bridge;
-        }
+        Bitmap icon = null;
         for (Playground item : playgrounds) {
+            if (item.getName().equalsIgnoreCase("orlik")) {
+                icon = BitmapFactory.decodeResource(context.getResources(),
+                        R.drawable.playground_marker_v2);
+            } else {
+                icon = BitmapFactory.decodeResource(context.getResources(),
+                        R.drawable.ic_home_black_36dp);
+            }
+
             String snippet = "Adres: " + item.getCity().getName() + "," + " " + item.getStreetName() + " " + item.getStreetNumber();
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(item.getLatitude(), item.getLongitude()))
                     .title(item.getName())
+//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home_black_24dp))
+                    .icon(BitmapDescriptorFactory.fromBitmap(icon))
                     .snippet(snippet))
-//                    .icon(BitmapDescriptorFactory.fromResource(drawable)))
                     .setTag(item);
+
         }
     }
 }

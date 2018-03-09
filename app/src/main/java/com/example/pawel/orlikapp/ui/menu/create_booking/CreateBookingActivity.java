@@ -1,6 +1,8 @@
 package com.example.pawel.orlikapp.ui.menu.create_booking;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -81,12 +83,16 @@ public class CreateBookingActivity extends AppCompatActivity {
     }
 
     private void onClick() {
-        createBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        createBooking.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreateBookingActivity.this);
+            builder.setTitle(getString(R.string.createBookingDialog));
+            builder.setPositiveButton("TAK", (dialogInterface, i) -> {
                 setBooking();
                 createBookingPresenter.addBooking(booking, addBookingListener);
-            }
+            });
+            builder.setNegativeButton("Anuluj", (dialogInterface, i) -> dialogInterface.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
     }
 

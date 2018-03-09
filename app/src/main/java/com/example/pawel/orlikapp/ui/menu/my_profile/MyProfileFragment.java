@@ -104,6 +104,7 @@ public class MyProfileFragment extends Fragment implements MyProfileView {
         viewHolder.age.setText(String.valueOf(DateHelper.getActualAgeFromBirthday(player.getBirthDate())));
         viewHolder.nameOfUser.setText(player.toString());
         Optional.ofNullable(player.getPhoneNumber()).ifPresent(s -> viewHolder.phoneNumber.setText(player.getPhoneNumber()));
+
         Logs.d("MyProfileFragment", "SUCCESFUL");
         viewHolder.test.setOnClickListener(view -> {
             openEditPlayerFragment(player);

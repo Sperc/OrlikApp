@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,8 +30,8 @@ import okhttp3.RequestBody;
 public class CreatePlayerActivity extends BaseActivity implements CreatePlayerView {
     private CreatePlayerPresenter createPlayerPresenter;
     ImageView imageView;
-    Button cameraBtn;
-    Button galeryBtn;
+    ImageButton cameraBtn;
+    ImageButton galeryBtn;
     Button createPlayer;
     EditText firstName;
     EditText lastName;
@@ -86,8 +87,8 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void initialize() {
         imageView = (ImageView) findViewById(R.id.imageView);
-        cameraBtn = (Button) findViewById(R.id.cameraBtn);
-        galeryBtn = (Button) findViewById(R.id.galeryBtn);
+        cameraBtn = (ImageButton) findViewById(R.id.cameraBtn);
+        galeryBtn = (ImageButton) findViewById(R.id.galeryBtn);
         createPlayer = (Button) findViewById(R.id.createBtn);
         firstName = (EditText) findViewById(R.id.firstName);
         lastName = (EditText) findViewById(R.id.lastName);
@@ -118,7 +119,7 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
                 player.setLastName(lastName.getText().toString());
                 player.setBirthDate(birthDay.getText().toString());
                 imageView.buildDrawingCache();
-                createPlayerPresenter.createPlayer(player, token,ImageHelper.convertImageToString(imageView));
+                createPlayerPresenter.createPlayer(player, token, ImageHelper.convertImageToString(imageView));
 
             }
         });
@@ -132,7 +133,7 @@ public class CreatePlayerActivity extends BaseActivity implements CreatePlayerVi
     @Override
     public void onPlayerCreate() {
         Toast.makeText(this, "Dodano Gracza", Toast.LENGTH_SHORT).show();
-        PreferencesShared.onStoreData(PreferencesSharedKyes.token,token);
+        PreferencesShared.onStoreData(PreferencesSharedKyes.token, token);
         Intent intent = new Intent(getApplicationContext(), SelectCityActicity.class);
         startActivity(intent);
         finish();

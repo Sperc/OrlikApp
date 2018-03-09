@@ -42,29 +42,35 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:src="@drawable/usr" />
+            android:background="@drawable/ic_account_circle_black_24dp" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp">
+            android:paddingRight="15dp">
 
-            <Button
+           <ImageButton
+                android:layout_alignParentTop="true"
+                android:background="@drawable/ic_photo_camera_white_36dp"
                 android:id="@+id/cameraBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginRight="20dp"
                 android:text="kamera" />
 
-            <Button
+            <ImageButton
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/cameraBtn"
                 android:id="@+id/galeryBtn"
+                android:background="@drawable/ic_sd_storage_white_36dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="galeria" />
-        </LinearLayout>
+                />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/firstName"

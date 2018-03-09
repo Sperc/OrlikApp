@@ -103,4 +103,8 @@
     <string name="currentPasswordError">Hasło jest nieprawidłowe</string>
     <string name="newPasswordError">Hasło nie spełnia wymagań</string>
     <string name="confirmDeleteError">niepoprawne hasło</string>
+
+    <!--AlertDiaglos-->
+    <string name="createBookingDialog">Utworzyc rezerwacje?</string>
+    <string name="deleteBookingDialog">Czy na pewno chcesz usunąć rezerwacje?</string>
 </resources>

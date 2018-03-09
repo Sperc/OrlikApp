@@ -54,7 +54,8 @@
         <activity android:name=".ui.create_player.CreatePlayerActivity" />
         <activity android:name=".ui.playground_info.PlaygroundInfoActivity" />
         <activity android:name=".ui.menu.create_booking.CreateBookingActivity" />
-        <activity android:name=".ui.menu.bookingdetails.BookingDetailsActivity"></activity>
+        <activity android:name=".ui.menu.bookingdetails.BookingDetailsActivity" />
+        <activity android:name=".ui.menu.player_details.PlayerDetailsActivity"></activity>
     </application>
 
 </manifest>

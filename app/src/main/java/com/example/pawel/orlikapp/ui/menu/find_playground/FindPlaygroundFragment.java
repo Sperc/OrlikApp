@@ -83,12 +83,11 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     public void onMapReady(final GoogleMap googleMap) {
         mGoogleMap = googleMap;
         MapsInitializer.initialize(getContext());
-        boolean mapStyle = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),R.raw.style_map));
-        Logs.d("FindPlaygroundFragment","Load map style:"+mapStyle);
+        boolean mapStyle = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_map));
+        Logs.d("FindPlaygroundFragment", "Load map style:" + mapStyle);
         double lati = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.latitude));
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
         updateCamera(new LatLng(lati, longi), ConstansValues.MAP_ZOOM_DEFAULT);
-
 //        findPlaygroundPresenter.getPlaygroundByCity(PreferencesShared.onReadString(PreferencesSharedKyes.city), getListener(googleMap));
         findPlaygroundPresenter.getPlaygroundByCityAndCategory(PreferencesShared.onReadString(PreferencesSharedKyes.city), defaultCategory, getListener(googleMap));
         spinerFunctions(googleMap);
@@ -98,10 +97,6 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
             @Override
             public void onInfoWindowClick(Marker marker) {
                 onStartDetailsFragment(marker);
-//                Intent intent = new Intent(getContext(), DetailPlaygroundActivity.class);
-//                Playground playground = (Playground) marker.getTag();
-//                intent.putExtra("playground", playground);
-//                startActivity(intent);
             }
         });
     }
@@ -132,14 +127,11 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     }
 
     public FindPlaygroundPresenter.FindPlaygroundListener getListener(final GoogleMap googleMap) {
-        return new FindPlaygroundPresenter.FindPlaygroundListener() {
-            @Override
-            public void onSucces(List<Playground> playgrounds) {
-                googleMap.clear();
-                MapHelper.addMarkerFromList(googleMap, playgrounds);
-                multiAutoCompleteConfig(playgrounds);
-                onDrawableMultitexClick(DataHelper.getPlaygroundsLatLng(playgrounds), googleMap);
-            }
+        return playgrounds -> {
+            googleMap.clear();
+            MapHelper.addMarkerFromList(googleMap, playgrounds,getContext());
+            multiAutoCompleteConfig(playgrounds);
+            onDrawableMultitexClick(DataHelper.getPlaygroundsLatLng(playgrounds), googleMap);
         };
     }
 
@@ -160,12 +152,9 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
             }
         });
         //turn off shadow background
-        shadowLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                multiAutoCompleteTextView.clearFocus();
-                return false;
-            }
+        shadowLayout.setOnTouchListener((view, motionEvent) -> {
+            multiAutoCompleteTextView.clearFocus();
+            return false;
         });
     }
 
@@ -232,8 +221,6 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latLng)
                 .zoom(zoom)
-//                .bearing(90)
-//                .tilt(30)
                 .build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
@@ -256,26 +243,17 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         DetailsPlaygroundFragment detailsPlaygroundFragment = new DetailsPlaygroundFragment();
-//        InitializeDetailsPlaygroundFragment initializeDetailsPlaygroundFragment = new InitializeDetailsPlaygroundFragment();
         Bundle bundle = new Bundle();
         Playground playground = (Playground) marker.getTag();
-
         bundle.putSerializable("playground", playground);
         detailsPlaygroundFragment.setArguments(bundle);
         ft.replace(R.id.flcontent, detailsPlaygroundFragment);
         ft.addToBackStack(null);
         ft.commit();
-
-
-//
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flcontent, detailsPlaygroundFragment).commit();
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
     }
 }

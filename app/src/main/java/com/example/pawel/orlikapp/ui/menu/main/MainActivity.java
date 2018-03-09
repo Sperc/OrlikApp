@@ -152,8 +152,8 @@ public class MainActivity extends BaseActivity {
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(menuItem.getTitle());
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle(menuItem.getTitle());
 
         drawerLayout.closeDrawers();
     }

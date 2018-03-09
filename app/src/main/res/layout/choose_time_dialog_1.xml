@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="20dp"
     android:theme="@style/CustomAlertDialog">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/black"
         android:text="@string/selectStartTime"
-        android:textSize="18sp" />
+        android:textStyle="bold" />
 
     <TimePicker
+
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,30 +23,27 @@
         android:timePickerMode="spinner" />
 
     <TextView
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="@string/selectDurationOfBooking"
-        android:textSize="18sp" />
+        android:textStyle="bold"
+        />
+
     <TextView
-        android:layout_gravity="center"
         android:id="@+id/durationTextView"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="00:00" />
+
     <SeekBar
         android:id="@+id/durationTimeSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
-    <TextView
-        android:id="@+id/endTime"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="21:15"/>
 </LinearLayout>
