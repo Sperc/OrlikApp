@@ -1,12 +1,16 @@
 package com.example.pawel.orlikapp.ui.menu.find_playground;
 
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentTransaction;
@@ -85,6 +89,8 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
         MapsInitializer.initialize(getContext());
         boolean mapStyle = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_map));
         Logs.d("FindPlaygroundFragment", "Load map style:" + mapStyle);
+
+
         double lati = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.latitude));
         double longi = Double.parseDouble(PreferencesShared.onReadString(PreferencesSharedKyes.longitude));
         updateCamera(new LatLng(lati, longi), ConstansValues.MAP_ZOOM_DEFAULT);
@@ -129,7 +135,7 @@ public class FindPlaygroundFragment extends Fragment implements OnMapReadyCallba
     public FindPlaygroundPresenter.FindPlaygroundListener getListener(final GoogleMap googleMap) {
         return playgrounds -> {
             googleMap.clear();
-            MapHelper.addMarkerFromList(googleMap, playgrounds,getContext());
+            MapHelper.addMarkerFromList(googleMap, playgrounds, getContext());
             multiAutoCompleteConfig(playgrounds);
             onDrawableMultitexClick(DataHelper.getPlaygroundsLatLng(playgrounds), googleMap);
         };

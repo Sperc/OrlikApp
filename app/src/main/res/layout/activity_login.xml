@@ -61,56 +61,48 @@
                 android:textColor="#fff"
                 android:textColorHint="#fff" />
 
+
+            <RelativeLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:padding="15dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/saveUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rememberCheckbox"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="@string/forgotPassword"
+                    android:textColor="#fff" />
+            </RelativeLayout>
+
             <Button
+                android:layout_marginTop="10dp"
                 android:id="@+id/logIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:background="@drawable/background_login_3"
                 android:text="@string/logIn"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/registerButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/background_signup"
-                android:text="@string/signUp"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <CheckBox
-                    android:id="@+id/saveUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:padding="8dp"
-                    android:text="@string/rememberCheckbox"
-                    android:textColor="#fff" />
-
-                <TextView
-                    android:id="@+id/forgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:clickable="true"
-                    android:padding="16dp"
-                    android:text="@string/forgotPassword"
-                    android:textColor="#fff" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -133,13 +125,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <ProgressBar
-        android:visibility="invisible"
-        android:theme="@style/ProgressTheme"
         android:id="@+id/progressBar"
-        android:indeterminate="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:indeterminate="true"
+        android:theme="@style/ProgressTheme"
+        android:visibility="invisible" />
 </RelativeLayout>

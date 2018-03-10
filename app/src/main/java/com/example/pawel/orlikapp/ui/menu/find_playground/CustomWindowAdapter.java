@@ -43,7 +43,10 @@ public class CustomWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         CircleImageView circleImageView = view.findViewById(R.id.photo);
         if (playground.getPicture() != null)
-            Picasso.with(view.getContext()).load(ConstansValues.BASE_IMG_URL + playground.getPicture().getId()).placeholder(R.drawable.football).error(R.drawable.draw_person).into(circleImageView);
+            Picasso.with(view.getContext())
+                    .load(ConstansValues.BASE_IMG_URL + playground.getPicture().getId())
+                    .placeholder(R.drawable.football)
+                    .error(R.drawable.draw_person).into(circleImageView);
         else {
             Picasso.with(view.getContext()).load(R.drawable.football).fit().placeholder(R.drawable.draw_person).error(R.drawable.draw_person).into(circleImageView);
         }

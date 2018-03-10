@@ -214,9 +214,13 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        if (event.getColor() == getResources().getColor(R.color.shadow))
-            Toast.makeText(getContext(), "Rezerwacja prywatna", Toast.LENGTH_SHORT).show();
-        else
+        String eventLeaderName = getLeaderNameFromEvent(event.getName());
+        if (event.getColor() == getResources().getColor(R.color.shadow)) {
+            if (eventLeaderName.equalsIgnoreCase(PreferencesShared.onReadString(PreferencesSharedKyes.username)))
+                onStartBookingDetails(event.getId());
+            else
+                Toast.makeText(getContext(), "Rezerwacja prywatna", Toast.LENGTH_SHORT).show();
+        } else
             onStartBookingDetails(event.getId());
     }
 
@@ -295,6 +299,13 @@ public class DetailsPlaygroundFragment extends Fragment implements WeekView.Even
         bundle.putSerializable("calendar", time);
         chooseTimeDialog.setArguments(bundle);
         chooseTimeDialog.show(getActivity().getSupportFragmentManager(), "choose time");
+    }
+
+    public String getLeaderNameFromEvent(String eventName) {
+        String[] array = eventName.split("\\n");
+        String leaderName = array[1].substring(13);
+        return leaderName;
+
     }
 
 }
